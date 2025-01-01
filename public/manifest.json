@@ -1,15 +1,22 @@
 {
-  "name": "EasyDrive",
-  "short_name": "EasyDrive",
+  "name": "JFR",
+  "short_name": "JFR",
   "icons": [
     {
-      "src": "/icons/logo-192.png",
+      "src": "/icons/JFR_logo.svg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ],
   "display": "standalone",
   "theme_color": "#2b2d40",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "splash_screens": [
+    {
+      "src": "/icons/JFR_logo.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
 }
