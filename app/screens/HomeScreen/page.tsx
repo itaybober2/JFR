@@ -1,8 +1,16 @@
+"use client"
 import BusInfoListItem from "@/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import StationHeader from "@/src/components/Home/components/StationHeader/StationHeader";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 export default function HomeScreen() {
+    const [isVisible, setIsVisible] = useState(false);
+    useEffect(() => {
+            setTimeout(() => {
+                setIsVisible(true);
+            }, 3000);
+    }, []);
+    if (!isVisible) return null;
     return (
         <main>
             <div>

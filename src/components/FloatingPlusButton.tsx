@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './FloatingPlusButton.css';
 import ReportsModal from "@/src/components/ReportsModal";
 
@@ -8,6 +8,14 @@ const FloatingPlusButton = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsVisible(true);
+        }, 3000);
+    }, []);
+    if (!isVisible) return null;
 
     return (
         <>
