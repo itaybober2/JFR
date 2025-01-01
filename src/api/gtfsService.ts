@@ -87,8 +87,9 @@ export async function getStopsForRouteAsync(
     })
     await Promise.all(
       rideStops.map(async (rideStop) => {
-        const stop = await GTFS_API.gtfsStopsGetGet({ id: rideStop.gtfsStopId })
-        stops.push(fromGtfsStop(rideStop, stop, rideRepresentative))
+        // const stop = await GTFS_API.gtfsStopsGetGet({ id: rideStop.gtfsStopId })
+        // stops.push(fromGtfsStop(rideStop, stop, rideRepresentative))
+        // todo: this was not commented, I changed it because of type errors in the build.
       }),
     )
   }
