@@ -4,7 +4,6 @@ import "@/styles/splash-screen.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Navbar from "@/lib/components/Navbar";
-import AppFooter from "@/lib/components/AppFooter";
 import FloatingPlusButton from "@/src/components/FloatingPlusButton";
 import SplashScreen from "@/src/components/SplashScreen";
 
