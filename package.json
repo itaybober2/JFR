@@ -14,7 +14,9 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.3.0",
     "@supabase/ssr": "^0.0.10",
-    "@supabase/supabase-js": "^2.39.1",
+    "@supabase/supabase-js": "^2.47.10",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "next": "^14.0.4",
     "nodemailer": "^6.9.5",
     "react": "^18.2.0",
@@ -40,5 +42,22 @@
     "open-bus-stride-client": "^0.1.3",
     "typescript": "^5",
     "underscore.string": "^3.3.6"
-  }
+  },
+  "description": "This is a Starter Kit for the Digital Product Jam course. It provides a configuration of the [Next.js](https://nextjs.org/) framework, and a number of examples of common patterns and components.",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itaybober2/JFR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/itaybober2/JFR/issues"
+  },
+  "homepage": "https://github.com/itaybober2/JFR#readme"
 }

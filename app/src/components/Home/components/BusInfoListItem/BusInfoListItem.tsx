@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import LineNumberCircle from "@/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
+import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
 import './BusInfoListItem.css';
-import ListItemIcon from "@/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIcon";
-import BusArrivals from "@/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
+import ListItemIcon from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIcon";
+import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
 import {BusArrivalMock} from "@/public/constants/constants";
 import { useRouter } from 'next/navigation';
 

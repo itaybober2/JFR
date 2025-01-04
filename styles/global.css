@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'BusStopFont';
-  src: url('../src/fonts/80-kb-Sharp.otf') format('opentype');
+  src: url('../app/src/fonts/80-kb-Sharp.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,7 +12,7 @@
 /* For time arrival of bus */
 @font-face {
   font-family: 'NumberFont';
-  src: url('../src/fonts/TheBasics-DisplayThin.otf') format('opentype');
+  src: url('../app/src/fonts/TheBasics-DisplayThin.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,7 +20,7 @@
 /* For time arrival of bus and reports */
 @font-face {
   font-family: 'BoldNunberFont';
-  src: url('../src/fonts/TheBasics-Medium.otf') format('opentype');
+  src: url('../app/src/fonts/TheBasics-Medium.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,7 +28,7 @@
 /* For titles and bus stops */
 @font-face {
   font-family: 'TitleFont';
-  src: url('../src/fonts/TheBasics-Regular.otf') format('opentype');
+  src: url('../app/src/fonts/TheBasics-Regular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -36,7 +36,7 @@
 /* For the current bus stop */
 @font-face {
   font-family: 'CurrentStopFont';
-  src: url('../src/fonts/TheBasics-Bold.otf') format('opentype');
+  src: url('../app/src/fonts/TheBasics-Bold.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }

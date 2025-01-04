@@ -1,6 +1,6 @@
 "use client"
-import BusInfoListItem from "@/src/components/Home/components/BusInfoListItem/BusInfoListItem";
-import StationHeader from "@/src/components/Home/components/StationHeader/StationHeader";
+import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
+import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
 import React, {useEffect, useState} from 'react';
 
 export default function HomeScreen() {

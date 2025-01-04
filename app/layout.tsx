@@ -4,8 +4,8 @@ import "@/styles/splash-screen.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Navbar from "@/lib/components/Navbar";
-import FloatingPlusButton from "@/src/components/FloatingPlusButton";
-import SplashScreen from "@/src/components/SplashScreen";
+import FloatingPlusButton from "@/app/src/components/FloatingPlusButton";
+import SplashScreen from "@/app/src/components/SplashScreen";
 
 export const metadata: Metadata = {
     title: "JFR",
