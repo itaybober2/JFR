@@ -1,9 +1,9 @@
 "use client";
-import StationHeader from "@/src/components/Home/components/StationHeader/StationHeader";
-import BuslineDetails from "@/src/components/Busline/components/BuslineDetails/BuslineDetails";
-import BuslineRoute from "@/src/components/Busline/components/BuslineRoute/BuslineRoute";
-import BuslineAlt from "@/src/components/Busline/components/BuslineAlt/BuslineAlt";
-import "@/src/components/Busline/Busline.css";
+import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
+import BuslineDetails from "@/app/src/components/Busline/components/BuslineDetails/BuslineDetails";
+import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
+import BuslineAlt from "@/app/src/components/Busline/components/BuslineAlt/BuslineAlt";
+import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
 import { busLines } from "@/public/constants/constants";
 import { useRouter } from "next/navigation";

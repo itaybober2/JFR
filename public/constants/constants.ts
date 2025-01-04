@@ -1,4 +1,4 @@
-import {BusStopProps} from "@/src/components/Busline/components/BuslineRoute/BuslineRoute";
+import {BusStopProps} from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
 
 export const Icons ={
     CrowdedIcon: '/icons/crowdedIcon.svg',
