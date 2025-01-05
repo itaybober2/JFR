@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import './ReportsModal.css';
 import {useEffect, useState} from "react";
 import {fetchReports, Report} from "@/backend/utils/api";
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -42,6 +43,7 @@ export default function ReportsModal(props: ModalProps) {
                 <Box sx={style}>
                     <div className={"modal-content"}>
                         <h1>כאן מכניסים דיווחים</h1>
+
                         <ul>
                             {reports.map((report) => (
                                 <li key={report.id}>{report.content}</li>
