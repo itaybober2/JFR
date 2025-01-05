@@ -1,11 +1,5 @@
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export type Report = {
-    id: number;
-    content: string;
-    createdAt: string;
-}
-
 export async function fetchReports() {
     const response = await fetch(`${backendUrl}/reports`);
     if (!response.ok) {
