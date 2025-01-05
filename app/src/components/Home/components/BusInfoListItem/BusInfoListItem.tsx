@@ -22,7 +22,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
             <LineNumberCircle lineNumber={lineNumber}/>
             <div className='time-and-icons-container'>
                 <div className="icons-container">
-                    <ListItemIcon type={'crowded'} crowdedLevel={1}/>
+                    <ListItemIcon type={'crowded'} crowdedLevel={1} lineNumber={lineNumber}/>
                     <ListItemIcon type={'roadBlock'}/>
                 </div>
                 <BusArrivals arrivals={BusArrivalMock}/>

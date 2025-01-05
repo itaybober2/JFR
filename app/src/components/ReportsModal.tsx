@@ -1,49 +1,40 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import Slider from '@mui/material/Slider';
 import './ReportsModal.css';
 import {useEffect, useState} from "react";
-import {fetchReports} from "@/backend/utils/api";
+import {fetchReports, createReport} from "@/backend/utils/api";
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 360,
-    height: 280,
-    bgcolor: 'background.paper',
-    border: '1px solid #000',
-    boxShadow: 24,
-};
 type ModalProps = {
     open: boolean;
     onClose: () => void;
 };
 
-export type Report = {
-    id: number;
-    content: string;
-    created_at: string | null;
-};
 
+const lineNumbers = [19, 517, 22, 17]; // Example line numbers
 
 export default function ReportsModal(props: ModalProps) {
     const { open, onClose } = props;
-    const [reports, setReports] = useState<Report[]>([]);
+    const [lineNumber, setLineNumber] = useState<number | null>(null);
+    const [crowdedness, setCrowdedness] = useState<number>(0);
 
-    useEffect(() => {
-        const fetchData = async () => {
+
+    const handleSubmit = async () => {
+        if (lineNumber !== null) {
             try {
-                const data = await fetchReports();
-                setReports(data.data);
+                await createReport(crowdedness, lineNumber);
+                setLineNumber(null);
+                setCrowdedness(1);
+                onClose();
             } catch (error) {
-                console.error("Error fetching reports:", error);
+                console.error( error);
             }
-        };
-        fetchData();
-    }, []);
-
+        }
+    };
 
     return (
         <div>
@@ -53,15 +44,36 @@ export default function ReportsModal(props: ModalProps) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box className={'modal-box'}>
                     <div className={"modal-content"}>
-                        <h1>כאן מכניסים דיווחים</h1>
-
-                        <ul>
-                            {reports.map((report) => (
-                                <li key={report.id}>{report.content}</li>
+                        <h1>Report Crowdedness</h1>
+                        <TextField
+                            select
+                            label="מספר קו"
+                            value={lineNumber}
+                            onChange={(e) => setLineNumber(Number(e.target.value))}
+                            fullWidth
+                            margin="normal"
+                        >
+                            {lineNumbers.map((number) => (
+                                <MenuItem key={number} value={number}>
+                                    {number}
+                                </MenuItem>
                             ))}
-                        </ul>
+                        </TextField>
+                        <Slider
+                            value={crowdedness}
+                            onChange={(e, newValue) => setCrowdedness(newValue as number)}
+                            aria-labelledby="crowdedness-slider"
+                            valueLabelDisplay="auto"
+                            step={1}
+                            marks
+                            min={0}
+                            max={3}
+                        />
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>
+                            Submit Report
+                        </Button>
                     </div>
                 </Box>
             </Modal>
