@@ -22,9 +22,6 @@ export default function HomeScreen() {
                 <BusInfoListItem lineNumber={17}/>
                 <StationHeader stationName="אגרון" stationNumber={753675}/>
                 <BusInfoListItem lineNumber={9}/>
-                <BusInfoListItem lineNumber={78}/>
-                <BusInfoListItem lineNumber={12}/>
-                <BusInfoListItem lineNumber={14}/>
             </div>
         </main>
     );

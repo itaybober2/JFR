@@ -41,7 +41,6 @@ axios
     .then((response) => {
         const data = response.data;
 
-        // Extract 'line_ref' values from each entry
         const lineRefs = data.map((entry: any) => entry.line_ref);
         console.log("Line refs:", lineRefs);
 
@@ -65,7 +64,6 @@ axios
             order_by: "recorded_at_time desc",
         };
 
-        // Make the GET request and parse the JSON response
         return axios.get(url2, { params: params2 });
     })
     .then((response2) => {
@@ -78,5 +76,4 @@ axios
         console.error("An error occurred:", error.message);
     });
 }
-// Make the GET request and parse the JSON response
 
