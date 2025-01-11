@@ -1,5 +1,4 @@
 
-import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import "./BuslineDetails.css";
 import { BusArrivalMock } from "@/public/constants/constants";
 import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";

@@ -2,10 +2,12 @@
 import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
 import React, {useEffect, useState} from 'react';
+import {fetchBusRoutes} from "@/backend/utils/api";
 
 export default function HomeScreen() {
     const [isVisible, setIsVisible] = useState(false);
     useEffect(() => {
+        fetchBusRoutes();
             setTimeout(() => {
                 setIsVisible(true);
             }, 3000);
