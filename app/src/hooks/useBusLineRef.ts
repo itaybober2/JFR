@@ -2,8 +2,8 @@ import {addHours, addMinutes} from "date-fns";
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-export const useBusLineRef = (lineNumber: number) => {
-    const agencyName = lineNumber === 517 ? "סופרבוס" : "אגד";
+export const useBusLineRef = (lineNumber: string) => {
+    const agencyName = lineNumber === "517" ? "סופרבוס" : "אגד";
     const params = {
         route_short_name: lineNumber,
         agency_name: agencyName,

@@ -6,11 +6,11 @@ import {fetchReports} from "@/backend/utils/api";
 type IconProps = {
     type: 'roadBlock' | 'crowded';
     crowdedLevel?: number;
-    lineNumber?: number;
+    lineNumber?: string;
 }
 
 export type Report = {
-    lineNumber: number;
+    lineNumber: string;
     crowdedness: 1 | 2 | 3;
     created_at: string | null;
 };
