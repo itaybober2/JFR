@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react'; // Import useState
 import HomeScreen from "@/app/screens/HomeScreen/page";
-import LocationFetcher from './src/hooks/useUserLocation';
 import Navbar from "@/lib/components/Navbar";
 
 
