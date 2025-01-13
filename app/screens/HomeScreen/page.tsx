@@ -20,8 +20,7 @@ type HomeScreenProps = {
   toMountScoupe: boolean;
 }
 
-// Adjust to satisfy the PageProps constraint
-export default function HomeScreen(props: HomeScreenProps) {
+const HomeScreen = (props: HomeScreenProps) => {
   const { toMountScoupe } = props;
   const [isVisible, setIsVisible] = useState(false);
   const [stops, setStops] = useState<Stop[]>([]);
@@ -65,3 +64,6 @@ export default function HomeScreen(props: HomeScreenProps) {
     </main>
   );
 }
+
+
+export default HomeScreen;
