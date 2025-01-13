@@ -16,7 +16,6 @@ interface Stop {
   direction: number;
 }
 
-
 // Adjust to satisfy the PageProps constraint
 export default function HomeScreen({ toMountScoupe}: any) {
   const [isVisible, setIsVisible] = useState(false);
