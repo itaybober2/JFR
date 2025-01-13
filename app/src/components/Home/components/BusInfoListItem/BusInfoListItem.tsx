@@ -10,7 +10,7 @@ import {useBusLineRef} from "@/app/src/hooks/useBusLineRef";
 import {useRealTimeBusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
 
 type BusInfoProps = {
-    lineNumber: number;
+    lineNumber: string;
 }
 const BusInfoListItem = (props: BusInfoProps) => {
     const {lineNumber} = props

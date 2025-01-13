@@ -1,9 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
-export default function NavbarButton() {
-  const [toMountScoupe, setToMountScoupe] = useState(true); // State to track the circle's position
+interface NavbarButtonProps {
+  toMountScoupe: boolean;
+  setToMountScoupe: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export default function NavbarButton({
+  toMountScoupe,
+  setToMountScoupe,
+}: NavbarButtonProps) {
   const handleCircleClick = () => {
     setToMountScoupe(!toMountScoupe); // Toggle the position
   };

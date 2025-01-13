@@ -2,7 +2,7 @@ import React from 'react';
 import './LineNumberCircle.css';
 
 type LineNumberCircleProps = {
-    lineNumber: number;
+    lineNumber: string;
 }
 const LineNumberCircle = (props: LineNumberCircleProps) => {
     const { lineNumber } = props;
