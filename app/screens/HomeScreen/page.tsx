@@ -16,7 +16,7 @@ interface Stop {
   direction: number;
 }
 
-type HomeScreenProps = {
+interface HomeScreenProps {
   toMountScoupe: boolean;
 }
 
@@ -24,7 +24,6 @@ const HomeScreen = (props: HomeScreenProps) => {
   const { toMountScoupe } = props;
   const [isVisible, setIsVisible] = useState(false);
   const [stops, setStops] = useState<Stop[]>([]);
-
 
   useEffect(() => {
     fetchBusRoutes();
@@ -38,7 +37,7 @@ const HomeScreen = (props: HomeScreenProps) => {
     console.log("Fetched stops:", fetchedStops); // Optional: For debugging
   };
 
-  useUserLocation({handleStopsFetch: handleStopsFetch});
+  useUserLocation({ handleStopsFetch: handleStopsFetch });
 
   // Filter stops based on the direction and button state
   const filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 0 : 1));
@@ -46,24 +45,22 @@ const HomeScreen = (props: HomeScreenProps) => {
   if (!isVisible) return null;
 
   return (
-    <main>
-      <div>
-        {/* Rendering StationHeader for each stop */}
-        {filteredStops.length > 0 &&
-          filteredStops.map((stop, index) => (
-            <div key={index}>
-              <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
-              {/* Render BusInfoListItem for each line number */}
-              {stop.line_num.map((line, lineIndex) => (
-                <BusInfoListItem key={lineIndex} lineNumber={line} />
+      <main>
+        <div>
+          {/* Rendering StationHeader for each stop */}
+          {filteredStops.length > 0 &&
+              filteredStops.map((stop, index) => (
+                  <div key={index}>
+                    <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
+                    {/* Render BusInfoListItem for each line number */}
+                    {stop.line_num.map((line, lineIndex) => (
+                        <BusInfoListItem key={lineIndex} lineNumber={line} />
+                    ))}
+                  </div>
               ))}
-            </div>
-          ))}
-      </div>
-
-    </main>
+        </div>
+      </main>
   );
-}
-
+};
 
 export default HomeScreen;
