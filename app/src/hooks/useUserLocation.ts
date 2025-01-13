@@ -18,12 +18,13 @@ interface Location {
     lon: number | null;
 }
 
-interface Props {
-    onStopsFetch: (stops: Stop[]) => void;
+type userLocationProps = {
+    handleStopsFetch: (stops: Stop[]) => void;
   }
 
 
-const LocationFetcher: React.FC<Props> = ({ onStopsFetch  }) => {    
+const useUserLocation = (props: userLocationProps) => {
+    const { handleStopsFetch } = props;
     useEffect(() => {
         if (!navigator.geolocation) {
             console.error('Geolocation is not supported by your browser.');
@@ -36,16 +37,16 @@ const LocationFetcher: React.FC<Props> = ({ onStopsFetch  }) => {
                 console.log(latitude,longitude);
                 const stops = getNearstsStops([latitude,longitude]);
                 console.log(stops);
-                onStopsFetch(stops);
+                handleStopsFetch(stops);
             },
             (err) => {
                 console.error('Error fetching location:', err.message);
             },
             {enableHighAccuracy: true}
         );
-    }, [onStopsFetch]);
+    }, []);
 
     return null; // Component renders nothing
 };
 
-export default LocationFetcher;
+export default useUserLocation;

@@ -24,7 +24,7 @@ export default function App() {
   return (
     <div>
       <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
-      <HomeScreen toMountScoupe={toMountScoupe} /> {/* Pass the state to HomeScreen */}
+      <HomeScreen toMountScoupe={toMountScoupe} />
     </div> 
   );
 }
