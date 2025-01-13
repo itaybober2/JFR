@@ -6,20 +6,19 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Slider from '@mui/material/Slider';
 import './ReportsModal.css';
-import {useEffect, useState} from "react";
-import {fetchReports, createReport} from "@/backend/utils/api";
+import {useState} from "react";
+import {createReport} from "@/backend/utils/api";
 
 type ModalProps = {
     open: boolean;
     onClose: () => void;
 };
 
-
-const lineNumbers = [19, 517, 22, 17]; // Example line numbers
+const lineNumbers = ['19', '517' ,'19א', '17'];
 
 export default function ReportsModal(props: ModalProps) {
     const { open, onClose } = props;
-    const [lineNumber, setLineNumber] = useState<number | null>(null);
+    const [lineNumber, setLineNumber] = useState<string | null>(null);
     const [crowdedness, setCrowdedness] = useState<number>(0);
 
 
@@ -51,7 +50,7 @@ export default function ReportsModal(props: ModalProps) {
                             select
                             label="מספר קו"
                             value={lineNumber}
-                            onChange={(e) => setLineNumber(Number(e.target.value))}
+                            onChange={(e) => setLineNumber(e.target.value)}
                             fullWidth
                             margin="normal"
                         >

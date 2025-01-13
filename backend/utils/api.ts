@@ -11,7 +11,7 @@ export async function fetchReports() {
     return response.json();
 }
 
-export async function createReport(crowdedness: number, lineNumber: number) {
+export async function createReport(crowdedness: number, lineNumber: string) {
     const response = await fetch(`${backendUrl}/reports`, {
         method: "POST",
         headers: {
