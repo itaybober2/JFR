@@ -1,5 +1,5 @@
 import axios from "axios";
-import {format, addDays, addHours, addMinutes} from "date-fns";
+import { format, addHours, addMinutes } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { useState, useEffect } from "react";
 
@@ -9,11 +9,13 @@ export type BusLocation = {
     lat: number;
 };
 
-export function useRealTimeBusLocation(lineRef: string, interval = 60000) {
+export function useRealTimeBusLocation(lineRef: number[], interval = 60000) {
     const [busLocation, setBusLocation] = useState<BusLocation | null>(null);
 
     useEffect(() => {
         const fetchLocation = async () => {
+            let latestData: BusLocation | null = null;
+
             try {
                 const israelTz = "Asia/Jerusalem";
                 const startTime = toZonedTime(
@@ -25,27 +27,33 @@ export function useRealTimeBusLocation(lineRef: string, interval = 60000) {
                     israelTz
                 );
 
-                const params = {
-                    siri_routes__line_ref: lineRef,
-                    siri_rides__schedualed_start_time_from: format(startTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-                    siri_rides__schedualed_start_time_to: format(endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-                    order_by: "recorded_at_time desc",
-                };
+                for (let i = 0; i < lineRef.length; i++) {
+                    const params = {
+                        siri_routes__line_ref: lineRef[i],
+                        siri_rides__schedualed_start_time_from: format(startTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+                        siri_rides__schedualed_start_time_to: format(endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+                        order_by: "recorded_at_time desc",
+                    };
 
-                const response = await axios.get(
-                    "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list",
-                    { params: params }
-                );
+                    const response = await axios.get(
+                        "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list",
+                        { params: params }
+                    );
 
-                const data = response.data;
+                    if (response.data.length > 0) {
+                        const data = response.data[0];
+                        if (!latestData || new Date(data.recorded_at_time) > new Date(latestData.recorded_at_time)) {
+                            latestData = {
+                                recorded_at_time: data.recorded_at_time,
+                                lon: data.lon,
+                                lat: data.lat,
+                            };
+                        }
+                    }
+                }
 
-                if (data.length > 0) {
-                    const latestData = data[0];
-                    setBusLocation({
-                        recorded_at_time: latestData.recorded_at_time,
-                        lon: latestData.lon,
-                        lat: latestData.lat,
-                    });
+                if (latestData) {
+                    setBusLocation(latestData);
                 }
             } catch (error) {
                 console.error("Error fetching real-time bus location:", error);

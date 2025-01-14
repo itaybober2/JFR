@@ -39,7 +39,7 @@ const HomeScreen = (props: HomeScreenProps) => {
 
     useUserLocation({ handleStopsFetch });
 
-    const filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 0 : 1));
+    const filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 1 : 2));
 
     if (!isVisible) return null;
 
@@ -51,7 +51,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                         <div key={index}>
                             <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
                             {stop.line_num.map((line, lineIndex) => (
-                                <BusInfoListItem key={lineIndex} lineNumber={line} />
+                                <BusInfoListItem key={lineIndex} lineNumber={line} direction={toMountScoupe ? 1 : 2} />
                             ))}
                         </div>
                     ))}

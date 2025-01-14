@@ -11,17 +11,18 @@ import {useRealTimeBusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
 
 type BusInfoProps = {
     lineNumber: string;
+    direction: number;
 }
 const BusInfoListItem = (props: BusInfoProps) => {
-    const {lineNumber} = props
+    const {lineNumber, direction} = props
     const router = useRouter();
     const handleClick = () => {
         router.push(`/screens/BuslineScreen?lineNumber=${lineNumber}`);
     };
 
-    const busLineRef = useBusLineRef(lineNumber);
-    console.log('lineRefs of ' + lineNumber.toString() + ':', JSON.stringify(busLineRef, null, 2));
-    const busLocation = useRealTimeBusLocation('10802');
+    const busLineRefs = useBusLineRef(lineNumber, direction);
+    console.log('lineRefs of ' + lineNumber.toString() + ':', JSON.stringify(busLineRefs, null, 2));
+    const busLocation = useRealTimeBusLocation(busLineRefs);
     console.log('line ' + lineNumber.toString() + ':', JSON.stringify(busLocation, null, 2));
 
     return (
