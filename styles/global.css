@@ -132,6 +132,7 @@ header {
   border-radius: 50%;      /* Rounded corners to make it a circle */
   flex-shrink: 0;          /* Prevents the circle from shrinking */
   margin: 4px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .black-circle.top {
