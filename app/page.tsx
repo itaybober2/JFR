@@ -8,6 +8,10 @@ export default function App() {
     const [toMountScoupe, setToMountScoupe] = useState(true);
 
     useEffect(() => {
+        requestLocationPermission();
+    }, []);
+
+    useEffect(() => {
         const savedState = localStorage.getItem("navbarButtonState");
         if (savedState !== null) {
             setToMountScoupe(JSON.parse(savedState));
