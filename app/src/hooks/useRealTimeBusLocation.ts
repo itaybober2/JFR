@@ -63,7 +63,6 @@ export function useRealTimeBusLocation(lineRef: number[], interval = 60000) {
         // Initial fetch
         fetchLocation();
 
-        // Set up polling
         const intervalId = setInterval(fetchLocation, interval);
 
         return () => clearInterval(intervalId);
