@@ -1,7 +1,7 @@
-"use client";
+"use client"
+import React, { useEffect, useState } from "react";
 import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
-import React, { useEffect, useState } from "react";
 import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
 
