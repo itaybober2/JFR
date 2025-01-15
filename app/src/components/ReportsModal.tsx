@@ -8,6 +8,7 @@ import Slider from '@mui/material/Slider';
 import './ReportsModal.css';
 import {useState} from "react";
 import {createReport} from "@/backend/utils/api";
+import {requestLocationPermission} from "@/backend/utils/locationService";
 
 type ModalProps = {
     open: boolean;
@@ -20,6 +21,16 @@ export default function ReportsModal(props: ModalProps) {
     const { open, onClose } = props;
     const [lineNumber, setLineNumber] = useState<string | null>(null);
     const [crowdedness, setCrowdedness] = useState<number>(0);
+    const [locationGranted, setLocationGranted] = useState<boolean>(false);
+
+    const handleLocationGrant = async () => {
+        try {
+            await requestLocationPermission();
+            setLocationGranted(true);
+        } catch (error) {
+            console.error( error);
+        }
+    }
 
 
     const handleSubmit = async () => {
@@ -44,8 +55,11 @@ export default function ReportsModal(props: ModalProps) {
                 aria-describedby="modal-modal-description"
             >
                 <Box className={'modal-box'}>
+                    {!locationGranted ? <div className={"modal-location-content"}>
+                        <button className={"modal-location-button"} onClick={handleLocationGrant}>Grant Location Permission</button>
+                    </div> :
                     <div className={"modal-content"}>
-                        <h1>Report Crowdedness</h1>
+                    <h1>Report Crowdedness</h1>
                         <TextField
                             select
                             label="מספר קו"
@@ -73,7 +87,7 @@ export default function ReportsModal(props: ModalProps) {
                         <Button variant="contained" color="primary" onClick={handleSubmit}>
                             Submit Report
                         </Button>
-                    </div>
+                    </div> }
                 </Box>
             </Modal>
         </div>

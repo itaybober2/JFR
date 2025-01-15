@@ -16,3 +16,21 @@
     border: 1px solid #000;
     box-shadow: 24px 24px 48px rgba(0, 0, 0, 0.5);
 }
+
+.modal-location-button {
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-location-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    padding: 4rem;
+}
