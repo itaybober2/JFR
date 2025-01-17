@@ -1,7 +1,7 @@
 import stops from "../../../backend/data/all_data_stops_with_dir.json";
 
 // Haversine formula to calculate the distance between two coordinates
-function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+export function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const toRadians = (deg: number) => (deg * Math.PI) / 180;
     lat1 = toRadians(lat1);
     lon1 = toRadians(lon1);
