@@ -48,7 +48,7 @@ const useUserLocation = (props: userLocationProps) => {
         const intervalId = setInterval(fetchLocation, 10000);
 
         return () => clearInterval(intervalId);
-    }, [handleStopsFetch]);
+    }, []);
 };
 
 export default useUserLocation;

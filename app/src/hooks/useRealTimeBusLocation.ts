@@ -4,6 +4,8 @@ import { toZonedTime } from "date-fns-tz";
 import { useState, useEffect } from "react";
 import {URLS} from "@/public/constants/constants";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
+import {userLocationStore} from "@/backend/stores/userLocationStore";
+import {haversineDistance} from "@/app/src/hooks/getClosestStops";
 
 export type BusLocation = {
     recordedAtTime: string;
@@ -18,6 +20,7 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
     useEffect(() => {
         const fetchLocation = async () => {
             let latestData: BusLocation | null = null;
+            let minDistance = undefined as number | undefined;
 
             try {
                 const israelTz = "Asia/Jerusalem";
@@ -46,7 +49,11 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
 
                     if (response.data.length > 0) {
                         const data = response.data[0];
-                        if (!latestData || new Date(data.recorded_at_time) > new Date(latestData.recordedAtTime)) {
+                        const busLocation = {lat: data.lat, lon: data.lon};
+                        const userLocation = userLocationStore.getUserLocation();
+                        const distance = haversineDistance(busLocation.lat, busLocation.lon, userLocation.lat, userLocation.lon);
+                        if (minDistance === undefined || distance < minDistance) {
+                            minDistance = distance;
                             latestData = {
                                 recordedAtTime: data.recorded_at_time,
                                 lon: data.lon,
@@ -58,8 +65,6 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
                 }
 
                 if (latestData) {
-                    // todo: insted of latestData, I want the bus with the correct line number, direction and that
-                    //  is the closest to the user
                     setBusLocation(latestData);
                     busLocationStore.setBusLocation(latestData, lineNumber);
                 }
