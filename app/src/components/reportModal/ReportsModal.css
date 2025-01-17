@@ -34,3 +34,26 @@
     gap: 4rem;
     padding: 4rem;
 }
+
+.report-icons {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1rem;
+    gap: 2rem;
+    height: 100%;
+}
+
+.path-change-text-field {
+    width: 80%;
+    border: 1px solid #000;
+}
+
+.submit-button {
+    width: 60%;
+    position: absolute;
+    bottom: 20px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+}

@@ -3,6 +3,8 @@ import {BusStopProps} from "@/app/src/components/Busline/components/BuslineRoute
 export const Icons ={
     CrowdedIcon: '/icons/crowdedIcon.svg',
     RoadBlockIcon: '/icons/roadBlockIcon.svg',
+    InspectionIcon: '/icons/inspector.svg',
+    PathChangeIcon: '/icons/pathChange.svg',
 }
 
 export const BusArrivalMock = [

@@ -1,22 +1,8 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group">
-<g id="Clip path group">
-<mask id="mask0_148_93" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1" y="1" width="30" height="30">
-<g id="clippath">
-<path id="Vector" d="M16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1C7.71573 1 1 7.71573 1 16C1 24.2843 7.71573 31 16 31Z" fill="white"/>
-</g>
-</mask>
-<g mask="url(#mask0_148_93)">
-<g id="Group_2">
-<g id="Group_3">
-<path id="Vector_2" d="M29.1897 5.17025L6.16077 28.1992L12.2216 34.2601L35.2506 11.2311L29.1897 5.17025Z" fill="#FFF200" stroke="white" stroke-width="1.11801" stroke-miterlimit="10"/>
-<path id="Vector_3" d="M34.9489 10.6204L11.9199 33.6494L17.9808 39.7103L41.0097 16.6813L34.9489 10.6204Z" fill="black" stroke="white" stroke-width="1.11801" stroke-miterlimit="10"/>
-<path id="Vector_4" d="M17.3734 -6.65104L-5.65552 16.3779L0.405335 22.4388L23.4343 -0.590182L17.3734 -6.65104Z" fill="#FFF200" stroke="white" stroke-width="1.11801" stroke-miterlimit="10"/>
-<path id="Vector_5" d="M23.1309 -1.19205L0.101929 21.8369L6.16278 27.8978L29.1917 4.8688L23.1309 -1.19205Z" fill="black" stroke="white" stroke-width="1.11801" stroke-miterlimit="10"/>
-</g>
-</g>
-</g>
-</g>
-<path id="Vector_6" d="M16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1C7.71573 1 1 7.71573 1 16C1 24.2843 7.71573 31 16 31Z" stroke="#727272" stroke-width="1.06897" stroke-miterlimit="10"/>
-</g>
+<svg width="121" height="121" viewBox="0 0 121 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M60.18 120.36C93.4165 120.36 120.36 93.4165 120.36 60.18C120.36 26.9435 93.4165 0 60.18 0C26.9435 0 0 26.9435 0 60.18C0 93.4165 26.9435 120.36 60.18 120.36Z" fill="#FFF200"/>
+<path d="M99.4301 34.7998H23.0701V54.2298H99.4301V34.7998Z" fill="black"/>
+<path d="M99.4301 62.1201H23.0701V81.5501H99.4301V62.1201Z" fill="black"/>
+<path d="M83.27 30.4101V96.3701H88.75V30.4101H83.27Z" fill="black"/>
+<path d="M34.28 30.4101L34.28 96.3701H39.76L39.76 30.4101H34.28Z" fill="black"/>
+<path d="M91.9199 81.5801H22.1599V86.2301H91.9199V81.5801Z" fill="#FFF200"/>
 </svg>
