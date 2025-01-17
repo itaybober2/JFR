@@ -1,14 +1,13 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import Slider from '@mui/material/Slider';
 import './ReportsModal.css';
 import {useState} from "react";
 import {createReport} from "@/backend/utils/api";
 import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
+import {busLocationStore} from "@/backend/store/busLocationStore";
 
 type ModalProps = {
     open: boolean;
@@ -21,6 +20,13 @@ export default function ReportsModal(props: ModalProps) {
     const { open, onClose } = props;
     const [lineNumber, setLineNumber] = useState<string | null>(null);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+    const [pathChangeText, setPathChangeText] = useState<string>('');
+
+    const handleCloseModal = () => {
+        onClose();
+        setSelectedTypes([]);
+        setPathChangeText('');
+    }
 
 
     const handleIconClick = (type: string) => {
@@ -31,25 +37,36 @@ export default function ReportsModal(props: ModalProps) {
         );
     };
 
+    const handlePathChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPathChangeText(e.target.value);
+    }
 
-    // const handleSubmit = async () => {
-    //     if (lineNumber !== null) {
-    //         try {
-    //             await createReport(crowdedness, lineNumber);
-    //             setLineNumber(null);
-    //             setCrowdedness(1);
-    //             onClose();
-    //         } catch (error) {
-    //             console.error( error);
-    //         }
-    //     }
-    // };
+    const handleSubmit = async () => {
+        if (lineNumber !== null) {
+            try {
+                await createReport({
+                    lineNumber: lineNumber,
+                    lineId: busLocationStore.getBusLocation(lineNumber)?.siriRideId,
+                    crowded: selectedTypes.includes('crowded'),
+                    roadBlock: selectedTypes.includes('roadBlock'),
+                    inspector: selectedTypes.includes('inspector'),
+                    pathChange: selectedTypes.includes('pathChange'),
+                    pathChangeDescription: pathChangeText,
+                });
+                setLineNumber(null);
+                setSelectedTypes([]);
+                onClose();
+            } catch (error) {
+                console.error( error);
+            }
+        }
+    };
 
     return (
         <div>
             <Modal
                 open={open}
-                onClose={onClose}
+                onClose={handleCloseModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -94,9 +111,18 @@ export default function ReportsModal(props: ModalProps) {
                         </Box>
                         {
                             selectedTypes.includes('pathChange') &&
-                            <TextField className={'path-change-text-field'} margin={'normal'}/>
+                            <TextField
+                                className={'path-change-text-field'}
+                                margin={'normal'}
+                                onChange={handlePathChangeText}
+                            />
                         }
-                        <button className={"submit-button"}>דווח</button>
+                        <button
+                            className={"submit-button"}
+                            onClick={handleSubmit}
+                        >
+                            דווח
+                        </button>
                     </div>
                 </Box>
             </Modal>

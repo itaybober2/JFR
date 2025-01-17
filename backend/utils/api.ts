@@ -3,6 +3,16 @@ import axios from "axios";
 import {format, addDays, addHours} from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
+export type reportProps = {
+    lineNumber: string;
+    lineId?: number;
+    crowded?: boolean;
+    inspector?: boolean;
+    roadBlock?: boolean;
+    pathChange?: boolean;
+    pathChangeDescription?: string;
+}
+
 export async function fetchReports() {
     const response = await fetch(`${backendUrl}/reports`);
     if (!response.ok) {
@@ -11,13 +21,31 @@ export async function fetchReports() {
     return response.json();
 }
 
-export async function createReport(crowdedness: number, lineNumber: string) {
+export async function createReport(
+    {
+        lineNumber,
+        lineId,
+        crowded,
+        inspector,
+        roadBlock,
+        pathChange,
+        pathChangeDescription,
+    }: reportProps
+) {
     const response = await fetch(`${backendUrl}/reports`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ crowdedness, lineNumber }),
+        body: JSON.stringify({
+            lineNumber,
+            lineId,
+            crowded,
+            inspector,
+            roadBlock,
+            pathChange,
+            pathChangeDescription
+        }),
     });
     if (!response.ok) {
         throw new Error("Failed to create report");
@@ -42,7 +70,6 @@ axios
         const data = response.data;
 
         const lineRefs = data.map((entry: any) => entry.line_ref);
-        console.log("Line refs:", lineRefs);
 
         const url2 =
             "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list";
