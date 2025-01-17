@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import {busLocationStore} from "@/backend/store/busLocationStore";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 interface NavbarButtonProps {
   toMountScoupe: boolean;
