@@ -7,7 +7,7 @@ import useUserLocation from "@/app/src/hooks/useUserLocation";
 import {requestLocationPermission} from "@/backend/utils/locationService";
 
 type Stop = {
-    id: number;
+    id: number
     stop_name: string;
     lat: number;
     lon: number;
