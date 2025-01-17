@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from 'react';
 import './FloatingPlusButton.css';
-import ReportsModal from "@/app/src/components/ReportsModal";
+import ReportsModal from "@/app/src/components/reportModal/ReportsModal";
 
 const FloatingPlusButton = () => {
 
