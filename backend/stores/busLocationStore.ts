@@ -27,8 +27,10 @@ const setters = remx.setters({
 
 const getters = remx.getters({
     getBusLocation(lineNumber: string): BusLocation {
+        let lineNum = lineNumber;
+        if (lineNumber === '19א') lineNum = '19a';
         // @ts-ignore
-        return state[`line${lineNumber}Direction${state.direction}`];
+        return state[`line${lineNum}Direction${state.direction}`];
     },
     getLineDirection(): number {
         return state.direction;

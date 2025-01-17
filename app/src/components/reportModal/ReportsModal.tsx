@@ -7,7 +7,7 @@ import './ReportsModal.css';
 import {useState} from "react";
 import {createReport} from "@/backend/utils/api";
 import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
-import {busLocationStore} from "@/backend/store/busLocationStore";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 type ModalProps = {
     open: boolean;

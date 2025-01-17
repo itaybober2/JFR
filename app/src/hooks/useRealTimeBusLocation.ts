@@ -3,7 +3,7 @@ import {format, addHours, addMinutes, addDays} from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { useState, useEffect } from "react";
 import {URLS} from "@/public/constants/constants";
-import {busLocationStore} from "@/backend/store/busLocationStore";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 export type BusLocation = {
     recordedAtTime: string;
@@ -58,6 +58,8 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
                 }
 
                 if (latestData) {
+                    // todo: insted of latestData, I want the bus with the correct line number, direction and that
+                    //  is the closest to the user
                     setBusLocation(latestData);
                     busLocationStore.setBusLocation(latestData, lineNumber);
                 }
