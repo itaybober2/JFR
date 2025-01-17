@@ -4,7 +4,6 @@ import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListIte
 import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
 import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
-import {requestLocationPermission} from "@/backend/utils/locationService";
 
 type Stop = {
     id: number

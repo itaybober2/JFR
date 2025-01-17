@@ -6,14 +6,6 @@
     padding: 20px 30px;
 }
 
-.icons-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
 .time-and-icons-container {
     display: flex;
     flex-direction: row;

@@ -1,5 +1,8 @@
 import {BusStopProps} from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
-
+export const URLS = {
+    lineRefsUrl : "https://open-bus-stride-api.hasadna.org.il/gtfs_routes/list",
+    busLocationUrl: "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list",
+}
 export const Icons ={
     CrowdedIcon: '/icons/crowdedIcon.svg',
     RoadBlockIcon: '/icons/roadBlockIcon.svg',
@@ -19,6 +22,32 @@ export const BusArrivalMock = [
         time: 15
     }
 ]
+
+export const SIRI_RESPONSE_MOCK =
+        {
+            id: 5224319869,
+            siri_snapshot_id: 1547051,
+            siri_ride_stop_id: 2357127066,
+            recorded_at_time: "2025-01-17T13:26:11+00:00",
+            lon: 35.248535,
+            lat: 31.794825,
+            bearing: 96,
+            velocity: 40,
+            distance_from_journey_start: 16177,
+            distance_from_siri_ride_stop_meters: null,
+            siri_snapshot__snapshot_id: "2025/01/17/13/26",
+            siri_route__id: 1821,
+            siri_route__line_ref: 10802,
+            siri_route__operator_ref: 3,
+            siri_ride__id: 93139879,
+            siri_ride__journey_ref: "2025-01-17-8413928",
+            siri_ride__scheduled_start_time: "2025-01-17T12:30:00+00:00",
+            siri_ride__vehicle_ref: "7784169",
+            siri_ride__first_vehicle_location_id: null,
+            siri_ride__last_vehicle_location_id: null,
+            siri_ride__duration_minutes: null,
+            siri_ride__gtfs_ride_id: null
+        }
 
 export const hardcodedStops: BusStopProps[] = [
     { name: "דרך עזה / מטודלה", status: "people" },

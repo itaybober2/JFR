@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import {busLocationStore} from "@/backend/store/busLocationStore";
 
 interface NavbarButtonProps {
   toMountScoupe: boolean;
@@ -12,6 +13,7 @@ export default function NavbarButton({
 }: NavbarButtonProps) {
   const handleCircleClick = () => {
     setToMountScoupe(!toMountScoupe); // Toggle the position
+    busLocationStore.setLineDirection(toMountScoupe ? 2 : 1);
   };
 
   return (
