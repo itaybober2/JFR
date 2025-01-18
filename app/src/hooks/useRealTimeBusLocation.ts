@@ -25,8 +25,7 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
             try {
                 const israelTz = "Asia/Jerusalem";
                 const startTime = toZonedTime(
-                    addDays(Date.now(), -3).toISOString().substring(0, 19), // todo: change back
-                    // addMinutes(Date.now(), -10).toISOString().substring(0, 19),
+                    addMinutes(Date.now(), -10).toISOString().substring(0, 19),
                     israelTz
                 );
                 const endTime = toZonedTime(
