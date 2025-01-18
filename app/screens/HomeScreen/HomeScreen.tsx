@@ -51,7 +51,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                         <div key={index}>
                             <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
                             {stop.line_num.map((line, lineIndex) => (
-                                <BusInfoListItem key={lineIndex} lineNumber={line} direction={toMountScoupe ? 1 : 2} />
+                                <BusInfoListItem key={lineIndex} lineNumber={line} />
                             ))}
                         </div>
                     ))}

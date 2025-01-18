@@ -1,4 +1,4 @@
-import { addDays, addHours } from "date-fns";
+import {addDays, addHours, addMinutes} from "date-fns";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { URLS } from "@/public/constants/constants";
@@ -14,7 +14,7 @@ export const useBusLineRef = (lineNumber: string, direction = 1) => {
         route_short_name: lineNumber,
         agency_name: agencyName,
         route_long_name_contains: "הר הצופים",
-        date_from: addDays(Date.now(), -3).toISOString().substring(0, 10), // output: "YYYY-MM-DD"
+        date_from: addMinutes(Date.now(), -10).toISOString().substring(0, 10), // output: "YYYY-MM-DD"
         date_to: addHours(Date.now(), 1).toISOString().substring(0, 10),
     };
     const [lineRefs, setLineRefs] = useState<number[]>([]);
