@@ -16,10 +16,11 @@ export type Report = {
 
 type ListItemIconContainerProps = {
     lineNumber: string;
+    lineId?: string;
 }
 
 const ListItemIconContainer = (props: ListItemIconContainerProps) => {
-    const {lineNumber} = props;
+    const {lineNumber, lineId} = props;
     const [report, setReport] = useState<Report>();
     const [reports, setReports] = useState<Report[]>([]);
 
@@ -45,11 +46,10 @@ const ListItemIconContainer = (props: ListItemIconContainerProps) => {
 
     return (
         <div className={"list-item-icons-container"}>
-            {/*todo: not very efficient... but it works.*/}
-            {reports.find((report) => report.lineNumber === lineNumber && report.crowded) && <ListItemIcon type={'crowded'}/>}
-            {reports.find((report) => report.lineNumber === lineNumber && report.inspector) && <ListItemIcon type={'inspector'}/>}
-            {reports.find((report) => report.lineNumber === lineNumber && report.roadBlock) && <ListItemIcon type={'roadBlock'}/>}
-            {reports.find((report) => report.lineNumber === lineNumber && report.pathChange) && <ListItemIcon type={'pathChange'}/>}
+            {reports.find((report) => report.lineId === lineId && report.crowded) && <ListItemIcon type={'crowded'}/>}
+            {reports.find((report) => report.lineId === lineId && report.inspector) && <ListItemIcon type={'inspector'}/>}
+            {reports.find((report) => report.lineId === lineId && report.roadBlock) && <ListItemIcon type={'roadBlock'}/>}
+            {reports.find((report) => report.lineId === lineId && report.pathChange) && <ListItemIcon type={'pathChange'}/>}
         </div>
     )
 }
