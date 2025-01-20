@@ -7,6 +7,7 @@ import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
 import { busLines } from "@/public/constants/constants";
 import { useRouter } from "next/navigation";
+import Navbar from "@/lib/components/Navbar";
 
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<number>(517)

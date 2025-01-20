@@ -88,7 +88,7 @@ header {
   nav {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 }
 
@@ -97,13 +97,14 @@ header {
   color: black;
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .logo{
   width: 89px;
   height: 43.73px;
 }
+
 .mainContainer{
   display: flex;
   flex-direction: row;

@@ -10,6 +10,15 @@ export const Icons ={
     PathChangeIcon: '/icons/pathChange.svg',
 }
 
+export const FooterIcons = {
+    Home: '/icons/grayHome.svg',
+    Report: '/icons/grayReport.svg',
+    Profil: '/icons/grayProfile.svg',
+    ReportSelected: '/icons/blueReport.svg',
+    HomeSelected: '/icons/blueHome.svg',
+    ProfileSelected: '/icons/blueProfile.svg'
+}
+
 export const BusArrivalMock = [
     {
         id: 1,
