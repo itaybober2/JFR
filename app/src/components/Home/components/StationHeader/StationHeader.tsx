@@ -5,7 +5,6 @@ import './StationHeader.css';
 type StationHeaderProps = {
     stationName: string;
     stationNumber: number;
-
 }
 
 const StationHeader = (props: StationHeaderProps) => {
