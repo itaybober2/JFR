@@ -10,6 +10,22 @@ export const Icons ={
     PathChangeIcon: '/icons/pathChange.svg',
 }
 
+export const circelLines ={
+    line517: '/icons/line517.png',
+    line19: '/icons/line19.png',
+    line19A: '/icons/line19A.png',
+    line17: '/icons/line17.png',
+}
+
+export const FooterIcons = {
+    Home: '/icons/grayHome.svg',
+    Report: '/icons/grayReport.svg',
+    Profil: '/icons/grayProfile.svg',
+    ReportSelected: '/icons/blueReport.svg',
+    HomeSelected: '/icons/blueHome.svg',
+    ProfileSelected: '/icons/blueProfile.svg'
+}
+
 export const BusArrivalMock = [
     {
         id: 1,
@@ -63,11 +79,11 @@ export const hardcodedStops: BusStopProps[] = [
 // To har hazofim:
 
 export type BusLinesType = {
-    [key: number]: BusStopProps[];
+    [key: string]: BusStopProps[];
 }
 
 export const busLines: BusLinesType = {
-    517: [
+    "517": [
         { name: "דולצ'ין/קוליץ", status: "" },
         { name: "פנמה/דהומיי", status: "" },
         { name: "ניקרגואה/החרצית", status: "" },
@@ -101,7 +117,7 @@ export const busLines: BusLinesType = {
         { name: "אקדמיה בצלאל/מרטין בובר", status: "" },
         { name: "מסוף הר הצופים/מרטין בובר", status: "" }
     ],
-    17: [
+    "17": [
         { name: "אריה דולצ'ין/יעקב צור", status: "" },
         { name: "דולצ'ין/נחמיה", status: "" },
         { name: "דולצ'ין/יורם רונן", status: "" },
@@ -150,7 +166,7 @@ export const busLines: BusLinesType = {
         { name: "אקדמיה בצלאל/מרטין בובר", status: "" },
         { name: "מסוף הר הצופים/מרטין בובר", status: "" }
     ],
-    19: [
+    "19": [
         { name: "כניסה ראשית/הדסה עין כרם", status: "" },
         { name: "מרכז הסטודנט/הדסה עין כרם", status: "" },
         { name: "צומת אורה", status: "" },
@@ -193,54 +209,5 @@ export const busLines: BusLinesType = {
         { name: "מחנה עופרית/מרטין בובר", status: "" },
         { name: "אקדמיה בצלאל/מרטין בובר", status: "" },
         { name: "מסוף הר הצופים/מרטין בובר", status: "" }
-    ],
-    9: [
-        { name: "תחנה מרכזית/יפו", status: "" },
-        { name: "שוק מחנה יהודה", status: "" },
-        { name: "כיכר הדוידקה", status: "" },
-        { name: "המלך ג'ורג'/קק\"ל", status: "" },
-        { name: "המלך ג'ורג'/בן יהודה", status: "" },
-        { name: "בן יהודה/שלומציון המלכה", status: "" },
-        { name: "בן יהודה/שץ", status: "" },
-        { name: "כיכר ציון", status: "" },
-        { name: "יפו/שערי ירושלים", status: "" },
-        { name: "העירייה/יפו", status: "" }
-    ],
-    78: [
-        { name: "תחנת רכבת מלחה", status: "" },
-        { name: "קניון מלחה", status: "" },
-        { name: "גן החיות התנכי", status: "" },
-        { name: "הרכבת/דרך בית לחם", status: "" },
-        { name: "דרך בית לחם/ינובסקי", status: "" },
-        { name: "התנופה/דרך בית לחם", status: "" },
-        { name: "אסמ\"ר/דרך בית לחם", status: "" },
-        { name: "דרך חברון/אסמ\"ר", status: "" },
-        { name: "דרך חברון/ינובסקי", status: "" },
-        { name: "דרך חברון/הסדנא", status: "" },
-        { name: "דרך חברון/אלבק", status: "" },
-        { name: "תחנת רקל\"ה דרך חברון", status: "" }
-    ],
-    12: [
-        { name: "הר הרצל", status: "" },
-        { name: "יד ושם", status: "" },
-        { name: "עין כרם/שד' הרצל", status: "" },
-        { name: "קרית יובל/שד' הרצל", status: "" },
-        { name: "בית וגן/הרב הרצוג", status: "" },
-        { name: "רחביה/רמב\"ן", status: "" },
-        { name: "המלך ג'ורג'/קק\"ל", status: "" },
-        { name: "המלך ג'ורג'/בן יהודה", status: "" },
-        { name: "יפו מרכז", status: "" },
-        { name: "שערי צדק", status: "" }
-    ],
-    14: [
-        { name: "תחנה מרכזית/יפו", status: "" },
-        { name: "בנייני האומה/שז\"ר", status: "" },
-        { name: "המלך ג'ורג'/קק\"ל", status: "" },
-        { name: "המלך ג'ורג'/בן יהודה", status: "" },
-        { name: "יפו מרכז", status: "" },
-        { name: "הנביאים/הרב קוק", status: "" },
-        { name: "שבטי ישראל/הנביאים", status: "" },
-        { name: "מעלות עיר דוד", status: "" },
-        { name: "הכותל המערבי", status: "" }
     ]
 };

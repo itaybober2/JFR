@@ -1,0 +1,61 @@
+/* Footer styles */
+.footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    height: 4.75rem;
+    flex-shrink: 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+  
+  .footer-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .footer-icon {
+    width: 30px; 
+    height: 30px;
+    margin-bottom: 0.75rem; /* Space between the icon and the text */
+  }
+  
+  .footer-text {
+    color: #9F9F9F;
+    text-align: center;
+    font-family: 'TitleFont';
+    font-size:1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  /* When a button is selected, make the text blue */
+  .footer-button.selected .footer-text {
+    color: #1A00FF;
+    text-align: center;
+    font-family: 'TitleFont';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  
+
+  
+  
+  
+
+  

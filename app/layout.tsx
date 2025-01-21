@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 // import Navbar from "@/lib/components/Navbar";
 import FloatingPlusButton from "@/app/src/components/FloatingPlusButton";
 import SplashScreen from "@/app/src/components/SplashScreen";
+import FooterNavBar from "@/lib/components/FooterNavbar";
 
 export const metadata: Metadata = {
     title: "JFR",
@@ -39,7 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 {/* Pass the state and setter to Navbar */}
                 {/* <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} /> */}
                 <div>{children}</div>
-                <FloatingPlusButton />
+                <FooterNavBar/>
             </body>
         </html>
     );

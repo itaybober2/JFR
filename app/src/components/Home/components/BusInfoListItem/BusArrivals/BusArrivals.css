@@ -9,18 +9,17 @@
 }
 
 .second-bus-arrival-time {
+    color: #9F9F9F;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #000;
-    text-align: right;
     font-size: 52.636px;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 100;
     line-height: normal;
     letter-spacing: -2.105px;
-    font-family: "NumberFont", sans-serif;
+    font-family: "MinutesFont", sans-serif;
 
 }
 
@@ -32,17 +31,16 @@
     color: #000;
     font-size: 52.636px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 100;
     line-height: normal;
     letter-spacing: -2.105px;
-    font-family: "BoldNunberFont", sans-serif;
+    font-family: "MinutesFont", sans-serif;
 }
 
-.minutes {
+.minutes_bold {
     color: #000;
-    font-size: 13.79px;
-    margin-top: -7px;
-    margin-bottom: 10px;
+    text-align: right;
+    font-size: 10.79px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -51,5 +49,22 @@
     text-decoration-skip-ink: auto;
     text-decoration-thickness: auto;
     text-underline-offset: auto;
-    text-underline-position: from-font;
+    text-underline-position: from-font;
+    letter-spacing: 0.5px;
+}
+
+.minutes_gray{
+    color: #9F9F9F;
+    text-align: right;
+    font-size: 10.79px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    letter-spacing: 0.5px; 
 }

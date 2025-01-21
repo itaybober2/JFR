@@ -1,7 +1,7 @@
 export default function Logo() {
   return (
     <div className="logo">
-        <img src="/icons/JFR_logo.jpg" alt="Logo" />
+        <img src="/icons/ABLogo.png" alt="Logo"/>
     </div>
   );
 }
