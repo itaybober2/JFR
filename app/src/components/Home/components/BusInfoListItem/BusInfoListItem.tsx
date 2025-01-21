@@ -30,6 +30,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const lineId = busLocation?.siriRideId.toString();
 
     return (
+        <>
         <div className="list-item-container" onClick={handleClick}>
             <LineNumberCircle lineNumber={lineNumber}/>
             <div className='time-and-icons-container'>
@@ -37,6 +38,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
                 <BusArrivals arrivals={BusArrivalMock}/>
             </div>
         </div>
+        </>
     );
 }
 

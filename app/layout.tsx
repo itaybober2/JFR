@@ -40,7 +40,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 {/* Pass the state and setter to Navbar */}
                 {/* <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} /> */}
                 <div>{children}</div>
-                {/* <FloatingPlusButton /> */}
                 <FooterNavBar/>
             </body>
         </html>

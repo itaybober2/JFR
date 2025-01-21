@@ -5,8 +5,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
 }
 
+.timeline-container {
+    width: 100%;
+}
 
 
 .station-container {
@@ -14,7 +18,14 @@
     flex-direction: row;
     align-items: center;
     position: relative;
+    text-align: right;
+    padding-right: 3rem;
 }
+
+.station-container.current {
+    background-color: #f6eb0f;
+}
+
 
 .station-container-graphic {
     display: flex;
@@ -25,45 +36,62 @@
 
 .station-info {
     margin-right: 10px;
-    display: flex;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
-    width: auto;
+    width: 100%;
     white-space: nowrap;
     margin-top: auto;
+    font-size: 18px;
     align-self: flex-end;
     font-family: "TitleFont", sans-serif;
 }
 
+.station-info.active {
+    color: #c6c5c5;
+}
+
+.station-info.current {
+    font-family: "BusStopFont";
+    color: #000000;
+}
+
+
+
+
 .connection-line {
     width: 4px;
-    height: 40px;
-    background-color: #d3d3d3;
+    height: 45px;
+    background-color: black;
 }
 
 .connection-line.active {
-    background-color: #4caf50;
+    background-color: #c6c5c5;
 }
 
 .station {
-    width: 24px;
-    height: 24px;
-    background-color: #d3d3d3;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
     border-radius: 50%;
+    border: 3px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
+    
 }
 
 .station.active {
-    background-color: #4caf50;
+    background-color: #c6c5c5;
+    border: none;
 }
 
 .station.current {
-    border: 3px solid #4caf50;
+    border: 5px solid black;
+    background-color: black;
+
 }
 
 .bus-icon {

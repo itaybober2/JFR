@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/footer.css";
 import { FooterIcons } from "@/public/constants/constants";
 import {useRouter} from "next/navigation";
+import ReportsModal from "@/app/src/components/reportModal/ReportsModal";
 
 
 const Footer = () => {
@@ -29,7 +30,23 @@ const Footer = () => {
         router.push('/');
     }
 
+        const [open, setOpen] = useState(false);
+        const handleOpen = () => {
+            setSelectedButton("add");
+            setOpen(true);
+        };
+        const handleClose = () => setOpen(false);
+        const [isVisible, setIsVisible] = useState(false);
+    
+        useEffect(() => {
+            setTimeout(() => {
+                setIsVisible(true);
+            }, 3000);
+        }, []);
+        if (!isVisible) return null;
+
   return (
+    <>
     <footer className="footer">
       {/* Profile Button */}
       <button
@@ -47,7 +64,7 @@ const Footer = () => {
       {/* Add Report Button */}
       <button
         className={`footer-button ${selectedButton === "add" ? "selected" : ""}`}
-        onClick={() => setSelectedButton("add")}
+        onClick={handleOpen}
       >
         <img
           src={getIconSrc("add")}
@@ -70,6 +87,12 @@ const Footer = () => {
         <span className="footer-text">מסך הבית</span>
       </button>
     </footer>
+     <div className="popup">
+     <div className="popup-inner">
+         <ReportsModal open={open} onClose={handleClose}/>
+     </div>
+ </div>
+ </>
   );
 };
 

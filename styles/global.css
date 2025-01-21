@@ -33,6 +33,14 @@
   font-style: normal;
 }
 
+/* For titles and bus stops */
+@font-face {
+  font-family: 'MinutesFont';
+  src: url('../app/src/fonts/TheBasics-Mono.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* For the current bus stop */
 @font-face {
   font-family: 'CurrentStopFont';
@@ -93,16 +101,18 @@ header {
 }
 
 .navbar{
-  background-color: #f5f5f5;
+  background-color: white;
   color: black;
   display: flex;
   flex-direction: row;
-  gap: 1.5rem;
+  gap: 2rem;
+  height: 6rem;
+  padding-bottom: 1rem;
 }
 
 .logo{
-  width: 89px;
-  height: 43.73px;
+  width: 85px;
+  height: 41px;
 }
 
 .mainContainer{

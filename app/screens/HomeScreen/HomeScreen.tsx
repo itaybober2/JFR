@@ -4,6 +4,7 @@ import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListIte
 import StationHeader from "@/app/src/components/Home/components/StationHeader/StationHeader";
 import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
+import "./HomeScreen.css";
 
 type Stop = {
     id: number
@@ -46,15 +47,18 @@ const HomeScreen = (props: HomeScreenProps) => {
     return (
         <main>
             <div>
-                {filteredStops.length > 0 &&
-                    filteredStops.map((stop, index) => (
-                        <div key={index}>
-                            <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
-                            {stop.line_num.map((line, lineIndex) => (
-                                <BusInfoListItem key={lineIndex} lineNumber={line} />
-                            ))}
-                        </div>
+            {filteredStops.length > 0 &&
+                filteredStops.map((stop, index) => (
+                    <div key={index}>
+                    <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
+                    {stop.line_num.map((line, lineIndex) => (
+                        <React.Fragment key={lineIndex}>
+                        <BusInfoListItem lineNumber={line} />
+                        {lineIndex < stop.line_num.length - 1 && <div className="line" />}
+                        </React.Fragment>
                     ))}
+                    </div>
+                ))}
             </div>
         </main>
     );

@@ -16,12 +16,11 @@ const BusArrivals = ( props : BusArrivalsProps) => {
         <div className="bus-arrivals">
             <div className="first-bus-arrival-time">
                 <span>{arrivals[0].time}</span>
-                <span className='minutes'>דקות</span>
+                <span className='minutes_bold'>דקות</span>
             </div>
             <div className="second-bus-arrival-time">
                 <span>{arrivals[1].time}</span>
-                <span className='minutes'>דקות</span>
-
+                <span className='minutes_gray'>דקות</span>
             </div>
         </div>
     );

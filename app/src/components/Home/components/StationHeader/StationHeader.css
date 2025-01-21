@@ -11,26 +11,28 @@
     display: flex;
     align-items: center;
     justify-content: right;
-    padding-right: 40px;
+    padding-right: 25px;
     color: #000;
     text-align: right;
-    font-size: 22px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.906px;
     font-family: 'BusStopFont', sans-serif;
-
+    word-wrap: break-word;
+    letter-spacing: 2px;
 }
 
 .station-number {
+    letter-spacing: 2px;
     width: 25%;
     background-color: #1A00FF;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #FFF;
-    font-size: 18px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
