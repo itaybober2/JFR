@@ -24,9 +24,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const direction = busLocationStore.getLineDirection();
 
     const busLineRefs = useBusLineRef(lineNumber, direction);
-    console.log('lineRefs of ' + lineNumber.toString() + ':', JSON.stringify(busLineRefs, null, 2));
     const busLocation = useRealTimeBusLocation(busLineRefs, lineNumber);
-    console.log('line ' + lineNumber.toString() + ':', JSON.stringify(busLocation, null, 2));
     const lineId = busLocation?.siriRideId.toString();
 
     return (

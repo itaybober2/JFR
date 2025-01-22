@@ -8,6 +8,7 @@ import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListIte
 
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("517")
+
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         const lineNumberParam = query.get('lineNumber');
@@ -16,16 +17,11 @@ export default function BuslineScreen() {
         }
     }, []);
 
-    const router = useRouter();
-    const handleClick = (lineNumber: string) => {
-        router.push(`/screens/BuslineScreen?lineNumber=${lineNumber}`);
-        setLineNumber(lineNumber);
-    };
   return (
     <main>
         <div className="schedule-container">
           <BusInfoListItem lineNumber={lineNumber}/>
-          <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]}/>
+          <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/>
         </div>
     </main>
   );

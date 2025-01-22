@@ -12,6 +12,7 @@ export type Report = {
     roadBlock: boolean;
     pathChange: boolean;
     pathChangeDescription: string;
+    closestStop: string;
 };
 
 type ListItemIconContainerProps = {
