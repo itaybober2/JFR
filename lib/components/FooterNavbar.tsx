@@ -35,7 +35,10 @@ const Footer = () => {
             setSelectedButton("add");
             setOpen(true);
         };
-        const handleClose = () => setOpen(false);
+        const handleClose = () => {
+          setOpen(false);
+          setSelectedButton("home");
+        }
         const [isVisible, setIsVisible] = useState(false);
     
         useEffect(() => {

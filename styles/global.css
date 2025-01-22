@@ -68,6 +68,7 @@ body {
   color: var(--color-primary);
   background-color: var(--color-background);
   font-family: var(--font-body);
+  margin-bottom: 5rem;
 }
 
 /* Layout */
@@ -120,6 +121,7 @@ header {
   flex-direction: row;
   align-items: center;
 }
+
 .buttonOutline {
   width: 28px;
   height: 52px;
@@ -159,7 +161,7 @@ header {
   color: black;
   text-align: right;
   font-family: TheBasics;
-  font-size: 19.524px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

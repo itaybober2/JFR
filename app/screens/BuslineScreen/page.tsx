@@ -3,6 +3,7 @@ import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/B
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
 import { busLines } from "@/public/constants/constants";
+import Navbar from "@/lib/components/Navbar";
 import { useRouter } from "next/navigation";
 import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import { Stop } from "../HomeScreen/HomeScreen";
@@ -20,6 +21,8 @@ export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
     const [arrivalTime, setArrivalTime] = useState<number>(-1);
+    const [toMountScoupe, setToMountScoupe] = useState(true); 
+
 
     const direction = busLocationStore.getLineDirection();
     const busLineRefs = useBusLineRef(lineNumber, direction);
@@ -59,6 +62,7 @@ export default function BuslineScreen() {
 
   return (
     <main>
+        <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
         <div className="schedule-container">
             <div className='time-and-icons-container'>
           <LineNumberCircle lineNumber={lineNumber}/>
