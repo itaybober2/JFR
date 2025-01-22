@@ -8,6 +8,7 @@ import {useState} from "react";
 import {createReport} from "@/backend/utils/api";
 import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
+import {closestStopStore} from "@/backend/stores/closestStopStore";
 
 type ModalProps = {
     open: boolean;
@@ -52,6 +53,7 @@ export default function ReportsModal(props: ModalProps) {
                     inspector: selectedTypes.includes('inspector'),
                     pathChange: selectedTypes.includes('pathChange'),
                     pathChangeDescription: pathChangeText,
+                    closestStop: closestStopStore.getClosestStopToUser().stopName,
                 });
                 setLineNumber(null);
                 setSelectedTypes([]);

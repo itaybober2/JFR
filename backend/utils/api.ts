@@ -11,6 +11,7 @@ export type reportProps = {
     roadBlock?: boolean;
     pathChange?: boolean;
     pathChangeDescription?: string;
+    closestStop: string;
 }
 
 export async function fetchReports() {
@@ -30,6 +31,7 @@ export async function createReport(
         roadBlock,
         pathChange,
         pathChangeDescription,
+        closestStop,
     }: reportProps
 ) {
     const response = await fetch(`${backendUrl}/reports`, {
@@ -44,7 +46,8 @@ export async function createReport(
             inspector,
             roadBlock,
             pathChange,
-            pathChangeDescription
+            pathChangeDescription,
+            closestStop,
         }),
     });
     if (!response.ok) {

@@ -5,6 +5,7 @@ import StationHeader from "@/app/src/components/Home/components/StationHeader/St
 import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
 import "./HomeScreen.css";
+import {closestStopStore} from "@/backend/stores/closestStopStore";
 
 export type Stop = {
     id: number
@@ -35,7 +36,14 @@ const HomeScreen = (props: HomeScreenProps) => {
 
     const handleStopsFetch = (fetchedStops: Stop[]) => {
         setStops(fetchedStops);
-        console.log("Fetched stops:", fetchedStops); // Optional: For debugging
+        closestStopStore.setClosestStopToUser(
+            fetchedStops[0].stop_name,
+            fetchedStops[0].stop_code,
+            {
+                lat: fetchedStops[0].lat,
+                lon: fetchedStops[0].lon
+            }
+        );
     };
 
     useUserLocation({ handleStopsFetch });

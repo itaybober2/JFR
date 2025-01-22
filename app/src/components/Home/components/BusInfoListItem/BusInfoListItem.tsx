@@ -18,8 +18,8 @@ type BusInfoProps = {
     station: Stop ;
 }
 
-const calculateArrival = (busLocation: BusLocation | null, stop: Stop) => {
-    if (!busLocation) {
+export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | null) => {
+    if (!busLocation || !stop) {
         return -1;
     }
 
@@ -53,9 +53,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const direction = busLocationStore.getLineDirection();
 
     const busLineRefs = useBusLineRef(lineNumber, direction);
-    console.log('lineRefs of ' + lineNumber.toString() + ':', JSON.stringify(busLineRefs, null, 2));
     const busLocation = useRealTimeBusLocation(busLineRefs, lineNumber);
-    console.log('line ' + lineNumber.toString() + ':', JSON.stringify(busLocation, null, 2));
     const lineId = busLocation?.siriRideId.toString();
 
     React.useEffect(() => {
@@ -68,6 +66,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
         route: lineNumber,
         time: arrivalTime,
     }
+
     return (
         <>
         <div className="list-item-container" onClick={handleClick}>
