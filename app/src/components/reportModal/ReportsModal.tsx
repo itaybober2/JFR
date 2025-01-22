@@ -4,31 +4,32 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import './ReportsModal.css';
-import {useState} from "react";
-import {createReport} from "@/backend/utils/api";
+import { useState } from "react";
+import { createReport } from "@/backend/utils/api";
 import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
-import {busLocationStore} from "@/backend/stores/busLocationStore";
-import {closestStopStore} from "@/backend/stores/closestStopStore";
+import { busLocationStore } from "@/backend/stores/busLocationStore";
+import { closestStopStore } from "@/backend/stores/closestStopStore";
+import LineSelectionScreen from "@/app/src/components/ReportScreen/LineSelectionScreen";
 
 type ModalProps = {
     open: boolean;
     onClose: () => void;
 };
 
-const lineNumbers = ['19', '517' ,'19א', '17'];
+const lineNumbers = ['19', '517', '19א', '17'];
 
 export default function ReportsModal(props: ModalProps) {
     const { open, onClose } = props;
     const [lineNumber, setLineNumber] = useState<string | null>(null);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [pathChangeText, setPathChangeText] = useState<string>('');
+    const [modalPhase, setModalPhase] = useState<'lineSelection' | 'reportSelection' | 'comment'>('lineSelection')
 
     const handleCloseModal = () => {
         onClose();
         setSelectedTypes([]);
         setPathChangeText('');
     }
-
 
     const handleIconClick = (type: string) => {
         setSelectedTypes((prevSelectedTypes) =>
@@ -59,7 +60,7 @@ export default function ReportsModal(props: ModalProps) {
                 setSelectedTypes([]);
                 onClose();
             } catch (error) {
-                console.error( error);
+                console.error(error);
             }
         }
     };
@@ -73,7 +74,14 @@ export default function ReportsModal(props: ModalProps) {
                 aria-describedby="modal-modal-description"
             >
                 <Box className={'modal-box'}>
+                {modalPhase === 'lineSelection' && <LineSelectionScreen />}
+                {modalPhase === 'reportSelection' &&
                     <div className={"modal-content"}>
+                        <div className="modal-header">
+                            <tspan>
+                                על איזה קו תרצו לדווח?
+                            </tspan>
+                        </div>
                         <TextField
                             select
                             size={"medium"}
@@ -90,27 +98,28 @@ export default function ReportsModal(props: ModalProps) {
                             ))}
                         </TextField>
                         <Box className={"report-icons"}>
-                                <ReportIconButton
-                                    type="crowded"
-                                    isSelected={selectedTypes.includes('crowded')}
-                                    onClick={() => handleIconClick('crowded')}
-                                />
-                                <ReportIconButton
-                                    type="roadBlock"
-                                    isSelected={selectedTypes.includes('roadBlock')}
-                                    onClick={() => handleIconClick('roadBlock')}
-                                />
-                                <ReportIconButton
-                                    type="inspector"
-                                    isSelected={selectedTypes.includes('inspector')}
-                                    onClick={() => handleIconClick('inspector')}
-                                />
-                                <ReportIconButton
-                                    type="pathChange"
-                                    isSelected={selectedTypes.includes('pathChange')}
-                                    onClick={() => handleIconClick('pathChange')}
-                                />
+                            <ReportIconButton
+                                type="crowded"
+                                isSelected={selectedTypes.includes('crowded')}
+                                onClick={() => handleIconClick('crowded')}
+                            />
+                            <ReportIconButton
+                                type="roadBlock"
+                                isSelected={selectedTypes.includes('roadBlock')}
+                                onClick={() => handleIconClick('roadBlock')}
+                            />
+                            <ReportIconButton
+                                type="inspector"
+                                isSelected={selectedTypes.includes('inspector')}
+                                onClick={() => handleIconClick('inspector')}
+                            />
+                            <ReportIconButton
+                                type="pathChange"
+                                isSelected={selectedTypes.includes('pathChange')}
+                                onClick={() => handleIconClick('pathChange')}
+                            />
                         </Box>
+
                         {
                             selectedTypes.includes('pathChange') &&
                             <TextField
@@ -126,6 +135,7 @@ export default function ReportsModal(props: ModalProps) {
                             דווח
                         </button>
                     </div>
+                }
                 </Box>
             </Modal>
         </div>

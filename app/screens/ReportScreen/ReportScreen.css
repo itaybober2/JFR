@@ -1,0 +1,49 @@
+.report-screen {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.report-screen-modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 4rem;
+    font-family: 'TitleFont', sans-serif;
+    font-size: 18px;
+}
+
+.report-screen-modal-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.report-screen-icons {
+    display: flex;
+    flex-direction: row;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.report-screen-path-change-text-field {
+    width: 80%;
+    margin-top: 1rem;
+}
+
+.report-screen-submit-button {
+    width: 60%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
