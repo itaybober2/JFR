@@ -6,7 +6,7 @@ import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
 import "./HomeScreen.css";
 
-type Stop = {
+export type Stop = {
     id: number
     stop_name: string;
     lat: number;
@@ -41,9 +41,7 @@ const HomeScreen = (props: HomeScreenProps) => {
     useUserLocation({ handleStopsFetch });
 
     const filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 1 : 2));
-
     if (!isVisible) return null;
-
     return (
         <main>
             <div>
@@ -53,7 +51,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                     <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
                     {stop.line_num.map((line, lineIndex) => (
                         <React.Fragment key={lineIndex}>
-                        <BusInfoListItem lineNumber={line} />
+                        <BusInfoListItem lineNumber={line} station={stop}/>
                         {lineIndex < stop.line_num.length - 1 && <div className="line" />}
                         </React.Fragment>
                     ))}
