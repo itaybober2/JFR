@@ -1,9 +1,24 @@
-<svg width="121" height="121" viewBox="0 0 121 121" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M60.18 120.36C93.4165 120.36 120.36 93.4165 120.36 60.18C120.36 26.9435 93.4165 0 60.18 0C26.9435 0 0 26.9435 0 60.18C0 93.4165 26.9435 120.36 60.18 120.36Z" fill="#FF4E00"/>
-<path d="M36.9174 58.1924L22.1177 72.9922L25.038 75.9125L39.8378 61.1128L36.9174 58.1924Z" fill="white"/>
-<path d="M20.2618 74.8819L36.7798 91.3999L39.7001 88.4796L23.1821 71.9615L20.2618 74.8819Z" fill="white"/>
-<path d="M81.39 40.5098H28.23V48.7898H81.39V40.5098Z" fill="white"/>
-<path d="M93.8797 70.04H40.7197V78.32H93.8797V70.04Z" fill="white"/>
-<path d="M83.0294 62.4345L97.8291 47.6348L94.9087 44.7144L80.109 59.5142L83.0294 62.4345Z" fill="white"/>
-<path d="M99.6823 45.7485L83.1643 29.2305L80.244 32.1508L96.762 48.6688L99.6823 45.7485Z" fill="white"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1006 1006">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 101.38px;
+      }
+
+      .cls-2 {
+        fill: #ff4e00;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="503" cy="503" r="415.66"/>
+  <polyline class="cls-1" points="427.24 737.85 565.59 599.5 437.47 471.38 547.2 359.47"/>
+  <polygon class="cls-3" points="632.43 272.39 465.16 281.9 622.91 439.65 632.43 272.39"/>
 </svg>

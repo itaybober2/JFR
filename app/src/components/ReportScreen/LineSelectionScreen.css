@@ -1,9 +1,10 @@
 .line-selection-screen {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 .line-number-circle {

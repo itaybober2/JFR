@@ -74,7 +74,7 @@ export default function ReportsModal(props: ModalProps) {
                 aria-describedby="modal-modal-description"
             >
                 <Box className={'modal-box'}>
-                {modalPhase === 'lineSelection' && <LineSelectionScreen />}
+                {/*{modalPhase === 'lineSelection' && <LineSelectionScreen setScreenToRender={'lineSelection'} />}*/}
                 {modalPhase === 'reportSelection' &&
                     <div className={"modal-content"}>
                         <div className="modal-header">

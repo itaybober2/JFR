@@ -4,34 +4,31 @@ import * as React from "react";
 import {createReport} from "@/backend/utils/api";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 import {closestStopStore} from "@/backend/stores/closestStopStore";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
 import './ReportScreen.css';
-import MenuItem from "@mui/material/MenuItem";
 import LineSelectionScreen from "@/app/src/components/ReportScreen/LineSelectionScreen";
-import ReportTypeSelection from "@/app/src/components/ReportScreen/ReportTypeSelection";
+import ReportTypeSelection, {getReportText} from "@/app/src/components/ReportScreen/ReportTypeSelection";
 import AddReportTextScreen from "@/app/src/components/ReportScreen/AddReportTextScreen";
+import ReportScreenWraper from "@/app/src/components/ReportScreen/ReportScreenWraper";
 
-const lineNumbers = ['19', '19א', '517', '17'];
+export type screensToRender = 'lineSelection' | 'reportSelection' | 'comment';
 
 const ReportScreen = () => {
     const [lineNumber, setLineNumber] = useState<string | null>(null);
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [pathChangeText, setPathChangeText] = useState<string>('');
-    const [screenToRender, setScreenToRender] = useState<'lineSelection' | 'reportSelection' | 'comment'>('lineSelection')
+    const [screenToRender, setScreenToRender] = useState<screensToRender>('lineSelection');
+    const [selectedReportType, setSelectedReportType] = useState('')
 
-    const handleIconClick = (type: string) => {
-        setSelectedTypes((prevSelectedTypes) =>
-            prevSelectedTypes.includes(type)
-                ? prevSelectedTypes.filter((t) => t !== type)
-                : [...prevSelectedTypes, type]
-        );
+    const getPreviousScreen = (currentScreen: screensToRender): screensToRender => {
+        switch (currentScreen) {
+            case 'comment':
+                return 'reportSelection';
+            case 'reportSelection':
+                return 'lineSelection';
+            default:
+                return 'lineSelection';
+        }
     };
-
-    const handlePathChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPathChangeText(e.target.value);
-    }
 
     const handleSubmit = async () => {
         if (lineNumber !== null) {
@@ -56,61 +53,47 @@ const ReportScreen = () => {
 
     switch (screenToRender) {
         case 'lineSelection':
-            return <LineSelectionScreen/>
+            return (
+                <ReportScreenWraper
+                    screenHeaderText={'על איזה קו תרצו לדווח?'}
+                    getPreviousScreen={getPreviousScreen}
+                    setScreenToRender={setScreenToRender}
+                    currentScreen={screenToRender}
+                >
+                    <LineSelectionScreen setScreenToRender={setScreenToRender}/>
+                </ReportScreenWraper>
+            )
         case 'reportSelection':
-            return <ReportTypeSelection/>
+            return (
+                <ReportScreenWraper
+                    screenHeaderText={'על מה תרצו לדווח?'}
+                    getPreviousScreen={getPreviousScreen}
+                    setScreenToRender={setScreenToRender}
+                    currentScreen={screenToRender}
+                >
+                    <ReportTypeSelection
+                        setScreenToRender={setScreenToRender}
+                        setSelectedReportType={setSelectedReportType}/>
+                </ReportScreenWraper>
+            )
         case 'comment':
-            return <AddReportTextScreen/>
+            return (
+                <ReportScreenWraper
+                    screenHeaderText={getReportText(selectedReportType)}
+                    getPreviousScreen={getPreviousScreen}
+                    setScreenToRender={setScreenToRender}
+                    currentScreen={screenToRender}
+                >
+                    <AddReportTextScreen
+                        setScreenToRender={setScreenToRender}
+                        reportType={selectedReportType}
+                        // handleSubmit={handleSubmit}
+                    />
+                </ReportScreenWraper>
+                )
+        default:
+            return null;
     }
-
-    return (
-        <div className="report-screen">
-                <div className="report-screen-modal-content">
-                    <div className="report-screen-modal-header">
-                        <tspan>
-                            על איזה קו תרצו לדווח?
-                        </tspan>
-                    </div>
-                    <Box className={"report-screen-icons"}>
-                        <ReportIconButton
-                            type="crowded"
-                            isSelected={selectedTypes.includes('crowded')}
-                            onClick={() => handleIconClick('crowded')}
-                        />
-                        <ReportIconButton
-                            type="roadBlock"
-                            isSelected={selectedTypes.includes('roadBlock')}
-                            onClick={() => handleIconClick('roadBlock')}
-                        />
-                        <ReportIconButton
-                            type="inspector"
-                            isSelected={selectedTypes.includes('inspector')}
-                            onClick={() => handleIconClick('inspector')}
-                        />
-                        <ReportIconButton
-                            type="pathChange"
-                            isSelected={selectedTypes.includes('pathChange')}
-                            onClick={() => handleIconClick('pathChange')}
-                        />
-                    </Box>
-
-                    {
-                        selectedTypes.includes('pathChange') &&
-                        <TextField
-                            className={'report-screen-path-change-text-field'}
-                            margin={'normal'}
-                            onChange={handlePathChangeText}
-                        />
-                    }
-                    <button
-                        className={"report-screen-submit-button"}
-                        onClick={handleSubmit}
-                    >
-                        דווח
-                    </button>
-                </div>
-        </div>
-    );
 }
 
 export default ReportScreen;

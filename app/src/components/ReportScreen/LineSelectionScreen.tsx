@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
-import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
 import './LineSelectionScreen.css';
+import ReportLineCircle from "@/app/src/components/ReportScreen/ReportLineCircle";
+import {screensToRender} from "@/app/screens/ReportScreen/ReportScreen";
 
-const LineSelectionScreen = () => {
-    const [selectedLine, setSelectedLine] = useState<string | null>(null);
+export type LineSelectionProps = {
+    setScreenToRender: (screensToRender: screensToRender) => void;
+};
 
-    const handleCircleClick = (lineNumber: string) => {
-        setSelectedLine(lineNumber);
-    };
-
+const LineSelectionScreen = (props: LineSelectionProps) => {
+    const { setScreenToRender } = props;
     const lineNumbers = ['19', '19א', '517', '17'];
+    const [stayTheSame, setStayTheSame] = useState(['19', '19א', '517', '17']);
+
+    const handleLineClick = (lineNumber: string) => {
+        setStayTheSame([lineNumber]);
+        setTimeout(() => {
+            setScreenToRender('reportSelection');
+            setTimeout(() => {
+                setStayTheSame(['19', '19א', '517', '17']);
+            }, 500);
+        }, 800);
+
+    };
 
     return (
         <div className="line-selection-screen">
             {lineNumbers.map((lineNumber) => (
-                <div
+                <ReportLineCircle
+                    lineNumber={lineNumber}
                     key={lineNumber}
-                    className={`line-number-circle ${selectedLine && selectedLine !== lineNumber ? 'unselected' : ''}`}
-                    onClick={() => handleCircleClick(lineNumber)}
-                >
-                    <LineNumberCircle lineNumber={lineNumber} isShownFromReportModal={true} />
-                </div>
+                    isSelected={stayTheSame.includes(lineNumber)}
+                    onClick={() => handleLineClick(lineNumber)}
+                />
             ))}
         </div>
     );
