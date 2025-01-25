@@ -6,7 +6,7 @@ type BusArrivalsProps = {
         id: number;
         route: string;
         time: number | null;
-    };
+    }[];
 }
 
 const BusArrivals = ( props : BusArrivalsProps) => {
@@ -14,11 +14,11 @@ const BusArrivals = ( props : BusArrivalsProps) => {
     return (
         <div className="bus-arrivals">
             <div className="first-bus-arrival-time">
-                <span>{arrivals.time}</span>
+                <span>{arrivals[0].time}</span>
                 <span className='minutes_bold'>דקות</span>
             </div>
             <div className="second-bus-arrival-time">
-                <span>{arrivals.time}</span>
+                <span>{arrivals[1].time}</span>
                 <span className='minutes_gray'>דקות</span>
             </div>
         </div>
