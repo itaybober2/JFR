@@ -9,8 +9,9 @@ import LineSelectionScreen from "@/app/src/components/ReportScreen/LineSelection
 import ReportTypeSelection, {getReportText} from "@/app/src/components/ReportScreen/ReportTypeSelection";
 import AddReportTextScreen from "@/app/src/components/ReportScreen/AddReportTextScreen";
 import ReportScreenWraper from "@/app/src/components/ReportScreen/ReportScreenWraper";
+import ThankYouScreen from "@/app/src/components/ReportScreen/ThankYouScreen";
 
-export type screensToRender = 'lineSelection' | 'reportSelection' | 'comment';
+export type screensToRender = 'lineSelection' | 'reportSelection' | 'comment' | 'thankYou';
 
 const ReportScreen = () => {
     const [lineNumber, setLineNumber] = useState<string | null>(null);
@@ -40,6 +41,8 @@ const ReportScreen = () => {
                     roadBlock: selectedTypes.includes('roadBlock'),
                     inspector: selectedTypes.includes('inspector'),
                     pathChange: selectedTypes.includes('pathChange'),
+                    wildDriving: selectedTypes.includes('wildDriving'),
+                    stink: selectedTypes.includes('stink'),
                     pathChangeDescription: pathChangeText,
                     closestStop: closestStopStore.getClosestStopToUser().stopName,
                 });
@@ -60,7 +63,7 @@ const ReportScreen = () => {
                     setScreenToRender={setScreenToRender}
                     currentScreen={screenToRender}
                 >
-                    <LineSelectionScreen setScreenToRender={setScreenToRender}/>
+                    <LineSelectionScreen setScreenToRender={setScreenToRender} setLineToReport={setLineNumber}/>
                 </ReportScreenWraper>
             )
         case 'reportSelection':
@@ -73,7 +76,9 @@ const ReportScreen = () => {
                 >
                     <ReportTypeSelection
                         setScreenToRender={setScreenToRender}
-                        setSelectedReportType={setSelectedReportType}/>
+                        setSelectedReportType={setSelectedReportType}
+                        setSelectedTypes={setSelectedTypes}
+                    />
                 </ReportScreenWraper>
             )
         case 'comment':
@@ -87,10 +92,21 @@ const ReportScreen = () => {
                     <AddReportTextScreen
                         setScreenToRender={setScreenToRender}
                         reportType={selectedReportType}
-                        // handleSubmit={handleSubmit}
+                        setCommentText={setPathChangeText}
+                        handleSubmit={handleSubmit}
                     />
                 </ReportScreenWraper>
                 )
+        case 'thankYou':
+            return <ReportScreenWraper
+                screenHeaderText={''}
+                setScreenToRender={setScreenToRender}
+                getPreviousScreen={getPreviousScreen}
+                currentScreen={screenToRender}
+                disableBackButton={true}
+            >
+                <ThankYouScreen setScreenToRender={setScreenToRender}/>
+            </ReportScreenWraper>
         default:
             return null;
     }

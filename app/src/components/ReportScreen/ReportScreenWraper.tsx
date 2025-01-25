@@ -9,10 +9,11 @@ type ReportScreenWrapperProps = {
     setScreenToRender: (screen: screensToRender) => void;
     getPreviousScreen: (screen: screensToRender) => screensToRender;
     currentScreen: screensToRender;
+    disableBackButton?: boolean;
 };
 
 const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
-    const {children, screenHeaderText, setScreenToRender, getPreviousScreen, currentScreen} = props;
+    const {children, screenHeaderText, setScreenToRender, getPreviousScreen, currentScreen, disableBackButton} = props;
     let imageUrl: string = Icons.backButton;
 
     const handleBackClick = () => {
@@ -22,7 +23,7 @@ const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
         <div className="report-screen">
             <div className="report-screen-modal-content">
                 <div className="report-screen-modal-header">
-                    <img src={imageUrl} alt='back button' onClick={handleBackClick}/>
+                    {!disableBackButton && <img src={imageUrl} alt='back button' onClick={handleBackClick}/>}
                     <tspan>
                         {screenHeaderText}
                     </tspan>

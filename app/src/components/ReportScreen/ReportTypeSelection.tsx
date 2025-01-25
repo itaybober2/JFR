@@ -1,11 +1,12 @@
-import { LineSelectionProps } from "@/app/src/components/ReportScreen/LineSelectionScreen";
+import { ReportFlowScreenProps } from "@/app/src/components/ReportScreen/LineSelectionScreen";
 import ReportIconButton from "@/app/src/components/reportModal/ReportIconButton";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import { useState } from "react";
 
-interface ReportTypeSelectionProps extends LineSelectionProps {
+interface ReportTypeSelectionProps extends ReportFlowScreenProps {
     setSelectedReportType: (title: string) => void;
+    setSelectedTypes: (types: string[]) => void;
 }
 
 export const getReportText = (type: string) => {
@@ -28,12 +29,13 @@ export const getReportText = (type: string) => {
 }
 
 const ReportTypeSelection = (props: ReportTypeSelectionProps) => {
-    const { setScreenToRender, setSelectedReportType } = props;
+    const { setScreenToRender, setSelectedReportType, setSelectedTypes } = props;
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
     const handleIconClick = (type: string) => {
         setSelectedType(type);
         setSelectedReportType(type);
+        setSelectedTypes([type]);
         setTimeout(() => {
             setScreenToRender('comment');
         }, 1000);

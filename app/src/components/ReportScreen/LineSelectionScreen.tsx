@@ -3,17 +3,22 @@ import './LineSelectionScreen.css';
 import ReportLineCircle from "@/app/src/components/ReportScreen/ReportLineCircle";
 import {screensToRender} from "@/app/screens/ReportScreen/ReportScreen";
 
-export type LineSelectionProps = {
+export type ReportFlowScreenProps = {
     setScreenToRender: (screensToRender: screensToRender) => void;
 };
 
-const LineSelectionScreen = (props: LineSelectionProps) => {
-    const { setScreenToRender } = props;
+interface LineSelectionScreenProps extends ReportFlowScreenProps {
+    setLineToReport: (lineNumber: string) => void;
+}
+
+const LineSelectionScreen = (props: LineSelectionScreenProps) => {
+    const { setScreenToRender, setLineToReport } = props;
     const lineNumbers = ['19', '19א', '517', '17'];
     const [stayTheSame, setStayTheSame] = useState(['19', '19א', '517', '17']);
 
     const handleLineClick = (lineNumber: string) => {
         setStayTheSame([lineNumber]);
+        setLineToReport(lineNumber);
         setTimeout(() => {
             setScreenToRender('reportSelection');
             setTimeout(() => {
