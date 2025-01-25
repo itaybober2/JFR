@@ -6,6 +6,9 @@ import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
 import "./HomeScreen.css";
 import {closestStopStore} from "@/backend/stores/closestStopStore";
+import { busLocationStore } from "@/backend/stores/busLocationStore";
+import { useBusLineRef } from "@/app/src/hooks/useBusLineRef";
+import { useRealTimeBusLocation } from "@/app/src/hooks/useRealTimeBusLocation";
 
 export type Stop = {
     id: number
@@ -21,6 +24,8 @@ export type Stop = {
 type HomeScreenProps = {
     toMountScoupe: boolean;
 };
+
+
 
 const HomeScreen = (props: HomeScreenProps) => {
     const { toMountScoupe } = props;
@@ -48,7 +53,11 @@ const HomeScreen = (props: HomeScreenProps) => {
 
     useUserLocation({ handleStopsFetch });
 
-    const filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 1 : 2));
+    var filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 1 : 2));
+
+    filteredStops = filteredStops.filter(stop => stop.line_num.length > 0);
+
+
     if (!isVisible) return null;
     return (
         <main>
@@ -58,6 +67,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                     <div key={index}>
                     <StationHeader stationName={stop.stop_name} stationNumber={stop.stop_code} />
                     {stop.line_num.map((line, lineIndex) => (
+                        
                         <React.Fragment key={lineIndex}>
                         <BusInfoListItem lineNumber={line} station={stop}/>
                         {lineIndex < stop.line_num.length - 1 && <div className="line" />}

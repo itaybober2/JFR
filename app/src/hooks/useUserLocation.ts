@@ -32,9 +32,7 @@ const useUserLocation = (props: userLocationProps) => {
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     userLocationStore.setUserLocation({ lat: latitude, lon: longitude });
-                    console.log(latitude, longitude);
                     const stops = getNearstsStops([latitude, longitude]);
-                    console.log(stops);
                     handleStopsFetch(stops);
                 },
                 (err) => {

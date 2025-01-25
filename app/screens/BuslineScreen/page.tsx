@@ -14,18 +14,21 @@ import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/Bu
 import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
 import ListItemIconContainer from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
 import '@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem.css';
+import { useConnect } from "remx";
 
 
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
-    const [arrivalTime, setArrivalTime] = useState<number>(-1);
+    const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
+    const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
 
     const direction = busLocationStore.getLineDirection();
     const busLineRefs = useBusLineRef(lineNumber, direction);
-    const busLocation = useRealTimeBusLocation(busLineRefs, lineNumber);
-    const lineId = busLocation?.siriRideId.toString();
-
+    const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
+    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId.toString() : locations?.siriRideId.toString();
+    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId.toString() : undefined;
+   
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         const lineNumberParam = query.get('lineNumber');
@@ -47,23 +50,32 @@ export default function BuslineScreen() {
 
 
     useEffect(() => {
-      const calculatedTime = calculateArrival(busLocation, station);
-      setArrivalTime(calculatedTime);
-  }, [busLocation, station]);
+      const calculatedTimeA = calculateArrival(locations && 'A' in locations ? locations.A : null, station);
+      setArrivalTimeA(calculatedTimeA);
+      const calculatedTimeB = calculateArrival(locations && 'B' in locations ? locations.B : null, station);
+      setArrivalTimeB(calculatedTimeB)
+  }, [locations, station]);
 
-  const busArrival = {
-    id: Number(lineId),
+  const busArrivalA = {
+    id: Number(lineIdA),
     route: lineNumber,
-    time: arrivalTime,
+    time: arrivalTimeA,
   }
+
+  const busArrivalB = {
+    id: Number(lineIdB),
+    route: lineNumber,
+    time: arrivalTimeB,
+  }
+
 
   return (
     <main>
         <div className="schedule-container">
             <div className='time-and-icons-container'>
           <LineNumberCircle lineNumber={lineNumber}/>
-                <ListItemIconContainer lineNumber={lineNumber} lineId={lineId}/>
-                <BusArrivals arrivals={busArrival}/>
+                <ListItemIconContainer lineNumber={lineNumber} lineId={lineIdA}/>
+                <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
             </div>
           <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/>
         </div>
