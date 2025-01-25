@@ -8,6 +8,9 @@ export const Icons ={
     RoadBlockIcon: '/icons/roadBlockIcon.svg',
     InspectionIcon: '/icons/inspector.svg',
     PathChangeIcon: '/icons/pathChange.svg',
+    stinkIcon: '/icons/stink.svg',
+    wildDrivingIcon: '/icons/wildDriving.svg',
+    backButton: '/icons/back_button.svg',
 }
 
 export const circelLines ={
@@ -15,6 +18,14 @@ export const circelLines ={
     line19: '/icons/line19.png',
     line19A: '/icons/line19A.png',
     line17: '/icons/line17.png',
+    line517White: '/icons/line517_white.svg',
+    line19White: '/icons/line19_white.svg',
+    line19AWhite: '/icons/line19A_white.svg',
+    line17White: '/icons/line17_white.svg',
+    line19ASelected: '/icons/line19ASelected.svg',
+    line517Selected: '/icons/line517Selected.svg',
+    line19Selected: '/icons/line19Selected.svg',
+    line17Selected: '/icons/line17Selected.svg',
 }
 
 export const FooterIcons = {

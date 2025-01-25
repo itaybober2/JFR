@@ -1,0 +1,52 @@
+.add-report-screen-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.input-container {
+    position: relative; /* Required for positioning the button inside */
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full screen width */
+    max-width: 100%; /* Prevent clipping */
+    background-color: #ffffff; /* White background for the input */
+    border-radius: 25px; /* Rounded edges */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional subtle shadow */
+}
+
+.text-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-align: right; /* Align text for RTL */
+    direction: rtl; /* Force RTL direction for Hebrew */
+    padding: 10px 10px 10px 50px; /* Add padding to leave space for the button */
+    height: 40px; /* Single-line height */
+    width: 80%;
+    overflow: hidden;
+    border-radius: 25px;
+    background: transparent;
+}
+
+.text-input::placeholder {
+    color: #888888; /* Placeholder text color */
+}
+
+.send-icon {
+    position: absolute; /* Place it inside the container */
+    left: 10px; /* Push it to the far-left (RTL design) */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    width: 30px; /* Adjust width for the icon */
+    height: 30px; /* Adjust height for the icon */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
