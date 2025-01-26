@@ -1,0 +1,33 @@
+.line-selection-screen {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.line-number-circle {
+    transition: background-color 0.3s;
+}
+
+.line-number-circle.unselected {
+    background-color: gray;
+}
+
+.line-number-circle-modal {
+    width: 86px;
+    height: 86px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+.line-number-font-modal {
+    font-size: 43px;
+    font-weight: bold;
+}

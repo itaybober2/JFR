@@ -12,6 +12,7 @@ import ListItemIconContainer
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 import {Stop} from "@/app/screens/HomeScreen/HomeScreen";
 import {BusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
+import { haversineDistance } from '@/app/src/hooks/getClosestStops';
 
 type BusInfoProps = {
     lineNumber: string;
@@ -31,7 +32,11 @@ export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | n
     // Euclidean distance formula
     const dLat = (busLocation.lat - stop.lat) * 111;
     const dLon = (busLocation.lon - stop.lon) * 111;
-    const distance = Math.sqrt(dLat * dLat + dLon * dLon); // Distance in meters
+    const distance = haversineDistance(busLocation.lat, busLocation.lon, stop.lat, stop.lon);
+
+    // const distance = Math.sqrt(dLat * dLat + dLon * dLon); 
+
+
     // Assume average bus speed of 20 km/h in urban areas
     const averageSpeed = 20;
     const timeInHours = distance / averageSpeed;
@@ -42,7 +47,8 @@ export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | n
 
 const BusInfoListItem = (props: BusInfoProps) => {
     const {lineNumber, station} = props
-    const [arrivalTime, setArrivalTime] = React.useState<number>(-1);
+    const [arrivalTimeA, setArrivalTimeA] = React.useState<number>(-1);
+    const [arrivalTimeB, setArrivalTimeB] = React.useState<number>(-1);
     
     const router = useRouter();
     const handleClick = () => {
@@ -53,29 +59,43 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const direction = busLocationStore.getLineDirection();
 
     const busLineRefs = useBusLineRef(lineNumber, direction);
-    const busLocation = useRealTimeBusLocation(busLineRefs, lineNumber);
-    const lineId = busLocation?.siriRideId.toString();
-
+    const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
+    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId.toString() : locations?.siriRideId.toString();
+    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId.toString() : undefined;
+    
     React.useEffect(() => {
-        const calculatedTime = calculateArrival(busLocation, station);
-        setArrivalTime(calculatedTime);
-    }, [busLocation, station]);
+        const calculatedTimeA = calculateArrival(locations && 'A' in locations ? locations.A : null, station);
+        setArrivalTimeA(calculatedTimeA);
+        const calculatedTimeB = calculateArrival(locations && 'B' in locations ? locations.B : null, station);
+        setArrivalTimeB(calculatedTimeB)
+    }, [locations, station]);
 
-    const busArrival = {
-        id: Number(lineId),
+    const busArrivalA = {
+        id: Number(lineIdA),
         route: lineNumber,
-        time: arrivalTime,
+        time: arrivalTimeA,
     }
+
+    const busArrivalB = {
+        id: Number(lineIdB),
+        route: lineNumber,
+        time: arrivalTimeB,
+    }
+
 
     return (
         <>
-        <div className="list-item-container" onClick={handleClick}>
-            <LineNumberCircle lineNumber={lineNumber}/>
-            <div className='time-and-icons-container'>
-                <ListItemIconContainer lineNumber={lineNumber} lineId={lineId}/>
-                <BusArrivals arrivals={busArrival}/>
+        {arrivalTimeA === -1 ? (
+            <div></div>
+        ) : (
+            <div className="list-item-container" onClick={handleClick}>
+                <LineNumberCircle lineNumber={lineNumber}/>
+                <div className='time-and-icons-container'>
+                    <ListItemIconContainer lineNumber={lineNumber} lineId={lineIdA}/>
+                    <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
+                </div>
             </div>
-        </div>
+        )}
         </>
     );
 }

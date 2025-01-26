@@ -29,6 +29,11 @@ const Footer = () => {
         setSelectedButton("home");
         router.push('/');
     }
+    const handleAddReportClick = () => {
+        console.log("add report clicked");
+        setSelectedButton("add");
+        router.push('/screens/ReportScreen');
+    }
 
         const [open, setOpen] = useState(false);
         const handleOpen = () => {
@@ -67,7 +72,7 @@ const Footer = () => {
       {/* Add Report Button */}
       <button
         className={`footer-button ${selectedButton === "add" ? "selected" : ""}`}
-        onClick={handleOpen}
+        onClick={handleAddReportClick}
       >
         <img
           src={getIconSrc("add")}

@@ -10,6 +10,8 @@ export type reportProps = {
     inspector?: boolean;
     roadBlock?: boolean;
     pathChange?: boolean;
+    wildDriving?: boolean;
+    stink?: boolean;
     pathChangeDescription?: string;
     closestStop: string;
 }
@@ -30,6 +32,8 @@ export async function createReport(
         inspector,
         roadBlock,
         pathChange,
+        wildDriving,
+        stink,
         pathChangeDescription,
         closestStop,
     }: reportProps
@@ -46,6 +50,8 @@ export async function createReport(
             inspector,
             roadBlock,
             pathChange,
+            wildDriving,
+            stink,
             pathChangeDescription,
             closestStop,
         }),

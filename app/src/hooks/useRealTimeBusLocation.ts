@@ -14,12 +14,22 @@ export type BusLocation = {
     siriRideId: number;
 };
 
-export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, interval = 60000) {
-    const [busLocation, setBusLocation] = useState<BusLocation | null>(null);
+export type BusLocations = {
+    A: BusLocation | null;
+    B: BusLocation | null;
+};
+
+
+
+// TODO make this function return the top 2 bus locations
+export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, double: boolean = false, interval = 60000): BusLocations | BusLocation | null {
+    const [busLocationA, setBusLocationA] = useState<BusLocation | null>(null);
+    const [busLocationB, setBusLocationB] = useState<BusLocation | null>(null);
 
     useEffect(() => {
         const fetchLocation = async () => {
-            let latestData: BusLocation | null = null;
+            let DataA: BusLocation | null = null;
+            let DataB: BusLocation | null = null;
             let minDistance = undefined as number | undefined;
 
             try {
@@ -40,32 +50,45 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
                         siri_rides__schedualed_start_time_to: format(endTime, "yyyy-MM-dd'T'HH:mm:ssXXX"),
                         order_by: "recorded_at_time desc",
                     };
-
                     const response = await axios.get(
                         URLS.busLocationUrl,
                         { params: params }
                     );
 
+                    // console.log("ResponseA: ", response.data[0])
+                    // console.log("ResponseB: ", response.data[1])
+
                     if (response.data.length > 0) {
-                        const data = response.data[0];
-                        const busLocation = {lat: data.lat, lon: data.lon};
+                        const dataA = response.data[0];
+                        const dataB = response.data[1];
+                        const busLocationA = {lat: dataA.lat, lon: dataA.lon};
                         const userLocation = userLocationStore.getUserLocation();
-                        const distance = haversineDistance(busLocation.lat, busLocation.lon, userLocation.lat, userLocation.lon);
-                        if (minDistance === undefined || distance < minDistance) {
-                            minDistance = distance;
-                            latestData = {
-                                recordedAtTime: data.recorded_at_time,
-                                lon: data.lon,
-                                lat: data.lat,
-                                siriRideId: data.siri_ride__id,
+                        const distanceA = haversineDistance(busLocationA.lat, busLocationA.lon, userLocation.lat, userLocation.lon);
+                        if (minDistance === undefined || distanceA < minDistance) {
+                            minDistance = distanceA;
+
+                            DataA = {
+                                recordedAtTime: dataA.recorded_at_time,
+                                lon: dataA.lon,
+                                lat: dataA.lat,
+                                siriRideId: dataA.siri_ride__id,
                             };
+                            DataB = {
+                                recordedAtTime: dataB.recorded_at_time,
+                                lon: dataB.lon,
+                                lat: dataB.lat,
+                                siriRideId: dataB.siri_ride__id,
+                            };
+
+                            setBusLocationA(DataB);
+                            setBusLocationB(DataA)
+                            
                         }
                     }
                 }
 
-                if (latestData) {
-                    setBusLocation(latestData);
-                    busLocationStore.setBusLocation(latestData, lineNumber);
+                if (DataA) {
+                    busLocationStore.setBusLocation(DataA, lineNumber);
                 }
             } catch (error) {
                 console.error("Error fetching real-time bus location:", error);
@@ -80,5 +103,9 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, in
         return () => clearInterval(intervalId);
     }, [lineRef, interval]);
 
-    return busLocation;
+    if (double) {
+        return { A: busLocationA, B: busLocationB }
+    } else {
+        return busLocationA;
+    }
 }

@@ -24,3 +24,7 @@
     font-weight: bold;
 }
 
+.line-number-circle.modal {
+    width: 36px;
+    height: 36px;
+}

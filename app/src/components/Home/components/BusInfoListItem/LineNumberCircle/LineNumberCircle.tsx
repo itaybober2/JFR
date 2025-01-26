@@ -4,26 +4,28 @@ import { circelLines } from "@/public/constants/constants";
 
 type LineNumberCircleProps = {
     lineNumber: string;
+    isShownFromReportModal?: boolean;
+    isWhite?: boolean;
 };
 
 const LineNumberCircle = (props: LineNumberCircleProps) => {
-    const { lineNumber } = props;
-    let imageUrl: string = circelLines.line19A;
+    const { lineNumber, isShownFromReportModal, isWhite } = props;
+    let imageUrl: string = isWhite ? circelLines.line19White : circelLines.line19A;
 
     switch (lineNumber) {
         case "517":
-            imageUrl = circelLines.line517;
+            imageUrl = isWhite ? circelLines.line517White : circelLines.line517;
             break;
         case "19":
-            imageUrl = circelLines.line19;
+            imageUrl = isWhite ? circelLines.line19White : circelLines.line19;
             break;
         case "17":
-            imageUrl = circelLines.line17;
+            imageUrl = isWhite? circelLines.line517White : circelLines.line17;
             break;
     }
 
     return (
-        <div className="line-number-circle">
+        <div className={`line-number-circle ${isShownFromReportModal ? 'modal' : ''}`}>
             <img src={imageUrl} alt={`Line number ${lineNumber}`} />
         </div>
     );
