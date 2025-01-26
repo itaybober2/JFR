@@ -21,13 +21,11 @@ const AddReportTextScreen = (props: AddReportTextScreenProps) => {
     }
 
     const handleSubmitClick = () => {
-        if (messageText) {
-            setScreenToRender('thankYou');
-            setCommentText(messageText);
-            setTimeout(() => {
-                handleSubmit();
-            }, 1000);
-        }
+        setScreenToRender('thankYou');
+        setCommentText(messageText);
+        setTimeout(() => {
+            handleSubmit();
+        }, 1000);
     }
 
     return (

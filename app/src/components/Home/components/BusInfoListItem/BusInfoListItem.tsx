@@ -1,18 +1,17 @@
 'use client';
-import React from 'react';
+import React, {useState} from 'react';
 import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
 import './BusInfoListItem.css';
 import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
-import {BusArrivalMock} from "@/public/constants/constants";
 import { useRouter } from 'next/navigation';
 import {useBusLineRef} from "@/app/src/hooks/useBusLineRef";
 import {useRealTimeBusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
-import ListItemIconContainer
-    from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
+import ListItemIconContainer from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 import {Stop} from "@/app/screens/HomeScreen/HomeScreen";
 import {BusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
 import { haversineDistance } from '@/app/src/hooks/getClosestStops';
+import LoadingScreen from "@/app/src/components/LoadingScreen";
 
 type BusInfoProps = {
     lineNumber: string;
@@ -21,21 +20,10 @@ type BusInfoProps = {
 
 export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | null) => {
     if (!busLocation || !stop) {
-        return -1;
+        return -2;
     }
 
-    // Convert coordinates to radians
-    const toRad = (value: number) => (value * Math.PI) / 180;
-    
-
-
-    // Euclidean distance formula
-    const dLat = (busLocation.lat - stop.lat) * 111;
-    const dLon = (busLocation.lon - stop.lon) * 111;
     const distance = haversineDistance(busLocation.lat, busLocation.lon, stop.lat, stop.lon);
-
-    // const distance = Math.sqrt(dLat * dLat + dLon * dLon); 
-
 
     // Assume average bus speed of 20 km/h in urban areas
     const averageSpeed = 20;
@@ -49,7 +37,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const {lineNumber, station} = props
     const [arrivalTimeA, setArrivalTimeA] = React.useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = React.useState<number>(-1);
-    
+
     const router = useRouter();
     const handleClick = () => {
         const encodedStation = encodeURIComponent(JSON.stringify(station));
@@ -60,8 +48,8 @@ const BusInfoListItem = (props: BusInfoProps) => {
 
     const busLineRefs = useBusLineRef(lineNumber, direction);
     const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
-    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId.toString() : locations?.siriRideId.toString();
-    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId.toString() : undefined;
+    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId : locations?.siriRideId;
+    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId : undefined;
     
     React.useEffect(() => {
         const calculatedTimeA = calculateArrival(locations && 'A' in locations ? locations.A : null, station);
@@ -82,17 +70,19 @@ const BusInfoListItem = (props: BusInfoProps) => {
         time: arrivalTimeB,
     }
 
+    if (arrivalTimeA === -1) {
+        return <LoadingScreen/>
+    }
 
     return (
         <>
-        {arrivalTimeA === -1 ? (
-            <div></div>
-        ) : (
+        {arrivalTimeA === -2 ?
+            null
+         : (
             <div className="list-item-container" onClick={handleClick}>
                 <LineNumberCircle lineNumber={lineNumber}/>
                 <div className='time-and-icons-container'>
-                    <ListItemIconContainer lineNumber={lineNumber} lineId={lineIdA}/>
-                    <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
+                    <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={true}/>
                 </div>
             </div>
         )}

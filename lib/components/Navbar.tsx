@@ -9,15 +9,6 @@ interface NavbarProps {
 }
 
 export default function Navbar({ toMountScoupe, setToMountScoupe }: NavbarProps) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 3000);
-  }, []);
-
-  if (!isVisible) return null;
 
   return (
     <header className="navbar">

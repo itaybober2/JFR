@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './ListItemIcon.css';
 import {Icons} from "@/public/constants/constants";
 
 type IconProps = {
-    type: 'roadBlock' | 'crowded' | 'inspector' | 'pathChange';
-    lineNumber?: string;
+    type: 'roadBlock' | 'crowded' | 'inspector' | 'pathChange' | 'wildDriving' | 'stink';
+    handleIconClick?: (event: React.MouseEvent) => void;
 }
 
 const ListItemIcon = (props: IconProps) => {
-    const {type, lineNumber} = props;
+    const {type, handleIconClick} = props;
     let imageUrl;
 
     switch (type) {
@@ -24,12 +24,17 @@ const ListItemIcon = (props: IconProps) => {
         case "pathChange":
             imageUrl = Icons.PathChangeIcon;
             break;
+        case "wildDriving":
+            imageUrl = Icons.wildDrivingIcon;
+            break;
+        case "stink":
+            imageUrl = Icons.stinkIcon;
 
     }
 
         return (
             <div className="list-item-icon">
-                <img src={imageUrl} alt="Bus Icon"/>
+                <img src={imageUrl} alt={type} onClick={handleIconClick}/>
             </div>
         );
 }

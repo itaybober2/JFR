@@ -3,7 +3,9 @@ import React, { useEffect, useState, useRef } from "react";
 import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
-import { fetchReports } from "@/backend/utils/api";
+import {reportsStore} from "@/backend/stores/reportsStore";
+import {busLines} from "@/public/constants/constants";
+import LoadingScreen from "@/app/src/components/LoadingScreen";
 
 
 export interface BusStopProps {
@@ -13,47 +15,34 @@ export interface BusStopProps {
 
 interface BuslineRouteProps {
     currentStop: number;
-    stops: BusStopProps[];
     lineNumber: string;
     stopCode: number;
 }
 
-const getReport = async (lineNumber: string): Promise<Report | undefined> => {
-    try {
-        const data = await fetchReports();
-        return data.data.find((fetchedReport: Report) => fetchedReport.lineNumber === lineNumber);
-    } catch (error) {
-        console.error("Error fetching reports:", error);
-        return undefined;
-    }
-};
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-    const { currentStop, stops, lineNumber, stopCode } = props;
+    const { currentStop, lineNumber, stopCode } = props;
     const [report, setReport] = useState<Report | undefined>();
+    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
+    const stops = busLines[lineNumber];
     const [loading, setLoading] = useState(true);
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId?.toString();
-    //const currentStopRef = useRef<HTMLDivElement>(null); // Reference to the current stop element
 
     useEffect(() => {
         const element = document.getElementById("blue-box");
         // Scroll to the current stop when the component mounts
         if (element) {
             element.scrollIntoView();
-        } 
+        }
     }, []);
-
     useEffect(() => {
-        const fetchData = async () => {
-            const fetchedReport = await getReport(lineNumber);
-            setReport(fetchedReport);
+        setReport(reportsStore.getAllReportsByLineId(lineId)[0]);
             setLoading(false);
-        };
-        fetchData();
-    }, [lineNumber]);
+    }, [lineId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <LoadingScreen marginTop={4}/>
+        );
     }
 
 
@@ -78,8 +67,8 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         >
                             {stop.name}
                         </div>
-                        {index === currentStop && <div className="blue-box" id="blue-box"> 
-                            {stopCode} 
+                        {index === currentStop && <div className="blue-box" id="blue-box">
+                            {stopCode}
                         </div>}
                         {stop.name === report?.closestStop && (
                             <ListItemIconContainer lineNumber={lineNumber} lineId={lineId} />
