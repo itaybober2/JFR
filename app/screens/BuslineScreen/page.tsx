@@ -19,8 +19,6 @@ import { useConnect } from "remx";
 
 
 
-
-
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
