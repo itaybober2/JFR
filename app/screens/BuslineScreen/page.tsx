@@ -19,6 +19,8 @@ import { useConnect } from "remx";
 
 
 
+
+
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
@@ -65,12 +67,16 @@ export default function BuslineScreen() {
     time: arrivalTimeA,
   }
 
+<<<<<<< Updated upstream
   const busArrivalB = {
     id: Number(lineIdB),
     route: lineNumber,
     time: arrivalTimeB,
   }
 
+
+=======
+>>>>>>> Stashed changes
   function getStationIndex(busLines: BusLinesType, lineNumber: string, stationName: string) {
     // Check if the line number exists in the data
     if (busLines.hasOwnProperty(lineNumber)) {
