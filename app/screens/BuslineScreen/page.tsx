@@ -20,6 +20,7 @@ import { useConnect } from "remx";
 export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
+    const [stationIndex, setStationIndex] = useState<number>(-1);
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
 
@@ -56,6 +57,15 @@ export default function BuslineScreen() {
       setArrivalTimeB(calculatedTimeB)
   }, [locations, station]);
 
+  useEffect(() => {
+    if (lineNumber !== "NULL" && station) {
+        const index = busLines[lineNumber].findIndex(
+            (stop) => stop.name === station.stop_name
+        );
+        setStationIndex(index);
+    }
+  }, [lineNumber, station]);
+
   const busArrivalA = {
     id: Number(lineIdA),
     route: lineNumber,
@@ -77,7 +87,11 @@ export default function BuslineScreen() {
                 <ListItemIconContainer lineNumber={lineNumber} lineId={lineIdA}/>
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
             </div>
-          <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/>
+          <BuslineRoute 
+            currentStop={stationIndex} 
+            stops={busLines[lineNumber]} 
+            lineNumber={lineNumber}
+          />
         </div>
     </main>
   );

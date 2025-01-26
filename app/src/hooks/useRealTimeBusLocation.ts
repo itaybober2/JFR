@@ -59,30 +59,65 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, do
                     // console.log("ResponseB: ", response.data[1])
 
                     if (response.data.length > 0) {
-                        const dataA = response.data[0];
-                        const dataB = response.data[1];
-                        const busLocationA = {lat: dataA.lat, lon: dataA.lon};
                         const userLocation = userLocationStore.getUserLocation();
-                        const distanceA = haversineDistance(busLocationA.lat, busLocationA.lon, userLocation.lat, userLocation.lon);
-                        if (minDistance === undefined || distanceA < minDistance) {
-                            minDistance = distanceA;
-
-                            DataA = {
-                                recordedAtTime: dataA.recorded_at_time,
-                                lon: dataA.lon,
-                                lat: dataA.lat,
-                                siriRideId: dataA.siri_ride__id,
+                        
+                        // Calculate distances for all buses and sort them
+                        type BusWithDistance = {
+                            bus: {
+                                recorded_at_time: string;
+                                lon: number;
+                                lat: number;
+                                siri_ride__id: number;
                             };
-                            DataB = {
-                                recordedAtTime: dataB.recorded_at_time,
-                                lon: dataB.lon,
-                                lat: dataB.lat,
-                                siriRideId: dataB.siri_ride__id,
-                            };
-
-                            setBusLocationA(DataB);
-                            setBusLocationB(DataA)
+                            distance: number;
+                        };
+                        
+                        const busesWithDistances = response.data.map((bus: BusWithDistance['bus']) => ({
+                            bus,
+                            distance: haversineDistance(bus.lat, bus.lon, userLocation.lat, userLocation.lon)
+                        }));
+                        
+                        // Sort by distance to user
+                        busesWithDistances.sort((a: BusWithDistance, b: BusWithDistance) => a.distance - b.distance);
+                        
+                        // Take the two closest buses if available
+                        if (busesWithDistances.length >= 2) {
+                            const closestBus = busesWithDistances[0].bus;
+                            const secondClosestBus = busesWithDistances[1].bus;
                             
+                            DataA = {
+                                recordedAtTime: closestBus.recorded_at_time,
+                                lon: closestBus.lon,
+                                lat: closestBus.lat,
+                                siriRideId: closestBus.siri_ride__id,
+                            };
+                            
+                            DataB = {
+                                recordedAtTime: secondClosestBus.recorded_at_time,
+                                lon: secondClosestBus.lon,
+                                lat: secondClosestBus.lat,
+                                siriRideId: secondClosestBus.siri_ride__id,
+                            };
+
+                            setBusLocationA(DataA);
+                            setBusLocationB(DataB);
+                            
+                            // Update the minimum distance for the current line
+                            minDistance = busesWithDistances[0].distance;
+                        } else if (busesWithDistances.length === 1) {
+                            const closestBus = busesWithDistances[0].bus;
+                            
+                            DataA = {
+                                recordedAtTime: closestBus.recorded_at_time,
+                                lon: closestBus.lon,
+                                lat: closestBus.lat,
+                                siriRideId: closestBus.siri_ride__id,
+                            };
+                            
+                            setBusLocationA(DataA);
+                            setBusLocationB(null);
+                            
+                            minDistance = busesWithDistances[0].distance;
                         }
                     }
                 }

@@ -10,8 +10,16 @@
 
 .timeline-container {
     width: 100%;
+    position: relative;
+    padding: 20px 40px;
 }
 
+.bus-icon-container {
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 2;
+}
 
 .station-container {
     display: flex;
@@ -19,7 +27,7 @@
     align-items: center;
     position: relative;
     text-align: right;
-    padding-right: 3rem;
+    height: 80px;
 }
 
 .station-container.current {
@@ -32,19 +40,22 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+    width: 20px;
+    height: 100%;
 }
 
 .station-info {
     margin-right: 10px;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
-    white-space: nowrap;
-    margin-top: auto;
+    white-space: normal;
+    word-wrap: break-word;
     font-size: 18px;
-    align-self: flex-end;
     font-family: "TitleFont", sans-serif;
+    line-height: 1.2;
+    padding: 5px 0;
 }
 
 .station-info.active {
@@ -61,12 +72,26 @@
 
 .connection-line {
     width: 4px;
-    height: 45px;
+    height: 100%;
     background-color: black;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .connection-line.active {
     background-color: #c6c5c5;
+}
+
+.connection-line-top {
+    height: 50%;
+    top: 0;
+}
+
+.connection-line-bottom {
+    height: 50%;
+    top: 50%;
 }
 
 .station {
@@ -78,9 +103,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    /* z-index: 1; */
-    
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .station.active {
@@ -94,7 +120,14 @@
 
 }
 
+.bus-icon-wrapper {
+    position: absolute;
+    right: 40px;
+    transform: translateY(-50%);
+    z-index: 2;
+    transition: top 0.5s ease-in-out;
+}
+
 .bus-icon {
-    font-size: 14px;
-    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
