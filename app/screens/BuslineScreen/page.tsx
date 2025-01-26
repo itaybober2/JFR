@@ -3,6 +3,7 @@ import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/B
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
 import { busLines, BusLinesType } from "@/public/constants/constants";
+import Footer from "@/lib/components/FooterNavbar";
 import Navbar from "@/lib/components/Navbar";
 import { useRouter } from "next/navigation";
 import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
@@ -101,8 +102,11 @@ export default function BuslineScreen() {
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
             </div>
           </div>
-          {/* <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/> */}
-          <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")} stops={busLines[lineNumber]} lineNumber={lineNumber} stopCode={ station ? station.stop_code: 0}/>
+          <BuslineRoute 
+            currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")} 
+            stops={busLines[lineNumber]} lineNumber={lineNumber} 
+            stopCode={ station ? station.stop_code: 0}/>
+            <Footer />
     </main>
   );
 }

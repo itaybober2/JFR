@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
@@ -33,15 +33,6 @@ export default function BuslineRoute(props: BuslineRouteProps) {
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId?.toString();
-    //const currentStopRef = useRef<HTMLDivElement>(null); // Reference to the current stop element
-
-    useEffect(() => {
-        const element = document.getElementById("blue-box");
-        // Scroll to the current stop when the component mounts
-        if (element) {
-            element.scrollIntoView();
-        } 
-    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -90,3 +81,4 @@ export default function BuslineRoute(props: BuslineRouteProps) {
         </div>
     );
 }
+

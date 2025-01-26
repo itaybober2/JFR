@@ -1,0 +1,61 @@
+.fifth-container{
+    margin-top: -6rem;
+    margin-bottom: -6rem;
+    padding-top: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 55rem;
+    gap: 40px;
+    background-color: white;    
+}
+
+.summaryText{
+    font-family: "CurrentStopFont", sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: -2rem;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.direction{
+    color: black;
+    font-size: 120.22px;
+    font-weight: 700;
+    line-height: 123.82px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+.textContainer{
+    text-align: center;
+}
+
+.fifth-text{
+    font-family: "NumberFont", sans-serif;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.linesIcons{
+    display: flex;
+    flex-direction: row;
+}
+
+.icon{
+    width:80px;
+    height: 80px;
+}
+
+.fifth-continue{
+    font-family: "CurrentStopFont", sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: underline;
+}
