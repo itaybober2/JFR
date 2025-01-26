@@ -7,7 +7,6 @@ import Footer from "@/lib/components/FooterNavbar";
 
 export default function ProfileScreen() {
     const [toMountScoupe, setToMountScoupe] = useState(true); 
-    
 
   return (
     <main className="profilePage">
@@ -25,7 +24,7 @@ export default function ProfileScreen() {
             <button className="menuItem">צפייה בנקודות שלי</button>
             <button className="menuItem">הגדרות פרטיות</button>
       </div>
-      <Footer/>
+      <Footer selected={'profile'}/>
     </main>
   );
 }

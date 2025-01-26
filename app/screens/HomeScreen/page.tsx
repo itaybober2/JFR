@@ -13,7 +13,7 @@ const Page = () => {
     <div>
       <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
       <HomeScreen toMountScoupe={true} />;
-      <Footer />
+      <Footer selected={'home'}/>
     </div>
   )
 };

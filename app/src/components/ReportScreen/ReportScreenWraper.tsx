@@ -37,7 +37,7 @@ const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
                 </div>
                 {children}
             </div>
-            <Footer />
+            <Footer selected={'add'}/>
         </div>
     );
 }

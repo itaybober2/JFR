@@ -112,7 +112,7 @@ export default function BuslineScreen() {
           <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")}
            lineNumber={lineNumber} 
            stopCode={ station ? station.stop_code: 0}/>
-           <Footer />
+           <Footer selected={'home'}/>
     </main>
   );
 }
