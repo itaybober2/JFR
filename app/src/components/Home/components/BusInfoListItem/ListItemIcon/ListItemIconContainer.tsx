@@ -31,6 +31,7 @@ const ListItemIconContainer = (props: ListItemIconContainerProps) => {
     const title = useRef('');
     const description = useRef<string | undefined>('');
 
+
     useEffect(() => {
         if (lineId) setReports(reportsStore.getAllReportsByLineId(lineId));
     }, [lineId]);
