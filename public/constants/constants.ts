@@ -4,13 +4,14 @@ export const URLS = {
     busLocationUrl: "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list",
 }
 export const Icons ={
-    CrowdedIcon: '/icons/crowdedIcon.svg',
-    RoadBlockIcon: '/icons/roadBlockIcon.svg',
+    CrowdedIcon: '/icons/crowded.svg',
+    RoadBlockIcon: '/icons/roadBlock.svg',
     InspectionIcon: '/icons/inspector.svg',
     PathChangeIcon: '/icons/pathChange.svg',
     stinkIcon: '/icons/stink.svg',
     wildDrivingIcon: '/icons/wildDriving.svg',
     backButton: '/icons/back_button.svg',
+    infoIcon: '/icons/infoIcon.svg',
 }
 
 export const circelLines ={

@@ -2,7 +2,7 @@ import "@/styles/global.css";
 import "@/styles/splash-screen.css";
 
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import {ReactNode} from "react";
 // import Navbar from "@/lib/components/Navbar";
 import FloatingPlusButton from "@/app/src/components/FloatingPlusButton";
 import SplashScreen from "@/app/src/components/SplashScreen";

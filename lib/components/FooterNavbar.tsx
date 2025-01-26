@@ -4,6 +4,7 @@ import "../../styles/footer.css";
 import { FooterIcons } from "@/public/constants/constants";
 import {useRouter} from "next/navigation";
 import ReportsModal from "@/app/src/components/reportModal/ReportsModal";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 
 const Footer = () => {
@@ -30,7 +31,7 @@ const Footer = () => {
         router.push('/');
     }
     const handleAddReportClick = () => {
-        console.log("add report clicked");
+        console.log("add report clicked", busLocationStore.getBusLocation('19')?.siriRideId);
         setSelectedButton("add");
         router.push('/screens/ReportScreen');
     }
@@ -41,14 +42,7 @@ const Footer = () => {
             setOpen(true);
         };
         const handleClose = () => setOpen(false);
-        const [isVisible, setIsVisible] = useState(false);
-    
-        useEffect(() => {
-            setTimeout(() => {
-                setIsVisible(true);
-            }, 3000);
-        }, []);
-        if (!isVisible) return null;
+
 
   return (
     <>

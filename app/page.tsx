@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from "react";
 import HomeScreen from "@/app/screens/HomeScreen/HomeScreen";
 import Navbar from "@/lib/components/Navbar";
+import {reportsStore} from "@/backend/stores/reportsStore";
 
 export default function App() {
     const [toMountScoupe, setToMountScoupe] = useState(true);
 
     useEffect(() => {
+        reportsStore.initReports();
         const savedState = localStorage.getItem("navbarButtonState");
         if (savedState !== null) {
             setToMountScoupe(JSON.parse(savedState));

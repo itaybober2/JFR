@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
-import { fetchReports } from "@/backend/utils/api";
+import {reportsStore} from "@/backend/stores/reportsStore";
+import {busLines} from "@/public/constants/constants";
+import LoadingScreen from "@/app/src/components/LoadingScreen";
 
 export interface BusStopProps {
     name: string;
@@ -12,37 +14,26 @@ export interface BusStopProps {
 
 interface BuslineRouteProps {
     currentStop: number;
-    stops: BusStopProps[];
     lineNumber: string;
 }
 
-const getReport = async (lineNumber: string): Promise<Report | undefined> => {
-    try {
-        const data = await fetchReports();
-        return data.data.find((fetchedReport: Report) => fetchedReport.lineNumber === lineNumber);
-    } catch (error) {
-        console.error("Error fetching reports:", error);
-        return undefined;
-    }
-};
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-    const { currentStop, stops, lineNumber } = props;
+    const { currentStop, lineNumber } = props;
     const [report, setReport] = useState<Report | undefined>();
+    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
+    const stops = busLines[lineNumber];
     const [loading, setLoading] = useState(true);
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId?.toString();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const fetchedReport = await getReport(lineNumber);
-            setReport(fetchedReport);
+        setReport(reportsStore.getAllReportsByLineId(lineId)[0]);
             setLoading(false);
-        };
-        fetchData();
-    }, [lineNumber]);
+    }, [lineId]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <LoadingScreen marginTop={4}/>
+        );
     }
 
     return (

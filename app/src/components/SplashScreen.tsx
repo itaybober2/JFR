@@ -9,8 +9,11 @@ const SplashScreen = () => {
         const splashScreen = document.querySelector('.splash-screen') as HTMLElement;
         if (splashScreen) {
             setTimeout(() => {
-                setIsVisible(false);
-            }, 3000);
+                splashScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    setIsVisible(false);
+                }, 1000);
+            }, 1500);
         }
     }, []);
 
