@@ -20,10 +20,11 @@
     position: relative;
     text-align: right;
     padding-right: 3rem;
+
 }
 
 .station-container.current {
-    background-color: #f6eb0f;
+    background-color: #F6EB0F;
 }
 
 
@@ -35,7 +36,7 @@
 }
 
 .station-info {
-    margin-right: 10px;
+    margin: 0 13px 30px 0;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
@@ -44,7 +45,11 @@
     margin-top: auto;
     font-size: 18px;
     align-self: flex-end;
-    font-family: "TitleFont", sans-serif;
+    font-family: 'TitleFont', sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 400px;
+    white-space: normal;
 }
 
 .station-info.active {
@@ -52,8 +57,12 @@
 }
 
 .station-info.current {
-    font-family: "BusStopFont";
+    font-family: 'BusStopFont', sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    line-height: normal;
     color: #000000;
+    font-size: 20px;
 }
 
 
@@ -61,7 +70,7 @@
 
 .connection-line {
     width: 4px;
-    height: 45px;
+    height: 30px;
     background-color: black;
 }
 
@@ -97,4 +106,27 @@
 .bus-icon {
     font-size: 14px;
     color: white;
+}
+
+.blue-box {
+    display: flex;
+    flex-direction: row;
+    x: 0;
+    y: 0;
+    width: 90px;
+    height: 5rem;
+    flex-shrink: 0;
+    background: #1A00FF;
+    color: #FFF;
+    text-align: right;
+    font-family: 'BusStopFont', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
 }

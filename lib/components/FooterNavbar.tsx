@@ -35,6 +35,11 @@ const Footer = () => {
         router.push('/screens/ReportScreen');
     }
 
+    const handleProfileClick = () => {
+      setSelectedButton("profile");
+      router.push('/screens/ProfileScreen');
+    }
+
         const [open, setOpen] = useState(false);
         const handleOpen = () => {
             setSelectedButton("add");
@@ -59,7 +64,7 @@ const Footer = () => {
       {/* Profile Button */}
       <button
         className={`footer-button ${selectedButton === "profile" ? "selected" : ""}`}
-        onClick={() => setSelectedButton("profile")}
+        onClick={handleProfileClick}
       >
         <img
           src={getIconSrc("profile")}

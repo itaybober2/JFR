@@ -2,7 +2,7 @@
 import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
-import { busLines } from "@/public/constants/constants";
+import { busLines, BusLinesType } from "@/public/constants/constants";
 import Navbar from "@/lib/components/Navbar";
 import { useRouter } from "next/navigation";
 import BusInfoListItem from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
@@ -16,6 +16,7 @@ import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListIt
 import ListItemIconContainer from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
 import '@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem.css';
 import { useConnect } from "remx";
+
 
 
 export default function BuslineScreen() {
@@ -70,6 +71,20 @@ export default function BuslineScreen() {
     time: arrivalTimeB,
   }
 
+  function getStationIndex(busLines: BusLinesType, lineNumber: string, stationName: string) {
+    // Check if the line number exists in the data
+    if (busLines.hasOwnProperty(lineNumber)) {
+        // Loop through the array of stations for the given line number
+        for (let i = 0; i < busLines[lineNumber].length; i++) {
+            if (busLines[lineNumber][i].name === stationName) {
+                return i;  // Return the index if the station name matches
+            }
+        }
+        return -1;  // Return -1 if the station name is not found
+    } else {
+        return -1;  // Return -1 if the line number does not exist
+    }
+}
 
   return (
     <main>
@@ -80,8 +95,9 @@ export default function BuslineScreen() {
                 <ListItemIconContainer lineNumber={lineNumber} lineId={lineIdA}/>
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]}/>
             </div>
-          <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/>
-        </div>
+          </div>
+          {/* <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} stops={busLines[lineNumber]} lineNumber={lineNumber}/> */}
+          <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")} stops={busLines[lineNumber]} lineNumber={lineNumber} stopCode={ station ? station.stop_code: 0}/>
     </main>
   );
 }

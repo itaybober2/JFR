@@ -1,9 +1,11 @@
 .list-item-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
+    justify-content: space-between; /* Aligns children to the extreme sides */
+    overflow: hidden; /* Ensures any overflow content is hidden */
+    width: 100%; /* Adjust width as needed */
 }
 
 .time-and-icons-container {
@@ -11,4 +13,5 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    display: flex;
 }

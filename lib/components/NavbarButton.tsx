@@ -18,6 +18,9 @@ export default function NavbarButton({
 
   return (
     <div className="mainContainer">
+          <div className="navbarText">
+        <h1>מהר הצופים</h1>
+      </div>
       <div className="buttonOutline" onClick={handleCircleClick}>
         <div className="container">
           <div
@@ -26,7 +29,7 @@ export default function NavbarButton({
         </div>
       </div>
       <div className="navbarText">
-        <h1>{toMountScoupe ? "להר הצופים" : "מהר הצופים"}</h1>
+        <h1>להר הצופים</h1>
       </div>
     </div>
   );
