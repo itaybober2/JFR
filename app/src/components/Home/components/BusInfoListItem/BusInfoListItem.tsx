@@ -38,11 +38,11 @@ export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | n
 
 
     // Assume average bus speed of 20 km/h in urban areas
-    const averageSpeed = 5;
+    const averageSpeed = 20;
     const timeInHours = distance / averageSpeed;
     const timeInMinutes = Math.round(timeInHours * 60);
 
-    return timeInMinutes - 30;
+    return timeInMinutes;
 }
 
 const BusInfoListItem = (props: BusInfoProps) => {
