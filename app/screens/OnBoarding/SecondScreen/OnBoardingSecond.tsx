@@ -31,9 +31,13 @@ const OnBoardingSecond: React.FC = () => {
         );
       };
 
+    const handleBackClick = () => {
+        if (isCompleted) setIsCompleted(false);
+    }
+
   return (
     <div className="on-boarding">
-        <div className={`up-screen ${isCompleted ? "completed" : ""}`}>
+        <div className={`up-screen ${isCompleted ? "completed" : ""}`} onClick={handleBackClick}>
             <div className="circle-and-text">
                 <div className={`circle ${isCompleted ? "" : "circle-active"}`}>
                     <span>A</span>
@@ -47,9 +51,9 @@ const OnBoardingSecond: React.FC = () => {
                     className="input-box"
                     type="text"
                     value={pointA}
-                    onChange={handleInputChange} // Save input for Point A
+                    onChange={handleInputChange}
                 />
-                <button className="continue-button" onClick={handleContinueClick}>
+                <button  disabled={pointA.length < 1} className="continue-button" onClick={handleContinueClick} style={pointA ? {color: '#000'} : {color: '#b9b9b9'}}>
                     המשך
                 </button>
             </div>
@@ -72,7 +76,7 @@ const OnBoardingSecond: React.FC = () => {
                     onChange={handleBottomInputChange} // Save input for Point B
                 />
                 {isCompleted &&                 
-                    <button className="continue-button" onClick={handleFinalContinueClick}>
+                    <button disabled={pointB.length < 1} className="continue-button" onClick={handleFinalContinueClick} style={pointB ? {color: '#000'} : {color: '#b9b9b9'}}>
                     המשך
                     </button> }
             </div>
