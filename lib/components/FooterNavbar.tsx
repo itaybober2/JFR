@@ -40,35 +40,6 @@ const Footer = () => {
       router.push('/screens/ProfileScreen');
     }
 
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
-
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
-
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
-
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
-
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
-
-    const handleProfileClick = () => {
-      setSelectedButton("profile");
-      router.push('/screens/ProfileScreen');
-    }
 
         const [open, setOpen] = useState(false);
         const handleOpen = () => {

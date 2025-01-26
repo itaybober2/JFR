@@ -22,11 +22,13 @@ import { useConnect } from "remx";
 
 
 export default function BuslineScreen() {
+
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
     const [toMountScoupe, setToMountScoupe] = useState(true); 
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
+
 
     const direction = busLocationStore.getLineDirection();
     const busLineRefs = useBusLineRef(lineNumber, direction);
