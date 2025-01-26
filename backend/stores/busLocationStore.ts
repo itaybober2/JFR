@@ -2,6 +2,8 @@ import * as remx from 'remx';
 import {BusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
 
 const state = remx.state({
+    target: 'להר הצופים',
+    destination: 'להר הצופים',
     direction: 1,
     line517Direction1: {} as BusLocation,
     line517Direction2: {} as BusLocation,
@@ -22,6 +24,10 @@ const setters = remx.setters({
     },
     setLineDirection(direction: number) {
         state.direction = direction;
+    },
+    setTargetAndDestination(target: string, destination: string) {
+        state.target = target;
+        state.destination = destination;
     }
 });
 
@@ -34,6 +40,12 @@ const getters = remx.getters({
     },
     getLineDirection(): number {
         return state.direction;
+    },
+    getTarget(): string {
+        return state.target;
+    },
+    getDestination(): string {
+        return state.destination;
     }
 });
 
