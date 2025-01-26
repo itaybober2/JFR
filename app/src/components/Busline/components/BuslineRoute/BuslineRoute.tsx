@@ -1,18 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
-<<<<<<< HEAD
-import { fetchReports } from "@/backend/utils/api";
-import Image from "next/image";
-import { userLocationStore } from "@/backend/stores/userLocationStore";
-=======
 import {reportsStore} from "@/backend/stores/reportsStore";
 import {busLines} from "@/public/constants/constants";
 import LoadingScreen from "@/app/src/components/LoadingScreen";
 
->>>>>>> main
 
 export interface BusStopProps {
     name: string;
@@ -39,66 +34,42 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-<<<<<<< HEAD
-    var { currentStop, stops, lineNumber } = props;
-=======
     const { currentStop, lineNumber, stopCode } = props;
->>>>>>> main
     const [report, setReport] = useState<Report | undefined>();
+    const [loading, setLoading] = useState(true);
+    const [distanceFromBus] = useState(0); // Default value, adjust as needed
     const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
     const stops = busLines[lineNumber];
-    const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
-    const currentStopRef = React.useRef<HTMLDivElement>(null);
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId?.toString();
-    const [busLocation, setBusLocation] = useState<number>(currentStop);
-    const [distanceFromBus, setDistanceFromBus] = useState<number>(0);
-    const direction = busLocationStore.getLineDirection();
-    
-    // Process stops based on direction
-    // stops = direction !== 1 ? [...stops].reverse() : stops;
-=======
->>>>>>> main
+    const currentStopRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setReport(reportsStore.getAllReportsByLineId(lineId)[0]);
-            setLoading(false);
+        setLoading(false);
     }, [lineId]);
 
     useEffect(() => {
-        if (!loading && currentStopRef.current) {
-            currentStopRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            const busLoc = busLocationStore.getBusLocation(lineNumber);
-            const userLoc = userLocationStore.getUserLocation();
-            
-            if (busLoc?.lat && busLoc?.lon && userLoc?.lat && userLoc?.lon) {
-                const distance = calculateDistance(
-                    userLoc.lat,
-                    userLoc.lon,
-                    busLoc.lat,
-                    busLoc.lon
-                );
-                setDistanceFromBus(distance*3);
-            }
+        if (currentStopRef.current) {
+            currentStopRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
         }
-    }, [loading, lineNumber]);
+    }, [currentStop]);
 
+    
     if (loading) {
         return (
             <LoadingScreen marginTop={4}/>
         );
     }
-<<<<<<< HEAD
-    console.log("distanc: ", distanceFromBus )
-=======
+    console.log(((currentStop) / (stops.length - 1)) * 100)
 
 
->>>>>>> main
     return (
         <div className="route">
             <div className="timeline-container">
                 <div className="bus-icon-container" style={{
-                    top: `${( (currentStop - distanceFromBus) / (stops.length - 1)) * 100}%`,
+                    top: `${((currentStop) / (stops.length - 1)) * 500}%`,
                     transition: 'top 0.5s ease-in-out'
                 }}>
                     <Image 
@@ -116,24 +87,15 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         ref={index === currentStop ? currentStopRef : undefined}
                     >
                         <div className="station-container-graphic">
-<<<<<<< HEAD
-                            {index === currentStop ? (
-                                <>
-                                    <div className="connection-line connection-line-top active"></div>
-                                    <div className="connection-line connection-line-bottom "></div>
-                                </>
-                            ) : (
-                                <div className={`connection-line ${index <= currentStop ? "active" : ""}`}></div>
-                            )}
-=======
-                            <div className={`connection-line ${index < currentStop ? "active" : ""}`}></div>
->>>>>>> main
+
+                            <div className={`connection-line top ${index <= currentStop ? "active" : ""}`}></div>
+                            <div className={`connection-line bottom ${index < currentStop ? "active" : ""}`}></div>
                             <div
                                 className={`station ${index === currentStop ? "current" : ""} ${
                                     index <= currentStop ? "active" : ""
                                 }`}
                             ></div>
-                            <div className={`connection-line ${index < currentStop - 1 ? "active" : ""}`}></div>
+
                         </div>
                         <div
                             className={`station-info ${

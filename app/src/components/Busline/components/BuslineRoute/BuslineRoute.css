@@ -6,13 +6,16 @@
     align-items: center;
     justify-content: flex-start;
     box-shadow: inset;
-
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .timeline-container {
     width: 100%;
     position: relative;
-    padding: 20px 40px;
+    padding: 20px 0;
+    height: 100%;
 }
 
 .bus-icon-container {
@@ -20,6 +23,7 @@
     right: 0;
     transform: translateY(-50%);
     z-index: 2;
+    /* height: 100%; */
 }
 
 .station-container {
@@ -28,18 +32,14 @@
     align-items: center;
     position: relative;
     text-align: right;
-<<<<<<< HEAD
-    height: 80px;
-=======
     padding-right: 3rem;
-
->>>>>>> main
+    height: 80px;
 }
 
 .station-container.current {
     background-color: #F6EB0F;
+    height: 80px;
 }
-
 
 .station-container-graphic {
     display: flex;
@@ -47,37 +47,26 @@
     align-items: center;
     position: relative;
     width: 20px;
-    height: 100%;
+    height: 80px;
+    min-height: 80px;
+    flex-shrink: 0;
 }
 
 .station-info {
-<<<<<<< HEAD
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-=======
-    margin: 0 13px 30px 0;
+    margin: 0 10px 30px 0;
     flex-direction: row;
     align-items: flex-end;
     justify-content: flex-end;
->>>>>>> main
     width: 100%;
     white-space: normal;
     word-wrap: break-word;
     font-size: 18px;
-<<<<<<< HEAD
-    font-family: "TitleFont", sans-serif;
-    line-height: 1.2;
-    padding: 5px 0;
-=======
     align-self: flex-end;
     font-family: 'TitleFont', sans-serif;
     word-wrap: break-word;
     overflow-wrap: break-word;
     max-width: 400px;
     white-space: normal;
->>>>>>> main
 }
 
 .station-info.active {
@@ -93,16 +82,9 @@
     font-size: 20px;
 }
 
-
-
-
 .connection-line {
     width: 4px;
-<<<<<<< HEAD
     height: 100%;
-=======
-    height: 30px;
->>>>>>> main
     background-color: black;
     z-index: 1;
     position: absolute;
@@ -114,14 +96,14 @@
     background-color: #c6c5c5;
 }
 
-.connection-line-top {
+.connection-line.top {
     height: 50%;
     top: 0;
 }
 
-.connection-line-bottom {
+.connection-line.bottom {
     height: 50%;
-    top: 50%;
+    bottom: 0;
 }
 
 .station {
@@ -147,7 +129,6 @@
 .station.current {
     border: 5px solid black;
     background-color: black;
-
 }
 
 .bus-icon-wrapper {
@@ -159,9 +140,6 @@
 }
 
 .bus-icon {
-<<<<<<< HEAD
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-=======
     font-size: 14px;
     color: white;
 }
@@ -169,8 +147,6 @@
 .blue-box {
     display: flex;
     flex-direction: row;
-    x: 0;
-    y: 0;
     width: 90px;
     height: 5rem;
     flex-shrink: 0;
@@ -187,5 +163,5 @@
     align-content: center;
     align-items: center;
     justify-content: space-around;
->>>>>>> main
+    margin-left: auto;
 }
