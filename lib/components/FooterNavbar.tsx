@@ -1,15 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "../../styles/footer.css";
 import { FooterIcons } from "@/public/constants/constants";
 import {useRouter} from "next/navigation";
-import ReportsModal from "@/app/src/components/reportModal/ReportsModal";
-import {busLocationStore} from "@/backend/stores/busLocationStore";
 
+type FooterProps = {
+    selected: "home" | "add" | "profile";
+}
 
-const Footer = () => {
-  // State to track the selected button
-  const [selectedButton, setSelectedButton] = useState("home");
+const Footer = (props: FooterProps) => {
+    const { selected } = props;
+    const [selectedButton, setSelectedButton] = useState(selected);
 
   // Define a function to get the appropriate image URL based on the selected button
   const getIconSrc = (button: string) => {
@@ -41,19 +42,11 @@ const Footer = () => {
     }
 
 
-    const [open, setOpen] = useState(false);
-
-    const handleClose = () => {
-      setOpen(false);
-      setSelectedButton("home");
-    }
-
   return (
     <>
     <footer className="footer">
       <div className="footer-container">
-      {/* Home Button */}
-            <button
+        <button
         className={`footer-button ${selectedButton === "home" ? "selected" : ""}`}
         onClick={handleHomeClick}
       >
@@ -64,15 +57,12 @@ const Footer = () => {
         />
         <span className="footer-text">תחנה</span>
       </button>
-      {/* Add Report Button */}
-      {/* Middle Circle with "+" Button */}
       <div className="footer-middle">
-            <button className="footer-button" onClick={handleAddReportClick}            >
-              <img src={FooterIcons.Report} alt="Add" className="footer-icon-Middle" />
-              <span className="footer-text">הוספת דיווח</span>
+            <button className="footer-button" onClick={handleAddReportClick}>
+              <img src={getIconSrc('add')} alt="Add" className="footer-icon-Middle" />
+              <span className="footer-text" style={selectedButton === 'add' ? {color: 'blue'}: {}}>הוספת דיווח</span>
             </button>
           </div>
-      {/* Profile Button */}
       <button
           className={`footer-button ${selectedButton === "profile" ? "selected" : ""}`}
           onClick={handleProfileClick}
@@ -85,13 +75,7 @@ const Footer = () => {
               <span className="footer-text">פרופיל</span>
             </button>
           </div>
-
     </footer>
-     <div className="popup">
-     <div className="popup-inner">
-         <ReportsModal open={open} onClose={handleClose}/>
-     </div>
- </div>
  </>
   );
 };
