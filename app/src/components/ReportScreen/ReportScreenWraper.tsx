@@ -2,6 +2,7 @@ import * as React from "react";
 import '../../../../app/screens/ReportScreen/ReportScreen.css';
 import {circelLines, Icons} from "@/public/constants/constants";
 import {screensToRender} from "@/app/screens/ReportScreen/ReportScreen";
+import Footer from "@/lib/components/FooterNavbar";
 
 type ReportScreenWrapperProps = {
     children: React.ReactElement;
@@ -30,6 +31,7 @@ const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
                 </div>
                 {children}
             </div>
+            <Footer />
         </div>
     );
 }

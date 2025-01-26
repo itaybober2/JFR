@@ -2,13 +2,9 @@
 import React, { useState, useEffect } from "react";
 import HomeScreen from "@/app/screens/HomeScreen/HomeScreen";
 import Navbar from "@/lib/components/Navbar";
-<<<<<<< HEAD
-import OnBoardingSecond from "./screens/OnBoarding/SecondScreen/OnBoardingSecond";
-import OnBoardingLoad from "./screens/OnBoarding/OnBoardingLoad";
 import FirstScreen from "./screens/OnBoarding/FirstScreen/firstScreen";
-=======
 import {reportsStore} from "@/backend/stores/reportsStore";
->>>>>>> 3129cc868d444473bc9e22c8d4be37feab8bc62a
+
 
 export default function App() {
     const [toMountScoupe, setToMountScoupe] = useState(true);
