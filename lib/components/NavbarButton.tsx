@@ -17,8 +17,8 @@ export default function NavbarButton({toMountScoupe, setToMountScoupe,}: NavbarB
   };
 
     useEffect(() => {
-        setTarget(busLocationStore.getTarget());
-        setDestination(busLocationStore.getDestination());
+        setTarget(localStorage.getItem("target") || "להר הצופים");
+        setDestination(localStorage.getItem("destination") || "מהר הצופים");
     }, []);
 
   return (

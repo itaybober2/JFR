@@ -12,9 +12,7 @@ export default function Navbar({ toMountScoupe, setToMountScoupe }: NavbarProps)
 
   return (
     <header className="navbar">
-      <h1>
         <NavbarButton toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
-      </h1>
       <nav>
         {/* <Logo /> */}
       </nav>
