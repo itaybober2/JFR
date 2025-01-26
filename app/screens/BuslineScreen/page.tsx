@@ -67,7 +67,6 @@ export default function BuslineScreen() {
     time: arrivalTimeA,
   }
 
-<<<<<<< Updated upstream
   const busArrivalB = {
     id: Number(lineIdB),
     route: lineNumber,
@@ -75,8 +74,6 @@ export default function BuslineScreen() {
   }
 
 
-=======
->>>>>>> Stashed changes
   function getStationIndex(busLines: BusLinesType, lineNumber: string, stationName: string) {
     // Check if the line number exists in the data
     if (busLines.hasOwnProperty(lineNumber)) {
