@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import "./OnBoarding.css";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 const OnBoardingSecond: React.FC = () => {
     const [isCompleted, setIsCompleted] = useState(false); // Track whether the "Continue" button was clicked
@@ -25,7 +26,7 @@ const OnBoardingSecond: React.FC = () => {
       };
 
     const handleFinalContinueClick = () => {
-        // Navigate to another page with query parameters
+        busLocationStore.setTargetAndDestination(pointA, pointB);
         router.push(
           `/screens/OnBoarding/ThirdScreen?pointA=${encodeURIComponent(pointA)}&pointB=${encodeURIComponent(pointB)}`
         );

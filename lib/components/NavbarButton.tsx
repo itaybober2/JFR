@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 interface NavbarButtonProps {
@@ -7,19 +7,24 @@ interface NavbarButtonProps {
   setToMountScoupe: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function NavbarButton({
-  toMountScoupe,
-  setToMountScoupe,
-}: NavbarButtonProps) {
+export default function NavbarButton({toMountScoupe, setToMountScoupe,}: NavbarButtonProps) {
+    const [target, setTarget] = useState('להר הצופים');
+    const [destination, setDestination] = useState('להר הצופים');
+
   const handleCircleClick = () => {
-    setToMountScoupe(!toMountScoupe); // Toggle the position
+    setToMountScoupe(!toMountScoupe);
     busLocationStore.setLineDirection(toMountScoupe ? 2 : 1);
   };
+
+    useEffect(() => {
+        setTarget(busLocationStore.getTarget());
+        setDestination(busLocationStore.getDestination());
+    }, []);
 
   return (
     <div className="navbarMainContainer">
           <div className="navbarText">
-        <h1>מהר הצופים</h1>
+        <h1>{destination}</h1>
       </div>
       <div className="navbarButtonOutline" onClick={handleCircleClick}>
         <div className="navbarContainer">
@@ -29,7 +34,7 @@ export default function NavbarButton({
         </div>
       </div>
       <div className="navbarText">
-        <h1>להר הצופים</h1>
+        <h1>{target}</h1>
       </div>
     </div>
   );
