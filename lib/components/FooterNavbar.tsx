@@ -31,18 +31,22 @@ const Footer = () => {
         router.push('/');
     }
     const handleAddReportClick = () => {
-        console.log("add report clicked", busLocationStore.getBusLocation('19')?.siriRideId);
         setSelectedButton("add");
         router.push('/screens/ReportScreen');
     }
 
-        const [open, setOpen] = useState(false);
-        const handleOpen = () => {
-            setSelectedButton("add");
-            setOpen(true);
-        };
-        const handleClose = () => setOpen(false);
+    const handleProfileClick = () => {
+      setSelectedButton("profile");
+      router.push('/screens/ProfileScreen');
+    }
 
+
+        const [open, setOpen] = useState(false);
+
+        const handleClose = () => {
+          setOpen(false);
+          setSelectedButton("home");
+        }
 
   return (
     <>
@@ -50,7 +54,7 @@ const Footer = () => {
       {/* Profile Button */}
       <button
         className={`footer-button ${selectedButton === "profile" ? "selected" : ""}`}
-        onClick={() => setSelectedButton("profile")}
+        onClick={handleProfileClick}
       >
         <img
           src={getIconSrc("profile")}

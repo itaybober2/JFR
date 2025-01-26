@@ -2,7 +2,8 @@
 import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
-import { busLines } from "@/public/constants/constants";
+import { busLines, BusLinesType } from "@/public/constants/constants";
+import Navbar from "@/lib/components/Navbar";
 import { Stop } from "../HomeScreen/HomeScreen";
 import { calculateArrival } from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
@@ -10,15 +11,17 @@ import { useRealTimeBusLocation } from "@/app/src/hooks/useRealTimeBusLocation";
 import { useBusLineRef } from "@/app/src/hooks/useBusLineRef";
 import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
 import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
-import ListItemIconContainer from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
 import '@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem.css';
 
 
 export default function BuslineScreen() {
+
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
+    const [toMountScoupe, setToMountScoupe] = useState(true);
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
+
 
     const direction = busLocationStore.getLineDirection();
     const busLineRefs = useBusLineRef(lineNumber, direction);
@@ -66,15 +69,31 @@ export default function BuslineScreen() {
   }
 
 
+  function getStationIndex(busLines: BusLinesType, lineNumber: string, stationName: string) {
+    // Check if the line number exists in the data
+    if (busLines.hasOwnProperty(lineNumber)) {
+        // Loop through the array of stations for the given line number
+        for (let i = 0; i < busLines[lineNumber].length; i++) {
+            if (busLines[lineNumber][i].name === stationName) {
+                return i;  // Return the index if the station name matches
+            }
+        }
+        return -1;  // Return -1 if the station name is not found
+    } else {
+        return -1;  // Return -1 if the line number does not exist
+    }
+}
+
   return (
     <main>
+        <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
         <div className="schedule-container">
             <div className='time-and-icons-container'>
           <LineNumberCircle lineNumber={lineNumber}/>
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={false}/>
             </div>
-          <BuslineRoute currentStop={Math.floor(Math.random() * 6) + 3} lineNumber={lineNumber}/>
         </div>
+          <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")} lineNumber={lineNumber} stopCode={ station ? station.stop_code: 0}/>
     </main>
   );
 }
