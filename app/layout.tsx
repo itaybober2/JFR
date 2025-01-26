@@ -1,10 +1,7 @@
 import "@/styles/global.css";
 import "@/styles/splash-screen.css";
-
 import type { Metadata } from "next";
-import {ReactNode} from "react";
-// import Navbar from "@/lib/components/Navbar";
-import FloatingPlusButton from "@/app/src/components/FloatingPlusButton";
+import type { ReactNode } from "react";
 import SplashScreen from "@/app/src/components/SplashScreen";
 import FooterNavBar from "@/lib/components/FooterNavbar";
 
@@ -13,7 +10,7 @@ export const metadata: Metadata = {
     description: "A social transportation app.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {    
 
     return (
         <html dir="rtl">
@@ -36,11 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <link rel="manifest" href="/manifest.json" />
             </head>
             <body>
-                <SplashScreen />
-                {/* Pass the state and setter to Navbar */}
-                {/* <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} /> */}
+                {/* <SplashScreen /> */}
                 <div>{children}</div>
-                <FooterNavBar/>
+                {/* <FooterNavBar/> */}
             </body>
         </html>
     );

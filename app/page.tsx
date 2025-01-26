@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import HomeScreen from "@/app/screens/HomeScreen/HomeScreen";
 import Navbar from "@/lib/components/Navbar";
+import FirstScreen from "./screens/OnBoarding/FirstScreen/firstScreen";
 import {reportsStore} from "@/backend/stores/reportsStore";
+
 
 export default function App() {
     const [toMountScoupe, setToMountScoupe] = useState(true);
@@ -21,8 +23,9 @@ export default function App() {
 
     return (
         <div>
-            <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
-            <HomeScreen toMountScoupe={toMountScoupe} />
+            <FirstScreen />
+            {/* <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} /> */}
+            {/* <HomeScreen toMountScoupe={toMountScoupe} /> */}
         </div>
     );
 }

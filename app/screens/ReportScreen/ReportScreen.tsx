@@ -20,7 +20,6 @@ const ReportScreen = () => {
     const [pathChangeText, setPathChangeText] = useState<string>('');
     const [screenToRender, setScreenToRender] = useState<screensToRender>('lineSelection');
     const [selectedReportType, setSelectedReportType] = useState('')
-    console.log('siriRideId: ',busLocationStore.getBusLocation('19')?.siriRideId)
 
     const getPreviousScreen = (currentScreen: screensToRender): screensToRender => {
         switch (currentScreen) {
@@ -48,6 +47,7 @@ const ReportScreen = () => {
                     pathChangeDescription: pathChangeText,
                     closestStop: closestStopStore.getClosestStopToUser().stopName,
                 }
+                console.log(JSON.stringify(report, null, 4));
                 await createReport(report);
                 setLineNumber(null);
                 setSelectedTypes([]);
