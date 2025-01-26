@@ -10,6 +10,7 @@ import ReportTypeSelection, {getReportText} from "@/app/src/components/ReportScr
 import AddReportTextScreen from "@/app/src/components/ReportScreen/AddReportTextScreen";
 import ReportScreenWraper from "@/app/src/components/ReportScreen/ReportScreenWraper";
 import ThankYouScreen from "@/app/src/components/ReportScreen/ThankYouScreen";
+import {reportsStore} from "@/backend/stores/reportsStore";
 
 export type screensToRender = 'lineSelection' | 'reportSelection' | 'comment' | 'thankYou';
 
@@ -34,7 +35,7 @@ const ReportScreen = () => {
     const handleSubmit = async () => {
         if (lineNumber !== null) {
             try {
-                await createReport({
+                const report = {
                     lineNumber: lineNumber,
                     lineId: busLocationStore.getBusLocation(lineNumber)?.siriRideId,
                     crowded: selectedTypes.includes('crowded'),
@@ -45,9 +46,12 @@ const ReportScreen = () => {
                     stink: selectedTypes.includes('stink'),
                     pathChangeDescription: pathChangeText,
                     closestStop: closestStopStore.getClosestStopToUser().stopName,
-                });
+                }
+                console.log(JSON.stringify(report, null, 4));
+                await createReport(report);
                 setLineNumber(null);
                 setSelectedTypes([]);
+                reportsStore.addReport(report)
             } catch (error) {
                 console.error(error);
             }

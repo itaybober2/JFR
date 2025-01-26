@@ -3,9 +3,16 @@ import React, { useEffect, useState } from "react";
 import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
+<<<<<<< HEAD
 import { fetchReports } from "@/backend/utils/api";
 import Image from "next/image";
 import { userLocationStore } from "@/backend/stores/userLocationStore";
+=======
+import {reportsStore} from "@/backend/stores/reportsStore";
+import {busLines} from "@/public/constants/constants";
+import LoadingScreen from "@/app/src/components/LoadingScreen";
+
+>>>>>>> main
 
 export interface BusStopProps {
     name: string;
@@ -14,19 +21,10 @@ export interface BusStopProps {
 
 interface BuslineRouteProps {
     currentStop: number;
-    stops: BusStopProps[];
     lineNumber: string;
+    stopCode: number;
 }
 
-const getReport = async (lineNumber: string): Promise<Report | undefined> => {
-    try {
-        const data = await fetchReports();
-        return data.data.find((fetchedReport: Report) => fetchedReport.lineNumber === lineNumber);
-    } catch (error) {
-        console.error("Error fetching reports:", error);
-        return undefined;
-    }
-};
 
 const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
     const R = 6371; // Earth's radius in kilometers
@@ -41,9 +39,16 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 export default function BuslineRoute(props: BuslineRouteProps) {
+<<<<<<< HEAD
     var { currentStop, stops, lineNumber } = props;
+=======
+    const { currentStop, lineNumber, stopCode } = props;
+>>>>>>> main
     const [report, setReport] = useState<Report | undefined>();
+    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
+    const stops = busLines[lineNumber];
     const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
     const currentStopRef = React.useRef<HTMLDivElement>(null);
     const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId?.toString();
     const [busLocation, setBusLocation] = useState<number>(currentStop);
@@ -52,15 +57,13 @@ export default function BuslineRoute(props: BuslineRouteProps) {
     
     // Process stops based on direction
     // stops = direction !== 1 ? [...stops].reverse() : stops;
+=======
+>>>>>>> main
 
     useEffect(() => {
-        const fetchData = async () => {
-            const fetchedReport = await getReport(lineNumber);
-            setReport(fetchedReport);
+        setReport(reportsStore.getAllReportsByLineId(lineId)[0]);
             setLoading(false);
-        };
-        fetchData();
-    }, [lineNumber]);
+    }, [lineId]);
 
     useEffect(() => {
         if (!loading && currentStopRef.current) {
@@ -81,9 +84,16 @@ export default function BuslineRoute(props: BuslineRouteProps) {
     }, [loading, lineNumber]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <LoadingScreen marginTop={4}/>
+        );
     }
+<<<<<<< HEAD
     console.log("distanc: ", distanceFromBus )
+=======
+
+
+>>>>>>> main
     return (
         <div className="route">
             <div className="timeline-container">
@@ -106,6 +116,7 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         ref={index === currentStop ? currentStopRef : undefined}
                     >
                         <div className="station-container-graphic">
+<<<<<<< HEAD
                             {index === currentStop ? (
                                 <>
                                     <div className="connection-line connection-line-top active"></div>
@@ -114,11 +125,15 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                             ) : (
                                 <div className={`connection-line ${index <= currentStop ? "active" : ""}`}></div>
                             )}
+=======
+                            <div className={`connection-line ${index < currentStop ? "active" : ""}`}></div>
+>>>>>>> main
                             <div
                                 className={`station ${index === currentStop ? "current" : ""} ${
                                     index <= currentStop ? "active" : ""
                                 }`}
                             ></div>
+                            <div className={`connection-line ${index < currentStop - 1 ? "active" : ""}`}></div>
                         </div>
                         <div
                             className={`station-info ${
@@ -127,6 +142,9 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         >
                             {stop.name}
                         </div>
+                        {index === currentStop && <div className="blue-box" id="blue-box">
+                            {stopCode}
+                        </div>}
                         {stop.name === report?.closestStop && (
                             <ListItemIconContainer lineNumber={lineNumber} lineId={lineId} />
                         )}
@@ -136,3 +154,4 @@ export default function BuslineRoute(props: BuslineRouteProps) {
         </div>
     );
 }
+

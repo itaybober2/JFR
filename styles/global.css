@@ -68,6 +68,8 @@ body {
   color: var(--color-primary);
   background-color: var(--color-background);
   font-family: var(--font-body);
+  margin-bottom: 5rem;
+  margin-top: 6rem;
 }
 
 /* Layout */
@@ -101,13 +103,17 @@ header {
 }
 
 .navbar{
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 6rem;
-  padding-bottom: 1rem;
+  align-content: center;
+  z-index: 1000;
 }
 
 .logo{
@@ -115,21 +121,22 @@ header {
   height: 41px;
 }
 
-.mainContainer{
+.navbarMainContainer{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.buttonOutline {
-  width: 28px;
-  height: 52px;
+
+.navbarButtonOutline {
+  width: 52px;
+  height: 28px;
   flex-shrink: 0;
   border-radius: 14px;
-  border: 2px solid #000; /* Ensure no non-breaking spaces here */
+  border: 2px solid #ffffff; /* Ensure no non-breaking spaces here */
 }
 
 
-.container {
+.navbarContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,35 +144,36 @@ header {
 }
 
 .black-circle {
+  margin: 2px 23px 0 0;
   width: 20px;            /* Smaller diameter of the circle */
   height: 20px;           /* Smaller diameter of the circle */
-  background-color: black; /* Circle color */
+  background-color: rgb(255, 255, 255); /* Circle color */
   border-radius: 50%;      /* Rounded corners to make it a circle */
   flex-shrink: 0;          /* Prevents the circle from shrinking */
-  margin: 4px;
   transition: transform 0.3s ease-in-out;
 }
 
 .black-circle.top {
-  transform: translateY(0); /* Top position */
+  transform: translateX(0); /* Top position */
 }
 
 .black-circle.bottom {
-  transform: translateY(21px);
+  transform: translateX(21px);
 }
 
 .navbarText{
   margin-right: 1rem;
-  color: black;
-  text-align: right;
+  color: rgb(255, 254, 254);
+  text-align: center;
   font-family: TheBasics;
-  font-size: 19.524px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   word-wrap: break-word;
   width: 62px;
   line-height: 1.2;
+  margin: 1rem;
 }
 
 footer {

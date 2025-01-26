@@ -1,7 +1,9 @@
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 import axios from "axios";
-import {format, addDays, addHours} from "date-fns";
-import { toZonedTime } from "date-fns-tz";
+import {addDays, addHours, format} from "date-fns";
+import {toZonedTime} from "date-fns-tz";
+import {reportsStore} from "@/backend/stores/reportsStore";
+
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export type reportProps = {
     lineNumber: string;
@@ -38,6 +40,7 @@ export async function createReport(
         closestStop,
     }: reportProps
 ) {
+    if (lineId) reportsStore.setLineId(lineId);
     const response = await fetch(`${backendUrl}/reports`, {
         method: "POST",
         headers: {
@@ -59,7 +62,7 @@ export async function createReport(
     if (!response.ok) {
         throw new Error("Failed to create report");
     }
-    return response.json();
+    return await response.json();
 }
 
 const url = "https://open-bus-stride-api.hasadna.org.il/gtfs_routes/list";

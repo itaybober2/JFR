@@ -1,0 +1,78 @@
+
+.first-container{
+    margin-top: -6rem;
+    margin-bottom: -6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    height: 100%;
+    padding-top: 3rem;
+    padding-bottom :5rem;
+  }
+
+  .first-buttonn-outline {
+    width: 300px;
+    background-color: white;
+    height: 675px;
+    flex-shrink: 0;
+    border-radius: 175px;
+    border: 2px solid #ffffff; /* Ensure no non-breaking spaces here */
+  }
+  
+  
+  .first-inside-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
+  }
+  
+  .first-black-circle {
+    width: 252px;            /* Smaller diameter of the circle */
+    height: 252px;           /* Smaller diameter of the circle */
+    background-color: black; /* Circle color */
+    border-radius: 50%;      /* Rounded corners to make it a circle */
+    flex-shrink: 0;          /* Prevents the circle from shrinking */
+    margin: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .first-black-circle.top {
+    transform: translateY(0); /* Top position */
+  }
+  
+  .first-black-circle.bottom {
+    transform: translateY(380px);
+  }
+
+.letter{
+    font-family: "BoldNunberFont", sans-serif;
+    margin-top: 30px;
+    font-size: 192.75px;
+    font-weight: 700;
+    line-height: 198.53px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: white;
+}
+
+.text-container{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.text{
+    color:white;
+    font-family: "NumberFont", sans-serif;
+    font-size: 20.01px;
+    font-weight: 100;
+    line-height: 20.61px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    letter-spacing: 1px;
+}
+  

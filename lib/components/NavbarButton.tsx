@@ -17,16 +17,19 @@ export default function NavbarButton({
   };
 
   return (
-    <div className="mainContainer">
-      <div className="buttonOutline" onClick={handleCircleClick}>
-        <div className="container">
+    <div className="navbarMainContainer">
+          <div className="navbarText">
+        <h1>מהר הצופים</h1>
+      </div>
+      <div className="navbarButtonOutline" onClick={handleCircleClick}>
+        <div className="navbarContainer">
           <div
             className={`black-circle ${toMountScoupe ? "top" : "bottom"}`}
           ></div>
         </div>
       </div>
       <div className="navbarText">
-        <h1>{toMountScoupe ? "להר הצופים" : "מהר הצופים"}</h1>
+        <h1>להר הצופים</h1>
       </div>
     </div>
   );

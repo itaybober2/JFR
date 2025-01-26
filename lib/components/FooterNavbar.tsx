@@ -4,6 +4,7 @@ import "../../styles/footer.css";
 import { FooterIcons } from "@/public/constants/constants";
 import {useRouter} from "next/navigation";
 import ReportsModal from "@/app/src/components/reportModal/ReportsModal";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 
 const Footer = () => {
@@ -27,60 +28,32 @@ const Footer = () => {
     const router = useRouter();
     const handleHomeClick = () => {
         setSelectedButton("home");
-        router.push('/');
+        router.push('/screens/HomeScreen');
     }
     const handleAddReportClick = () => {
-        console.log("add report clicked");
         setSelectedButton("add");
         router.push('/screens/ReportScreen');
     }
 
-        const [open, setOpen] = useState(false);
-        const handleOpen = () => {
-            setSelectedButton("add");
-            setOpen(true);
-        };
-        const handleClose = () => setOpen(false);
-        const [isVisible, setIsVisible] = useState(false);
-    
-        useEffect(() => {
-            setTimeout(() => {
-                setIsVisible(true);
-            }, 3000);
-        }, []);
-        if (!isVisible) return null;
+    const handleProfileClick = () => {
+      setSelectedButton("profile");
+      router.push('/screens/ProfileScreen');
+    }
+
+
+    const [open, setOpen] = useState(false);
+
+    const handleClose = () => {
+      setOpen(false);
+      setSelectedButton("home");
+    }
 
   return (
     <>
     <footer className="footer">
-      {/* Profile Button */}
-      <button
-        className={`footer-button ${selectedButton === "profile" ? "selected" : ""}`}
-        onClick={() => setSelectedButton("profile")}
-      >
-        <img
-          src={getIconSrc("profile")}
-          alt="Profile"
-          className="footer-icon"
-        />
-        <span className="footer-text">פרופיל</span>
-      </button>
-
-      {/* Add Report Button */}
-      <button
-        className={`footer-button ${selectedButton === "add" ? "selected" : ""}`}
-        onClick={handleAddReportClick}
-      >
-        <img
-          src={getIconSrc("add")}
-          alt="Add"
-          className="footer-icon"
-        />
-        <span className="footer-text">הוסף דיווח</span>
-      </button>
-
+      <div className="footer-container">
       {/* Home Button */}
-      <button
+            <button
         className={`footer-button ${selectedButton === "home" ? "selected" : ""}`}
         onClick={handleHomeClick}
       >
@@ -89,8 +62,30 @@ const Footer = () => {
           alt="Home"
           className="footer-icon"
         />
-        <span className="footer-text">מסך הבית</span>
+        <span className="footer-text">תחנה</span>
       </button>
+      {/* Add Report Button */}
+      {/* Middle Circle with "+" Button */}
+      <div className="footer-middle">
+            <button className="footer-button" onClick={handleAddReportClick}            >
+              <img src={FooterIcons.Report} alt="Add" className="footer-icon-Middle" />
+              <span className="footer-text">הוספת דיווח</span>
+            </button>
+          </div>
+      {/* Profile Button */}
+      <button
+          className={`footer-button ${selectedButton === "profile" ? "selected" : ""}`}
+          onClick={handleProfileClick}
+          >
+              <img
+                src={getIconSrc("profile")}
+                alt="Profile"
+                className="footer-icon"
+              />
+              <span className="footer-text">פרופיל</span>
+            </button>
+          </div>
+
     </footer>
      <div className="popup">
      <div className="popup-inner">

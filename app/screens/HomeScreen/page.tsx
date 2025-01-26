@@ -1,8 +1,21 @@
+"use client";
 import React from "react";
+import { useState } from "react";
 import HomeScreen from "@/app/screens/HomeScreen/HomeScreen";
+import Navbar from "@/lib/components/Navbar";
+import Footer from "@/lib/components/FooterNavbar";
+
 
 const Page = () => {
-  return <HomeScreen toMountScoupe={true} />;
+  const [toMountScoupe, setToMountScoupe] = useState(true); 
+
+  return (
+    <div>
+      <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
+      <HomeScreen toMountScoupe={true} />;
+      <Footer />
+    </div>
+  )
 };
 
 export default Page;
