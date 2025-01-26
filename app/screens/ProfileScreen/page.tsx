@@ -2,6 +2,7 @@
 import "@/app/screens/ProfileScreen/Profile.css";
 import { useState } from "react";
 import Navbar from "@/lib/components/Navbar";
+import Footer from "@/lib/components/FooterNavbar";
 
 
 export default function ProfileScreen() {
@@ -24,6 +25,7 @@ export default function ProfileScreen() {
             <button className="menuItem">צפייה בנקודות שלי</button>
             <button className="menuItem">הגדרות פרטיות</button>
       </div>
+      <Footer/>
     </main>
   );
 }

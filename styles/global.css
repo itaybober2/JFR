@@ -121,13 +121,13 @@ header {
   height: 41px;
 }
 
-.mainContainer{
+.navbarMainContainer{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.buttonOutline {
+.navbarButtonOutline {
   width: 52px;
   height: 28px;
   flex-shrink: 0;
@@ -136,7 +136,7 @@ header {
 }
 
 
-.container {
+.navbarContainer {
   display: flex;
   justify-content: center;
   align-items: center;
