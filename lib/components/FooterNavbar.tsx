@@ -41,12 +41,12 @@ const Footer = () => {
     }
 
 
-        const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
-        const handleClose = () => {
-          setOpen(false);
-          setSelectedButton("home");
-        }
+    const handleClose = () => {
+      setOpen(false);
+      setSelectedButton("home");
+    }
 
   return (
     <>

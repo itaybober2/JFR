@@ -1,5 +1,5 @@
 
-.container{
+.first-container{
     margin-top: -6rem;
     margin-bottom: -6rem;
     display: flex;
@@ -11,7 +11,7 @@
     padding-bottom :5rem;
   }
 
-  .buttonn-outline {
+  .first-buttonn-outline {
     width: 300px;
     background-color: white;
     height: 675px;
@@ -21,14 +21,14 @@
   }
   
   
-  .inside-container {
+  .first-inside-container {
     display: flex;
     justify-content: center;
     align-items: center;
     /* height: 100vh;  */
   }
   
-  .black-circle {
+  .first-black-circle {
     width: 252px;            /* Smaller diameter of the circle */
     height: 252px;           /* Smaller diameter of the circle */
     background-color: black; /* Circle color */
@@ -38,11 +38,11 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  .black-circle.top {
+  .first-black-circle.top {
     transform: translateY(0); /* Top position */
   }
   
-  .black-circle.bottom {
+  .first-black-circle.bottom {
     transform: translateY(380px);
   }
 

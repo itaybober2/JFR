@@ -22,14 +22,14 @@ export default function FirstScreen() {
   };
 
   return (
-    <div className="container">
+    <div className="first-container">
       <div className="text-container">
         <text className="text">מוצא</text>
       </div>
-      <div className="buttonn-outline" onClick={handleCircleClick}>
-        <div className="inside-container">
+      <div className="first-buttonn-outline" onClick={handleCircleClick}>
+        <div className="first-inside-container">
           <div
-            className={`black-circle ${toMountScoupe ? "top" : "bottom"}`}
+            className={`first-black-circle ${toMountScoupe ? "top" : "bottom"}`}
           >
             <div className="letter">{toMountScoupe ? "A" : "B"}</div>
           </div>
