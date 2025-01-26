@@ -28,6 +28,8 @@ const setters = remx.setters({
     setTargetAndDestination(target: string, destination: string) {
         state.target = target;
         state.destination = destination;
+        localStorage.setItem("target", target);
+        localStorage.setItem("destination", destination);
     }
 });
 

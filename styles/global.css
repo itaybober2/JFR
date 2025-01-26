@@ -113,6 +113,7 @@ header {
   width: 100%;
   height: 6rem;
   align-content: center;
+  justify-content: center;
   z-index: 1000;
 }
 
@@ -125,6 +126,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .navbarButtonOutline {
@@ -132,7 +134,7 @@ header {
   height: 28px;
   flex-shrink: 0;
   border-radius: 14px;
-  border: 2px solid #ffffff; /* Ensure no non-breaking spaces here */
+  border: 2px solid #ffffff;
 }
 
 
@@ -171,7 +173,6 @@ header {
   font-weight: 400;
   line-height: normal;
   word-wrap: break-word;
-  width: 62px;
   line-height: 1.2;
   margin: 1rem;
 }

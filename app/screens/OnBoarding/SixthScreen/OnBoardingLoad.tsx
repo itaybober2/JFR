@@ -15,14 +15,10 @@ type CircelLineKey = keyof typeof circelLines; // Get the keys of circelLines as
 
 
 const OnBoardingLoad: React.FC = () => {
-    const imageKeys: CircelLineKey[] = ["line517", "line19", "line19A", "line17"]; // Explicitly type imageKeys
+    const imageKeys: CircelLineKey[] = ["line517", "line19", "line19A", "line17"];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-      const searchParams = useSearchParams();
-    
-      // Get the query parameters
-      const pointA = searchParams.get("pointA") || "להר הצופים"; // Extract pointA
-      const pointB = searchParams.get("pointB") || "מהר הצופים"; // Extract pointB
-    const router = useRouter(); // Initialize the router
+
+    const router = useRouter();
 
 
   useEffect(() => {
@@ -36,9 +32,9 @@ const OnBoardingLoad: React.FC = () => {
   }, [imageKeys.length]);
 
   useEffect(() => {
-    // Check if the cycle is complete
+      localStorage.setItem("onboardingCompleted", "true");
     if (currentImageIndex === imageKeys.length - 1) {
-      router.push(`/screens/HomeScreen?pointA=${encodeURIComponent(pointA)}&pointB=${encodeURIComponent(pointB)}`); // Navigate to HomeScreen
+      router.push(`/screens/HomeScreen`);
     }
   }, [currentImageIndex, imageKeys.length, router]);
 
@@ -48,7 +44,7 @@ const OnBoardingLoad: React.FC = () => {
       <p className="loading-title">מסך הבית שלך בהכנה</p>
       <div className="image-container">
         <img
-          src={circelLines[imageKeys[currentImageIndex]]} // Use the path from circelLines
+          src={circelLines[imageKeys[currentImageIndex]]}
           alt={`Line ${imageKeys[currentImageIndex]}`}
           className="dynamic-image"
         />
