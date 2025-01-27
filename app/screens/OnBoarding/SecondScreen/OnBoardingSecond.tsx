@@ -1,14 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import "./OnBoarding.css";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 const OnBoardingSecond: React.FC = () => {
+    const router = useRouter();
     const [isCompleted, setIsCompleted] = useState(false); // Track whether the "Continue" button was clicked
     const [pointA, setPointA] = useState<string>(""); // Save the user's first input
     const [pointB, setPointB] = useState<string>(""); // Save the user's second input
-    const router = useRouter(); // Initialize router
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            if (localStorage.getItem("onboardingCompleted") === "true") {
+                router.push("/screens/HomeScreen");
+            }
+        }
+    }, [router]);
 
   
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
