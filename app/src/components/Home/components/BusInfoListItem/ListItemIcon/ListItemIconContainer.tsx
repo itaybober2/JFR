@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import ListItemIcon from "./ListItemIcon";
 import { reportsStore } from "@/backend/stores/reportsStore";
 import ReportFloatingBox from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ReportFloatingBox";
+import {useConnect} from "remx";
 
 export type Report = {
     id?: number;
@@ -20,21 +21,17 @@ export type Report = {
 
 type ListItemIconContainerProps = {
     lineNumber: string;
-    lineId?: number;
+    lineId: number;
 }
 
 const ListItemIconContainer = (props: ListItemIconContainerProps) => {
     const { lineNumber, lineId } = props;
-    const [reports, setReports] = useState<Report[]>();
     const [showBox, setShowBox] = useState(false);
     const color = useRef('');
     const title = useRef('');
     const description = useRef<string | undefined>('');
 
-
-    useEffect(() => {
-        if (lineId) setReports(reportsStore.getAllReportsByLineId(lineId));
-    }, [lineId]);
+    const reports =useConnect(reportsStore.getAllReportsByLineId, [lineId]);
 
     const handleIconClick = (type: string) => {
         if (reports !== undefined) {
@@ -95,11 +92,11 @@ const ListItemIconContainer = (props: ListItemIconContainerProps) => {
             {reports.find((report) => report.pathChange) && <ListItemIcon type={'pathChange'} handleIconClick={() => handleIconClick('pathChange')} />}
             {reports.find((report) => report.wildDriving) && <ListItemIcon type={'wildDriving'} handleIconClick={() => handleIconClick('wildDriving')} />}
             {reports.find((report) => report.stink) && <ListItemIcon type={'stink'} handleIconClick={() => handleIconClick('stink')} />}
-            {showBox && description.current !== undefined && (
+            {showBox && description.current !== undefined && description.current.length > 0 && (
                 <>
                     <div className="overlay" onClick={handleCloseBox}></div>
                     <div className="icon-container">
-                        <ReportFloatingBox description={description.current} position={{top: 5, left: 20}} title={title.current} color={color.current}/>
+                        <ReportFloatingBox description={description.current} position={{top: 5, left: -200}} title={title.current} color={color.current}/>
                     </div>
                 </>
             )}

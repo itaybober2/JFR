@@ -1,12 +1,12 @@
 "use client";
 import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
 import "@/app/src/components/Busline/Busline.css";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { busLines, busLinesToB, BusLinesType } from "@/public/constants/constants";
 import { Stop } from "../HomeScreen/HomeScreen";
 import { calculateArrival } from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
-import { useRealTimeBusLocation } from "@/app/src/hooks/useRealTimeBusLocation";
+import {BusLocation, useRealTimeBusLocation} from "@/app/src/hooks/useRealTimeBusLocation";
 import { useBusLineRef } from "@/app/src/hooks/useBusLineRef";
 import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
 import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
@@ -27,8 +27,12 @@ export default function BuslineScreen() {
 
     const busLineRefs = useBusLineRef(lineNumber, directionSubscription);
     const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
-    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId : locations?.siriRideId;
-    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId : undefined;
+    let lineA: BusLocation | undefined;
+    let lineB: BusLocation | undefined;
+    if (locations) {
+        lineA = locations[0]
+        lineB = locations[1]
+    }
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
@@ -58,11 +62,11 @@ export default function BuslineScreen() {
 
 
     useEffect(() => {
-      const calculatedTimeA = calculateArrival(locations && 'A' in locations ? locations.A : null, station);
-      setArrivalTimeA(calculatedTimeA);
-      const calculatedTimeB = calculateArrival(locations && 'B' in locations ? locations.B : null, station);
-      setArrivalTimeB(calculatedTimeB)
-  }, [locations, station]);
+        const calculatedTimeA = calculateArrival(lineA, station);
+        setArrivalTimeA(calculatedTimeA);
+        const calculatedTimeB = calculateArrival(lineB, station);
+        setArrivalTimeB(calculatedTimeB)
+    }, [locations, station]);
 
   useEffect(() => {
     if (lineNumber !== "NULL" && station) {
@@ -74,13 +78,13 @@ export default function BuslineScreen() {
   }, [lineNumber, station]);
 
   const busArrivalA = {
-    id: Number(lineIdA),
+    id: lineA?.siriRideId || 0,
     route: lineNumber,
     time: arrivalTimeA,
   }
 
   const busArrivalB = {
-    id: Number(lineIdB),
+    id: lineB?.siriRideId || 0,
     route: lineNumber,
     time: arrivalTimeB,
   }

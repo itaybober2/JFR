@@ -19,7 +19,7 @@ type BusInfoProps = {
     stops: Stop[];
 }
 
-export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | null) => {
+export const calculateArrival = (busLocation: BusLocation | undefined, stop: Stop | null) => {
     if (!busLocation || !stop) {
         return -2;
     }
@@ -50,24 +50,28 @@ const BusInfoListItem = (props: BusInfoProps) => {
 
     const busLineRefs = useBusLineRef(lineNumber, direction);
     const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
-    const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId : locations?.siriRideId;
-    const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId : undefined;
-    
+    let lineA: BusLocation | undefined;
+    let lineB: BusLocation | undefined;
+    if (locations) {
+        lineA = locations[0]
+        lineB = locations[1]
+    }
+
     React.useEffect(() => {
-        const calculatedTimeA = calculateArrival(locations && 'A' in locations ? locations.A : null, station);
+        const calculatedTimeA = calculateArrival(lineA, station);
         setArrivalTimeA(calculatedTimeA);
-        const calculatedTimeB = calculateArrival(locations && 'B' in locations ? locations.B : null, station);
+        const calculatedTimeB = calculateArrival(lineB, station);
         setArrivalTimeB(calculatedTimeB)
     }, [locations, station]);
 
     const busArrivalA = {
-        id: Number(lineIdA),
+        id: lineA?.siriRideId || 0,
         route: lineNumber,
         time: arrivalTimeA,
     }
 
     const busArrivalB = {
-        id: Number(lineIdB),
+        id: lineB?.siriRideId || 0,
         route: lineNumber,
         time: arrivalTimeB,
     }

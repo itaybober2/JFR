@@ -40,7 +40,7 @@ export default function BuslineRoute(props: BuslineRouteProps) {
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const [distanceFromBus] = useState(0); // Default value, adjust as needed
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
+    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId || 0;
     const stops = toMountScoupe ? busLines[lineNumber] : busLinesToB[lineNumber];
     const currentStopRef = useRef<HTMLDivElement>(null);
 
