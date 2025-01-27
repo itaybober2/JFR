@@ -23,7 +23,7 @@
     right: 0;
     transform: translateY(-50%);
     z-index: 2;
-    /* height: 100%; */
+    margin-right: 1rem;
 }
 
 .station-container {

@@ -1,7 +1,7 @@
 import axios from "axios";
-import {format, addHours, addMinutes, addDays} from "date-fns";
-import { toZonedTime } from "date-fns-tz";
-import { useState, useEffect } from "react";
+import {addHours, addMinutes, format} from "date-fns";
+import {toZonedTime} from "date-fns-tz";
+import {useEffect, useState} from "react";
 import {URLS} from "@/public/constants/constants";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 import {userLocationStore} from "@/backend/stores/userLocationStore";
@@ -14,15 +14,7 @@ export type BusLocation = {
     siriRideId: number;
 };
 
-export type BusLocations = {
-    A: BusLocation | null;
-    B: BusLocation | null;
-};
-
-
-
-// TODO make this function return the top 2 bus locations
-export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, double: boolean = false, interval = 60000): BusLocations | BusLocation | null {
+export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, double: boolean = false, interval = 60000): BusLocation[] | undefined {
     const [busLocationA, setBusLocationA] = useState<BusLocation | null>(null);
     const [busLocationB, setBusLocationB] = useState<BusLocation | null>(null);
 
@@ -138,9 +130,9 @@ export function useRealTimeBusLocation(lineRef: number[], lineNumber: string, do
         return () => clearInterval(intervalId);
     }, [lineRef, interval]);
 
-    if (double) {
-        return { A: busLocationA, B: busLocationB }
+    if (double && busLocationA && busLocationB) {
+        return [busLocationA, busLocationB];
     } else {
-        return busLocationA;
+        if (busLocationA) return [busLocationA];
     }
 }

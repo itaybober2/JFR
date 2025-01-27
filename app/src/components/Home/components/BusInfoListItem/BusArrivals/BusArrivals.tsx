@@ -2,6 +2,7 @@ import React from 'react';
 import './BusArrivals.css';
 import { reportsStore } from "@/backend/stores/reportsStore";
 import { Icons } from "@/public/constants/constants";
+import {useConnect} from "remx";
 
 type BusArrivalsProps = {
     arrivals: {
@@ -14,12 +15,10 @@ type BusArrivalsProps = {
 
 const BusArrivals = (props: BusArrivalsProps) => {
     const { arrivals, isHomeScreen } = props;
-    let iconUrl = '';
-    if (reportsStore.isLineIdInStore(arrivals[0].id)) {
-        iconUrl = Icons.infoIcon;
-    }
+    let iconUrl = Icons.infoIcon;
+    const showInfoIcon0 = useConnect(reportsStore.isLineIdInStore, [arrivals[0].id]);
+    const showInfoIcon1 = useConnect(reportsStore.isLineIdInStore, [arrivals[1].id]);
 
-    // Sort arrivals by time (null values will be placed at the end)
     const sortedArrivals = [...arrivals].sort((a, b) => {
         if (a.time === null) return 1;
         if (b.time === null) return -1;
@@ -29,11 +28,12 @@ const BusArrivals = (props: BusArrivalsProps) => {
     return (
         <div className="bus-arrivals">
             <div className="first-bus-arrival-time">
-                {iconUrl && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
+                {showInfoIcon0 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
                 <span>{sortedArrivals[0].time}</span>
                 <span className='minutes_bold'>דקות</span>
             </div>
             <div className="second-bus-arrival-time">
+                {showInfoIcon1 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
                 <span>{sortedArrivals[1].time}</span>
                 <span className='minutes_gray'>דקות</span>
             </div>
