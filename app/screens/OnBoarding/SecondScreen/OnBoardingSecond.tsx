@@ -6,7 +6,7 @@ import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 const OnBoardingSecond: React.FC = () => {
     const router = useRouter();
-    if (localStorage.getItem("onboardingCompleted")) {
+    if (localStorage.getItem("onboardingCompleted") === "true") {
         router.push("/screens/HomeScreen");
     }
 
