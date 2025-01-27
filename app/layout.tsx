@@ -2,8 +2,8 @@ import "@/styles/global.css";
 import "@/styles/splash-screen.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import SplashScreen from "@/app/src/components/SplashScreen";
-import FooterNavBar from "@/lib/components/FooterNavbar";
+import Footer from "@/lib/components/FooterNavbar";
+import Navbar from "@/lib/components/Navbar";
 
 export const metadata: Metadata = {
     title: "AB",
@@ -33,9 +33,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <link rel="manifest" href="/manifest.json" />
             </head>
             <body>
-                {/* <SplashScreen /> */}
+                <Navbar/>
                 <div>{children}</div>
-                {/* <FooterNavBar/> */}
+                <Footer />
             </body>
         </html>
     );

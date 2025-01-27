@@ -1,21 +1,12 @@
 "use client";
-import Logo from "./Logo";
 import NavbarButton from "./NavbarButton";
-import { useEffect, useState } from "react";
 
-interface NavbarProps {
-  toMountScoupe: boolean;
-  setToMountScoupe: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-export default function Navbar({ toMountScoupe, setToMountScoupe }: NavbarProps) {
+export default function Navbar() {
 
   return (
     <header className="navbar">
-        <NavbarButton toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
-      <nav>
-        {/* <Logo /> */}
-      </nav>
+        <NavbarButton />
     </header>
   );
 }

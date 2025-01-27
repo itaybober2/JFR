@@ -6,6 +6,8 @@ import { fetchBusRoutes } from "@/backend/utils/api";
 import useUserLocation from "@/app/src/hooks/useUserLocation";
 import "./HomeScreen.css";
 import {closestStopStore} from "@/backend/stores/closestStopStore";
+import {useConnect} from "remx";
+import {busLocationStore} from "@/backend/stores/busLocationStore";
 
 export type Stop = {
     id: number
@@ -18,15 +20,11 @@ export type Stop = {
     direction: number;
 };
 
-type HomeScreenProps = {
-    toMountScoupe: boolean;
-};
 
-
-
-const HomeScreen = (props: HomeScreenProps) => {
-    const { toMountScoupe } = props;
+const HomeScreen = () => {
     const [stops, setStops] = useState<Stop[]>([]);
+    const directionSubscription = useConnect(busLocationStore.getLineDirection);
+
 
     useEffect(() => {
         fetchBusRoutes();
@@ -46,7 +44,7 @@ const HomeScreen = (props: HomeScreenProps) => {
 
     useUserLocation({ handleStopsFetch });
 
-    var filteredStops = stops.filter((stop) => stop.direction === (toMountScoupe ? 1 : 2));
+    var filteredStops = stops.filter((stop) => stop.direction === (directionSubscription));
 
     filteredStops = filteredStops.filter(stop => stop.line_num.length > 0);
 

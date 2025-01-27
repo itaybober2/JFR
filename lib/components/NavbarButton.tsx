@@ -2,12 +2,8 @@
 import React, {useEffect, useState} from "react";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
 
-interface NavbarButtonProps {
-  toMountScoupe: boolean;
-  setToMountScoupe: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function NavbarButton({toMountScoupe, setToMountScoupe,}: NavbarButtonProps) {
+export default function NavbarButton() {
+    const [toMountScoupe, setToMountScoupe] = useState(true);
     const [target, setTarget] = useState('להר הצופים');
     const [destination, setDestination] = useState('להר הצופים');
 

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import FirstScreen from "./screens/OnBoarding/FirstScreen/firstScreen";
 import {reportsStore} from "@/backend/stores/reportsStore";
 import {useRouter} from "next/navigation";
 
@@ -32,10 +31,6 @@ export default function App() {
     }, [toMountScoupe]);
 
     return (
-        <div>
-            <FirstScreen />
-            {/* <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} /> */}
-            {/* <HomeScreen toMountScoupe={toMountScoupe} /> */}
-        </div>
+        <div/>
     );
 }
