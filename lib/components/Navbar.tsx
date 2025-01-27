@@ -1,4 +1,5 @@
 "use client";
+import Logo from "./Logo";
 import NavbarButton from "./NavbarButton";
 import {usePathname} from "next/navigation";
 
