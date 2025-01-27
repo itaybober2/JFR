@@ -2,7 +2,7 @@
 import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/BuslineRoute";
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
-import { busLines, BusLinesType } from "@/public/constants/constants";
+import { busLines, busLinesToB, BusLinesType } from "@/public/constants/constants";
 import Footer from "@/lib/components/FooterNavbar";
 import Navbar from "@/lib/components/Navbar";
 import { Stop } from "../HomeScreen/HomeScreen";
@@ -20,6 +20,7 @@ export default function BuslineScreen() {
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
     const [toMountScoupe, setToMountScoupe] = useState(true);
+    const [closestStops, setClosestStops] = useState<Stop[]>([]);
     const [stationIndex, setStationIndex] = useState<number>(-1);
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
@@ -35,9 +36,16 @@ export default function BuslineScreen() {
         const query = new URLSearchParams(window.location.search);
         const lineNumberParam = query.get('lineNumber');
         const stationParam = query.get('station');
+        const closestStopsParam = query.get('stops');
+
         
         if (lineNumberParam) {
             setLineNumber(lineNumberParam);
+        }
+
+        if (closestStopsParam) {
+            const decodedStops = JSON.parse(decodeURIComponent(closestStopsParam));
+            setClosestStops(decodedStops);
         }
         
         if (stationParam) {
@@ -80,12 +88,15 @@ export default function BuslineScreen() {
   }
 
 
-  function getStationIndex(busLines: BusLinesType, lineNumber: string, stationName: string) {
+  function getStationIndex(busLines: BusLinesType, busLinesToB: BusLinesType, lineNumber: string, stationName: string, direction: number) {
+
+    let lines = busLines;
+    // // Check the direction based on toMountScoupe value
     // Check if the line number exists in the data
-    if (busLines.hasOwnProperty(lineNumber)) {
+    if (lines.hasOwnProperty(lineNumber)) {
         // Loop through the array of stations for the given line number
-        for (let i = 0; i < busLines[lineNumber].length; i++) {
-            if (busLines[lineNumber][i].name === stationName) {
+        for (let i = 0; i < lines[lineNumber].length; i++) {
+            if (lines[lineNumber][i].name === stationName) {
                 return i;  // Return the index if the station name matches
             }
         }
@@ -94,6 +105,7 @@ export default function BuslineScreen() {
         return -1;  // Return -1 if the line number does not exist
     }
 }
+
 
   return (
     <main>
@@ -104,8 +116,13 @@ export default function BuslineScreen() {
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={false}/>
             </div>
         </div>
-          <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")}
+          <BuslineRoute currentStop={getStationIndex(busLines,
+                                                     busLinesToB,
+                                                      lineNumber, 
+                                                      station ? station.stop_name: "",
+                                                    station ? station.direction : 1)}
            lineNumber={lineNumber} 
+           toMountScoupe={toMountScoupe}
            stopCode={ station ? station.stop_code: 0}/>
            <Footer selected={'home'}/>
     </main>

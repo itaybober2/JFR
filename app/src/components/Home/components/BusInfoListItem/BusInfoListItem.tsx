@@ -15,7 +15,8 @@ import LoadingScreen from "@/app/src/components/LoadingScreen";
 
 type BusInfoProps = {
     lineNumber: string;
-    station: Stop ;
+    station: Stop;
+    stops: Stop[];
 }
 
 export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | null) => {
@@ -34,14 +35,15 @@ export const calculateArrival = (busLocation: BusLocation | null, stop: Stop | n
 }
 
 const BusInfoListItem = (props: BusInfoProps) => {
-    const {lineNumber, station} = props
+    const {lineNumber, station, stops} = props
     const [arrivalTimeA, setArrivalTimeA] = React.useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = React.useState<number>(-1);
 
     const router = useRouter();
     const handleClick = () => {
         const encodedStation = encodeURIComponent(JSON.stringify(station));
-        router.push(`/screens/BuslineScreen?lineNumber=${lineNumber}&station=${encodedStation}`);
+        const encodedStops = encodeURIComponent(JSON.stringify(stops));
+        router.push(`/screens/BuslineScreen?lineNumber=${lineNumber}&station=${encodedStation}&stops=${encodedStops}`);
     };
 
     const direction = busLocationStore.getLineDirection();
