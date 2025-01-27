@@ -4,13 +4,9 @@ import "../../styles/footer.css";
 import { FooterIcons } from "@/public/constants/constants";
 import {useRouter} from "next/navigation";
 
-type FooterProps = {
-    selected: "home" | "add" | "profile";
-}
 
-const Footer = (props: FooterProps) => {
-    const { selected } = props;
-    const [selectedButton, setSelectedButton] = useState(selected);
+const Footer = () => {
+    const [selectedButton, setSelectedButton] = useState('home');
 
   // Define a function to get the appropriate image URL based on the selected button
   const getIconSrc = (button: string) => {

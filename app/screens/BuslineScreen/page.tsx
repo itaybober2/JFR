@@ -3,8 +3,6 @@ import BuslineRoute from "@/app/src/components/Busline/components/BuslineRoute/B
 import "@/app/src/components/Busline/Busline.css";
 import {useEffect, useState} from "react";
 import { busLines, busLinesToB, BusLinesType } from "@/public/constants/constants";
-import Footer from "@/lib/components/FooterNavbar";
-import Navbar from "@/lib/components/Navbar";
 import { Stop } from "../HomeScreen/HomeScreen";
 import { calculateArrival } from "@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
@@ -13,32 +11,32 @@ import { useBusLineRef } from "@/app/src/hooks/useBusLineRef";
 import BusArrivals from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivals";
 import LineNumberCircle from "@/app/src/components/Home/components/BusInfoListItem/LineNumberCircle/LineNumberCircle";
 import '@/app/src/components/Home/components/BusInfoListItem/BusInfoListItem.css';
+import {useConnect} from "remx";
 
 
 export default function BuslineScreen() {
 
     const [lineNumber, setLineNumber] = useState<string>("NULL")
     const [station, setStation] = useState<Stop | null>(null);
-    const [toMountScoupe, setToMountScoupe] = useState(true);
     const [closestStops, setClosestStops] = useState<Stop[]>([]);
     const [stationIndex, setStationIndex] = useState<number>(-1);
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
+    const directionSubscription = useConnect(busLocationStore.getLineDirection);
 
 
-    const direction = busLocationStore.getLineDirection();
-    const busLineRefs = useBusLineRef(lineNumber, direction);
+    const busLineRefs = useBusLineRef(lineNumber, directionSubscription);
     const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
     const lineIdA = locations && 'A' in locations ? locations.A?.siriRideId : locations?.siriRideId;
     const lineIdB = locations && 'B' in locations ? locations.B?.siriRideId : undefined;
-   
+
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         const lineNumberParam = query.get('lineNumber');
         const stationParam = query.get('station');
         const closestStopsParam = query.get('stops');
 
-        
+
         if (lineNumberParam) {
             setLineNumber(lineNumberParam);
         }
@@ -47,7 +45,7 @@ export default function BuslineScreen() {
             const decodedStops = JSON.parse(decodeURIComponent(closestStopsParam));
             setClosestStops(decodedStops);
         }
-        
+
         if (stationParam) {
             try {
                 const decodedStation = JSON.parse(decodeURIComponent(stationParam));
@@ -109,7 +107,6 @@ export default function BuslineScreen() {
 
   return (
     <main>
-        <Navbar toMountScoupe={toMountScoupe} setToMountScoupe={setToMountScoupe} />
         <div className="schedule-container">
             <div className='time-and-icons-container'>
           <LineNumberCircle lineNumber={lineNumber}/>
@@ -118,13 +115,12 @@ export default function BuslineScreen() {
         </div>
           <BuslineRoute currentStop={getStationIndex(busLines,
                                                      busLinesToB,
-                                                      lineNumber, 
+                                                      lineNumber,
                                                       station ? station.stop_name: "",
                                                     station ? station.direction : 1)}
-           lineNumber={lineNumber} 
-           toMountScoupe={toMountScoupe}
+           lineNumber={lineNumber}
+           toMountScoupe={directionSubscription === 1}
            stopCode={ station ? station.stop_code: 0}/>
-           <Footer selected={'home'}/>
     </main>
   );
 }
