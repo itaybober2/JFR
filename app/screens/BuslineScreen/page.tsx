@@ -103,11 +103,6 @@ export default function BuslineScreen() {
           <LineNumberCircle lineNumber={lineNumber}/>
                 <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={false}/>
             </div>
-          {/* <BuslineRoute 
-            currentStop={stationIndex} 
-            stops={busLines[lineNumber]} 
-            lineNumber={lineNumber}
-          /> */}
         </div>
           <BuslineRoute currentStop={getStationIndex(busLines, lineNumber, station ? station.stop_name: "")}
            lineNumber={lineNumber} 
