@@ -27,6 +27,7 @@ export default function BuslineScreen() {
 
     const busLineRefs = useBusLineRef(lineNumber, directionSubscription);
     const locations = useRealTimeBusLocation(busLineRefs, lineNumber, true);
+
     let lineA: BusLocation | undefined;
     let lineB: BusLocation | undefined;
     if (locations) {

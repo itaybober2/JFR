@@ -8,7 +8,6 @@ import {usePathname, useRouter} from "next/navigation";
 const Footer = () => {
     const pathname = usePathname();
     const hideFooter = pathname.startsWith("/screens/OnBoarding");
-
     const [selectedButton, setSelectedButton] = useState('home');
 
   // Define a function to get the appropriate image URL based on the selected button
