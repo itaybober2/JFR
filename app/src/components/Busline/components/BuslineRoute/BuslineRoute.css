@@ -165,3 +165,17 @@
     justify-content: space-around;
     margin-left: auto;
 }
+
+.station-info.report {
+    margin: 0 10px 20px 0;
+}
+
+.station-info.active.report{
+    margin: 0 10px 20px 0;
+
+}
+
+.station-info.current.report{
+    margin: 0 10px 20px 0;
+
+}

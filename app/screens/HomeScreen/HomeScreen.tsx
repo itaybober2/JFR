@@ -61,7 +61,7 @@ const HomeScreen = (props: HomeScreenProps) => {
                     {stop.line_num.map((line, lineIndex) => (
 
                         <React.Fragment key={lineIndex}>
-                        <BusInfoListItem lineNumber={line} station={stop}/>
+                        <BusInfoListItem lineNumber={line} station={stop} stops={stops}/>
                         {lineIndex < stop.line_num.length - 1 && <div className="line" />}
                         </React.Fragment>
                     ))}

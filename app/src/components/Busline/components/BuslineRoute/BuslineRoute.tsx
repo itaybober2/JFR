@@ -5,8 +5,9 @@ import "./BuslineRoute.css";
 import { busLocationStore } from "@/backend/stores/busLocationStore";
 import ListItemIconContainer, { Report } from "@/app/src/components/Home/components/BusInfoListItem/ListItemIcon/ListItemIconContainer";
 import {reportsStore} from "@/backend/stores/reportsStore";
-import {busLines} from "@/public/constants/constants";
+import {busLines, busLinesToB} from "@/public/constants/constants";
 import LoadingScreen from "@/app/src/components/LoadingScreen";
+import allStops from "@/backend/data/all_data_stops_with_dir.json"
 
 
 export interface BusStopProps {
@@ -18,6 +19,7 @@ interface BuslineRouteProps {
     currentStop: number;
     lineNumber: string;
     stopCode: number;
+    toMountScoupe: boolean;
 }
 
 
@@ -34,12 +36,12 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-    const { currentStop, lineNumber, stopCode } = props;
+    const { currentStop, lineNumber, stopCode, toMountScoupe } = props;
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const [distanceFromBus] = useState(0); // Default value, adjust as needed
     const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
-    const stops = busLines[lineNumber];
+    const stops = toMountScoupe ? busLines[lineNumber] : busLinesToB[lineNumber];
     const currentStopRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -63,6 +65,21 @@ export default function BuslineRoute(props: BuslineRouteProps) {
         );
     }
     console.log(((currentStop) / (stops.length - 1)) * 100)
+
+    function getStopCode(stopName: string) {
+        // Find the stop based on stop name and direction
+        const directionNumber = Number(toMountScoupe) + 1;  // Convert boolean to number
+        const stop = allStops.find(stop => stop.stop_name === stopName && stop.direction === directionNumber);
+        console.log("stop name", stopName);
+        console.log("direction:", directionNumber);
+        if(!stop){
+            const newStop = allStops.find(stop => stop.stop_name === stopName);
+            return newStop ? newStop.stop_code : undefined
+        }
+        // Return the stop code if the stop is found, otherwise return undefined or an error message
+        return stop ? stop.stop_code : undefined;
+    }
+    
 
 
     return (
@@ -100,16 +117,18 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         <div
                             className={`station-info ${
                                 index < currentStop ? "active" : index === currentStop ? "current" : ""
-                            }`}
+                            }${stop.name === report?.closestStop ? " report" : ""}`}
                         >
                             {stop.name}
+                            {stop.name === report?.closestStop && (
+                            <ListItemIconContainer lineNumber={lineNumber} lineId={lineId} />
+                        )}
                         </div>
+
                         {index === currentStop && <div className="blue-box" id="blue-box">
                             {stopCode}
                         </div>}
-                        {stop.name === report?.closestStop && (
-                            <ListItemIconContainer lineNumber={lineNumber} lineId={lineId} />
-                        )}
+
                     </div>
                 ))}
             </div>
