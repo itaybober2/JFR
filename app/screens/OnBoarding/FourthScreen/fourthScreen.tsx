@@ -1,16 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 import "./thirdScreen.css";
 
 
 export default function FourScreen() {
-    const searchParams = useSearchParams();
-  
-    // Get the query parameters
-    const pointA = searchParams.get("pointA") || "להר הצופים"; // Extract pointA
-    const pointB = searchParams.get("pointB") || "מהר הצופים"; // Extract pointB
+  let pointA = "להר הצופים";
+  let pointB = "מהר הצופים";
+  if (typeof window !== "undefined") {
+    // This code will only run on the client
+    pointA = localStorage.getItem("target") || "להר הצופים";
+    pointB = localStorage.getItem("destination")|| "מהר הצופים";
+  }
     const linesNumber = ["517", "19", "71", "77", "74","75", "17", "19א", "11"]
     const agencies = ["קווים","אגד","דן","קווים", "אגד", "דן", "קווים", "אגד", "דן"]
   

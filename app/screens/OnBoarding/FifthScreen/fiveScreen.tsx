@@ -1,16 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { circelLines } from "@/public/constants/constants";
 
 import "./fiveScreen.css";
 
 
 export default function FiveScreen() {
-    const searchParams = useSearchParams();
-  
-    const pointA = searchParams.get("pointA") || "להר הצופים"; // Extract pointA
-    const pointB = searchParams.get("pointB") || "מהר הצופים"; // Extract pointB
+    let pointA = "להר הצופים";
+    let pointB = "מהר הצופים";
+    if (typeof window !== "undefined") {
+      // This code will only run on the client
+      pointA = localStorage.getItem("target") || "להר הצופים";
+      pointB = localStorage.getItem("destination")|| "מהר הצופים";
+    }
 
     useEffect(() => {
         // Disable scrolling when the component mounts

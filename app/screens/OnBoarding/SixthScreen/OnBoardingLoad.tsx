@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation"; // Import the router
+import { useRouter } from "next/navigation"; // Import the router
 import "./OnBoarding.css";
 
 // Import your constant
