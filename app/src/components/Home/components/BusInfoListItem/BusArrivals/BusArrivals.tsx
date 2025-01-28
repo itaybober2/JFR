@@ -29,12 +29,12 @@ const BusArrivals = (props: BusArrivalsProps) => {
         <div className="bus-arrivals">
             <div className="first-bus-arrival-time">
                 {showInfoIcon0 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
-                <span>{sortedArrivals[0].time}</span>
+                <span>{sortedArrivals[0].time !== null && sortedArrivals[0].time < 10 ? `0${sortedArrivals[0].time}` : sortedArrivals[0].time}</span>
                 <span className='minutes_bold'>דקות</span>
             </div>
             <div className="second-bus-arrival-time">
                 {showInfoIcon1 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
-                <span>{sortedArrivals[1].time}</span>
+                <span>{sortedArrivals[1].time !== null && sortedArrivals[1].time < 10 ? `0${sortedArrivals[1].time}` : sortedArrivals[1].time}</span>
                 <span className='minutes_gray'>דקות</span>
             </div>
         </div>

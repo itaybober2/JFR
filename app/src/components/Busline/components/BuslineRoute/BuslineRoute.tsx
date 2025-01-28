@@ -41,7 +41,7 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-    const { currentStop, lineNumber, stopCode, toMountScoupe, busArrivalA } = props;
+    const { currentStop, lineNumber, stopCode, toMountScoupe, busArrivalA} = props;
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const [distanceFromBus] = useState(0); // Default value, adjust as needed
