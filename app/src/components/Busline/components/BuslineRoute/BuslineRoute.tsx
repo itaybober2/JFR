@@ -92,8 +92,8 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                     <Image 
                         src="/icons/BusIcon.svg"
                         alt="Bus"
-                        width={24}
-                        height={24}
+                        width={35}
+                        height={35}
                         className="bus-icon"
                     />
                 </div>

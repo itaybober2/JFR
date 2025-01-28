@@ -1,7 +1,7 @@
 /* Footer styles */
 .footer {
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   right: 0;
   background-color: #fff;
@@ -50,26 +50,38 @@
 }
 
 .footer-icon {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   margin-bottom: 0.4rem;
 }
 
 .footer-icon-Middle {
   width: 65px;
   height: 65px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .footer-text {
   color: #9F9F9F;
   text-align: center;
   font-family: 'TitleFont';
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1px;
+}
+
+.footer-text-middle{
+  color: #9F9F9F;
+  text-align: center;
+  font-family: 'TitleFont';
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
 }
 
 .footer-button.selected .footer-text {

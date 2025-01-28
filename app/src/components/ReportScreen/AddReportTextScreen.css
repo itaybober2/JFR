@@ -4,13 +4,14 @@
     justify-content: center;
     align-items: center;
     gap: 4rem;
+    width: 100%;
 }
 
 .input-container {
     position: relative; /* Required for positioning the button inside */
     display: flex;
     align-items: center;
-    width: 100%; /* Full screen width */
+    width: 90%; /* Full screen width */
     max-width: 100%; /* Prevent clipping */
     background-color: #ffffff; /* White background for the input */
     border-radius: 25px; /* Rounded edges */
@@ -24,7 +25,7 @@
     font-size: 16px;
     text-align: right; /* Align text for RTL */
     direction: rtl; /* Force RTL direction for Hebrew */
-    padding: 10px 10px 10px 50px; /* Add padding to leave space for the button */
+    padding: 10px 30px 10px 50px; /* Add padding to leave space for the button */
     height: 40px; /* Single-line height */
     width: 80%;
     overflow: hidden;

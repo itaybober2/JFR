@@ -59,7 +59,7 @@ const Footer = () => {
       <div className="footer-middle">
             <button className="footer-button" onClick={handleAddReportClick}>
               <img src={getIconSrc('add')} alt="Add" className="footer-icon-Middle" />
-              <span className="footer-text" style={selectedButton === 'add' ? {color: 'blue'}: {}}>הוספת דיווח</span>
+              <span className="footer-text-middle" style={selectedButton === 'add' ? {color: 'blue'}: {}}>הוספת דיווח</span>
             </button>
           </div>
       <button

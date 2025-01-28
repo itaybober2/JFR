@@ -1,15 +1,19 @@
 "use client";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "./thirdScreen.css";
 
 
 export default function ThirdScreen() {
-  const searchParams = useSearchParams();
-
   // Get the query parameters
-  const pointA = searchParams.get("pointA") || "להר הצופים"; // Extract pointA
-  const pointB = searchParams.get("pointB") || "מהר הצופים"; // Extract pointB
+  let pointA = "להר הצופים";
+  let pointB = "מהר הצופים";
+  if (typeof window !== "undefined") {
+    // This code will only run on the client
+    pointA = localStorage.getItem("target") || "להר הצופים";
+    pointB = localStorage.getItem("destination")|| "מהר הצופים";
+  }
+
 
   const linesNumber = ["517", "19", "71", "77", "74","75", "17", "19א", "11"]
   const agencies = ["קווים","אגד","דן","קווים", "אגד", "דן", "קווים", "אגד", "דן"]
@@ -23,7 +27,19 @@ export default function ThirdScreen() {
        prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
      );
    };
+   useEffect(() => {
+      // Disable scrolling when the component mounts
+      document.body.style.overflow = 'hidden';
+      document.body.style.backgroundColor = 'white';
 
+      // Re-enable scrolling when the component unmounts
+      return () => {
+          document.body.style.overflow = 'auto';
+          document.body.style.backgroundColor = '';
+
+      };
+  }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
+  
   const router = useRouter();
   const handleContinue = () =>{
     router.push(`/screens/OnBoarding/FourthScreen?pointA=${encodeURIComponent(pointA)}&pointB=${encodeURIComponent(pointB)}`)}
