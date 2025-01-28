@@ -38,7 +38,18 @@ const OnBoardingLoad: React.FC = () => {
     }
   }, [currentImageIndex, imageKeys.length, router]);
 
+  useEffect(() => {
+    // Disable scrolling when the component mounts
+    document.body.style.overflow = 'hidden';
+    document.body.style.backgroundColor = 'white';
 
+    // Re-enable scrolling when the component unmounts
+    return () => {
+        document.body.style.overflow = 'auto';
+        document.body.style.backgroundColor = '';
+
+    };
+}, []); // Empty dependency array ensures this effect runs only once on mount and unmount
   return (
     <div className="dynamic-image-page">
       <p className="loading-title">מסך הבית שלך בהכנה</p>

@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { useEffect } from "react";
 import '../../../../app/screens/ReportScreen/ReportScreen.css';
 import {Icons} from "@/public/constants/constants";
 import {screensToRender} from "@/app/screens/ReportScreen/ReportScreen";
@@ -17,6 +18,16 @@ const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
     const {children, screenHeaderText, setScreenToRender, getPreviousScreen, currentScreen, disableBackButton} = props;
     let imageUrl: string = Icons.backButton;
 
+useEffect(() => {
+            // Disable scrolling when the component mounts
+            document.body.style.overflow = 'hidden';
+            // Re-enable scrolling when the component unmounts
+            return () => {
+                document.body.style.overflow = 'auto';
+    
+            };
+        }, []);
+
 
     const handleBackClick = () => {
         setScreenToRender(getPreviousScreen(currentScreen));
@@ -25,7 +36,7 @@ const ReportScreenWrapper = (props: ReportScreenWrapperProps) => {
         <div className="report-screen">
             <div className="report-screen-modal-content">
                 <div className="report-screen-modal-header">
-                    {!disableBackButton && <img src={imageUrl} alt='back button' onClick={handleBackClick}/>}
+                    {!disableBackButton && currentScreen != "lineSelection" && <img src={imageUrl} alt='back button' onClick={handleBackClick}/>}
                     <tspan>
                         {screenHeaderText}
                     </tspan>

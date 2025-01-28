@@ -15,11 +15,12 @@ const ReportFloatingBox = (props: FloatingBoxProps) => {
 
     return (
         <div className="floating-box" style={{ top: position.top, left: position.left }}>
-            <div className="floating-box-header" style={{ backgroundColor: color }}>
+            <div className={`floating-box-header ${title === "חסימה" ? "yellow" : ""}`} style={{ backgroundColor: color }}>
                 <h1>{title}</h1>
-                <img src={Icons.backButton} alt={'yes'}/>
+                <img src={Icons.backButton} alt={'yes'} className="arrow"/>
             </div>
-            <div className="floating-box-content">
+            
+            <div className={`floating-box-content ${title === "חסימה" ? "yellow" : ""}`}>
                 <div className={'floating-box-content-time'}>
                     {time}
                 </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import "./thirdScreen.css";
@@ -24,11 +24,27 @@ export default function FourScreen() {
      );
    };
 
+   useEffect(() => {
+    // Disable scrolling when the component mounts
+    document.body.style.overflow = 'hidden';
+    document.body.style.backgroundColor = 'white';
+
+
+    // Re-enable scrolling when the component unmounts
+    return () => {
+        document.body.style.overflow = 'auto';
+        document.body.style.backgroundColor = '';
+
+    };
+}, []); // Empty dependency array ensures this effect runs only once on mount and unmount
+
+
   const router = useRouter();
   const handleContinue = () =>{
     router.push(`/screens/OnBoarding/FifthScreen?pointA=${encodeURIComponent(pointA)}&pointB=${encodeURIComponent(pointB)}`); 
-
   }
+
+
   return (
     <div className="third-container">
         <div className="main-circle">B</div>

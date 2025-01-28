@@ -1,4 +1,5 @@
 
+
 .first-container{
     margin-top: -6rem;
     margin-bottom: -6rem;
@@ -6,9 +7,10 @@
     flex-direction: column;
     align-items: center;
     background-color: black;
-    height: 100%;
-    padding-top: 3rem;
-    padding-bottom :5rem;
+    height: 100vh;
+    padding-top: 2rem;
+    padding-bottom :10rem;
+    overflow: hidden;
   }
 
   .first-buttonn-outline {

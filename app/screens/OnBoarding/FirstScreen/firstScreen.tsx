@@ -15,6 +15,16 @@ export default function FirstScreen() {
         setTimeout(() => {router.push("/screens/OnBoarding/SecondScreen")},4000);
     }, []);
 
+    useEffect(() => {
+      // Disable scrolling when the component mounts
+      document.body.style.overflow = 'hidden';
+
+      // Re-enable scrolling when the component unmounts
+      return () => {
+          document.body.style.overflow = 'auto';
+      };
+  }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
+
   return (
     <div className="first-container">
       <div className="text-container">

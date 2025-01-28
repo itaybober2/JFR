@@ -7,6 +7,10 @@
     position: relative;
 }
 
+.arrow{
+    transform: rotate(90deg);
+}
+
 .floating-box {
     position: absolute;
     top: 0;
@@ -29,6 +33,11 @@
     font-weight: bold;
 }
 
+.floating-box-header.yellow{
+    color:black;
+}
+
+
 .floating-box-header h1 {
     margin-top: 0;
 } 
@@ -36,6 +45,10 @@
 .floating-box-content {
     padding: 8px;
     font-size: 14px;
+}
+
+.floating-box-content.yellow {
+    color: black;
 }
 
 .overlay {
