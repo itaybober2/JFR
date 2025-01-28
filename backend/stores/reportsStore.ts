@@ -12,6 +12,7 @@ const setters = remx.setters({
         try {
             const data = await fetchReports();
             state.reports = data.data;
+            state.LineIdsWithReports = data.data.map((report: Report) => report.lineId);
         } catch (error) {
             console.error("Error fetching reports:", error);
         }

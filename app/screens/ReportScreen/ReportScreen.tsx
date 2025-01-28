@@ -35,9 +35,10 @@ const ReportScreen = () => {
     const handleSubmit = async () => {
         if (lineNumber !== null) {
             try {
+                const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
                 const report = {
                     lineNumber: lineNumber,
-                    lineId: busLocationStore.getBusLocation(lineNumber)?.siriRideId,
+                    lineId: lineId,
                     crowded: selectedTypes.includes('crowded'),
                     roadBlock: selectedTypes.includes('roadBlock'),
                     inspector: selectedTypes.includes('inspector'),
@@ -47,11 +48,11 @@ const ReportScreen = () => {
                     pathChangeDescription: pathChangeText,
                     closestStop: closestStopStore.getClosestStopToUser().stopName,
                 }
-                console.log(JSON.stringify(report, null, 4));
                 await createReport(report);
                 setLineNumber(null);
                 setSelectedTypes([]);
                 reportsStore.addReport(report)
+                lineId !== undefined && reportsStore.setLineId(busLocationStore.getBusLocation(lineNumber)?.siriRideId)
             } catch (error) {
                 console.error(error);
             }

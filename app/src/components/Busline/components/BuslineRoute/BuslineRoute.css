@@ -15,7 +15,7 @@
     width: 100%;
     position: relative;
     padding: 20px 0;
-    height: 100%;
+    height: auto;
 }
 
 .bus-icon-container {
@@ -23,7 +23,7 @@
     right: 0;
     transform: translateY(-50%);
     z-index: 2;
-    /* height: 100%; */
+    margin-right: 0.5rem;
 }
 
 .station-container {

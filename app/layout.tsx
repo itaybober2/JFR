@@ -10,8 +10,7 @@ export const metadata: Metadata = {
     description: "A social transportation app.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {    
-
+export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html dir="rtl">
             <head>

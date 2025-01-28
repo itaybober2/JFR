@@ -3,6 +3,8 @@ import React, {useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import "./OnBoarding.css";
 import {busLocationStore} from "@/backend/stores/busLocationStore";
+import { AB } from "@/public/constants/constants";
+
 
 const OnBoardingSecond: React.FC = () => {
     const router = useRouter();
@@ -44,6 +46,18 @@ const OnBoardingSecond: React.FC = () => {
         if (isCompleted) setIsCompleted(false);
     }
 
+    useEffect(() => {
+        // Disable scrolling when the component mounts
+        document.body.style.overflow = 'hidden';
+        document.body.style.backgroundColor = '#d5d5d5';
+        // Re-enable scrolling when the component unmounts
+        return () => {
+            document.body.style.overflow = 'auto';
+            document.body.style.backgroundColor = '';
+
+        };
+    }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
+
   return (
     <div className="on-boarding">
         <div className={`up-screen ${isCompleted ? "completed" : ""}`} onClick={handleBackClick}>
@@ -51,6 +65,7 @@ const OnBoardingSecond: React.FC = () => {
                 <div className={`circle ${isCompleted ? "" : "circle-active"}`}>
                     <span>A</span>
                 </div>
+                {/* <img src={AB.A} alt="A"/> */}
                 {!isCompleted && <p className="circle-subtitle">מוצא</p>}
             </div>
             {!isCompleted && (
@@ -73,6 +88,7 @@ const OnBoardingSecond: React.FC = () => {
                 <div className={`circle ${!isCompleted ? "" : "circle-active"}`}>
                 <span>B</span>
                 </div>
+                {/* <img src={AB.B} alt="B"/> */}
                 <p className="circle-subtitle">יעד</p>
             </div>
             <div className="input-and-button">

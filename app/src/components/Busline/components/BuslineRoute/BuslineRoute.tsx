@@ -20,6 +20,11 @@ interface BuslineRouteProps {
     lineNumber: string;
     stopCode: number;
     toMountScoupe: boolean;
+    busArrivalA: {
+        id: number;
+        route: string;
+        time: number;
+    };
 }
 
 
@@ -36,11 +41,11 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 };
 
 export default function BuslineRoute(props: BuslineRouteProps) {
-    const { currentStop, lineNumber, stopCode, toMountScoupe } = props;
+    const { currentStop, lineNumber, stopCode, toMountScoupe, busArrivalA} = props;
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const [distanceFromBus] = useState(0); // Default value, adjust as needed
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId;
+    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId || 0;
     const stops = toMountScoupe ? busLines[lineNumber] : busLinesToB[lineNumber];
     const currentStopRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +69,6 @@ export default function BuslineRoute(props: BuslineRouteProps) {
             <LoadingScreen marginTop={4}/>
         );
     }
-    console.log(((currentStop) / (stops.length - 1)) * 100)
 
     function getStopCode(stopName: string) {
         // Find the stop based on stop name and direction
@@ -86,14 +90,15 @@ export default function BuslineRoute(props: BuslineRouteProps) {
         <div className="route">
             <div className="timeline-container">
                 <div className="bus-icon-container" style={{
-                    top: `${((currentStop) / (stops.length - 1)) * 500}%`,
+                    // 0.2 so the bus is at the station at minutes = 0
+                    top: `${((currentStop - (busArrivalA.time / 5) - 0.2 ) / (stops.length - 1)) * 100}%`,
                     transition: 'top 0.5s ease-in-out'
                 }}>
                     <Image 
                         src="/icons/BusIcon.svg"
                         alt="Bus"
-                        width={24}
-                        height={24}
+                        width={35}
+                        height={35}
                         className="bus-icon"
                     />
                 </div>

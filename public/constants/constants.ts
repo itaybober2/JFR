@@ -3,6 +3,12 @@ export const URLS = {
     lineRefsUrl : "https://open-bus-stride-api.hasadna.org.il/gtfs_routes/list",
     busLocationUrl: "https://open-bus-stride-api.hasadna.org.il/siri_vehicle_locations/list",
 }
+
+export const AB = {
+    A: '/icons/A.svg',
+    B: '/icons/B.svg'
+}
+
 export const Icons ={
     CrowdedIcon: '/icons/crowded.svg',
     RoadBlockIcon: '/icons/roadBlock.svg',

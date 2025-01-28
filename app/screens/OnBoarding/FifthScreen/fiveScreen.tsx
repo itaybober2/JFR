@@ -1,18 +1,32 @@
 "use client";
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter} from "next/navigation";
 import { circelLines } from "@/public/constants/constants";
 
 import "./fiveScreen.css";
 
 
 export default function FiveScreen() {
-    const searchParams = useSearchParams();
-  
-    const pointA = searchParams.get("pointA") || "להר הצופים"; // Extract pointA
-    const pointB = searchParams.get("pointB") || "מהר הצופים"; // Extract pointB
+    let pointA = "להר הצופים";
+    let pointB = "מהר הצופים";
+    if (typeof window !== "undefined") {
+      // This code will only run on the client
+      pointA = localStorage.getItem("target") || "להר הצופים";
+      pointB = localStorage.getItem("destination")|| "מהר הצופים";
+    }
 
-    
+    useEffect(() => {
+        // Disable scrolling when the component mounts
+        document.body.style.overflow = 'hidden';
+        document.body.style.backgroundColor = 'white';
+
+        // Re-enable scrolling when the component unmounts
+        return () => {
+            document.body.style.overflow = 'auto';
+            document.body.style.backgroundColor = '';
+
+        };
+    }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
 
     const router = useRouter();
     const handleContinue = () =>{
