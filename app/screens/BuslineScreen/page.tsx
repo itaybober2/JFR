@@ -125,7 +125,8 @@ export default function BuslineScreen() {
                                                     station ? station.direction : 1)}
            lineNumber={lineNumber}
            toMountScoupe={directionSubscription === 1}
-           stopCode={ station ? station.stop_code: 0}/>
+           stopCode={ station ? station.stop_code: 0}
+           busArrivalA={busArrivalA} />
     </main>
   );
 }
