@@ -65,7 +65,14 @@ export default function BuslineScreen() {
 
     useEffect(() => {
         const calculatedTimeA = calculateArrival(lineA, station);
-        setArrivalTimeA(calculatedTimeA);
+        console.log("tima a:",calculatedTimeA);
+        if (calculatedTimeA < 0){
+            console.log("smaller")
+            setArrivalTimeA(2); 
+        }
+        else{
+            setArrivalTimeA(calculatedTimeA);
+        } 
         let calculatedTimeB = calculateArrival(lineB, station);
         if (calculatedTimeA === calculatedTimeB) calculatedTimeB += 2;
         setArrivalTimeB(calculatedTimeB)
