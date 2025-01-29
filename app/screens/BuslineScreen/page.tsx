@@ -93,7 +93,7 @@ export default function BuslineScreen() {
 
   function getStationIndex(busLines: BusLinesType, busLinesToB: BusLinesType, lineNumber: string, stationName: string, direction: number) {
 
-    let lines = busLines;
+    let lines = direction === 1 ? busLines : busLinesToB;
     // // Check the direction based on toMountScoupe value
     // Check if the line number exists in the data
     if (lines.hasOwnProperty(lineNumber)) {
@@ -103,7 +103,8 @@ export default function BuslineScreen() {
                 return i;  // Return the index if the station name matches
             }
         }
-        return -1;  // Return -1 if the station name is not found
+        return -1;
+        
     } else {
         return -1;  // Return -1 if the line number does not exist
     }

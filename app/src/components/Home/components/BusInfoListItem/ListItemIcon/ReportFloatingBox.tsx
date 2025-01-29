@@ -1,6 +1,8 @@
+"use client";
 import React from 'react';
 import './ReportFloatingBox.css';
 import {Icons} from "@/public/constants/constants";
+import { useState } from 'react';
 
 type FloatingBoxProps = {
     position: { top: number, left: number };
@@ -12,6 +14,7 @@ type FloatingBoxProps = {
 
 const ReportFloatingBox = (props: FloatingBoxProps) => {
     const { position, description, title, time, color } = props;
+    const [newTime, setTime] = useState(new Date());
 
     return (
         <div className="floating-box" style={{ top: position.top, left: position.left }}>
@@ -22,10 +25,10 @@ const ReportFloatingBox = (props: FloatingBoxProps) => {
             
             <div className={`floating-box-content ${title === "חסימה" ? "yellow" : ""}`}>
                 <div className={'floating-box-content-time'}>
-                    {time}
+                    שעה: {newTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
                 <div className={'floating-box-content-description'}>
-                    {description}
+                    תיאור: {description}
                 </div>
             </div>
         </div>
