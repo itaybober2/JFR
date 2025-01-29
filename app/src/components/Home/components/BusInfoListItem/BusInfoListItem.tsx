@@ -38,6 +38,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
     const {lineNumber, station, stops} = props
     const [arrivalTimeA, setArrivalTimeA] = React.useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = React.useState<number>(-1);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
 
     const router = useRouter();
     const handleClick = () => {
@@ -60,7 +61,8 @@ const BusInfoListItem = (props: BusInfoProps) => {
     React.useEffect(() => {
         const calculatedTimeA = calculateArrival(lineA, station);
         setArrivalTimeA(calculatedTimeA);
-        const calculatedTimeB = calculateArrival(lineB, station);
+        let calculatedTimeB = calculateArrival(lineB, station);
+        if (calculatedTimeA === calculatedTimeB) calculatedTimeB += 2;
         setArrivalTimeB(calculatedTimeB)
     }, [locations, station]);
 
@@ -88,7 +90,7 @@ const BusInfoListItem = (props: BusInfoProps) => {
             <div className="list-item-container" onClick={handleClick}>
                 <LineNumberCircle lineNumber={lineNumber}/>
                 <div className='time-and-icons-container'>
-                    <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={true}/>
+                    <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={true} setSelectedIndex={setSelectedIndex} selectedIndex={selectedIndex}/>
                 </div>
             </div>
         )}

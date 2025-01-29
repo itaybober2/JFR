@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './BusArrivals.css';
 import { reportsStore } from "@/backend/stores/reportsStore";
-import { Icons } from "@/public/constants/constants";
-import {useConnect} from "remx";
+import { useConnect } from "remx";
+import BusArrivalTime from "@/app/src/components/Home/components/BusInfoListItem/BusArrivals/BusArrivalTime";
 
 type BusArrivalsProps = {
     arrivals: {
@@ -11,11 +11,12 @@ type BusArrivalsProps = {
         time: number | null;
     }[];
     isHomeScreen: boolean;
+    selectedIndex: number | null;
+    setSelectedIndex: (index: number) => void;
 }
 
 const BusArrivals = (props: BusArrivalsProps) => {
-    const { arrivals, isHomeScreen } = props;
-    let iconUrl = Icons.infoIcon;
+    const { arrivals, isHomeScreen, selectedIndex, setSelectedIndex} = props;
     const showInfoIcon0 = useConnect(reportsStore.isLineIdInStore, [arrivals[0].id]);
     const showInfoIcon1 = useConnect(reportsStore.isLineIdInStore, [arrivals[1].id]);
 
@@ -25,18 +26,26 @@ const BusArrivals = (props: BusArrivalsProps) => {
         return a.time - b.time;
     });
 
+    const handleSelection = (index: number) => {
+        setSelectedIndex(index);
+    };
+
     return (
         <div className="bus-arrivals">
-            <div className="first-bus-arrival-time">
-                {showInfoIcon0 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
-                <span>{sortedArrivals[0].time !== null && sortedArrivals[0].time < 10 ? `0${sortedArrivals[0].time}` : sortedArrivals[0].time}</span>
-                <span className='minutes_bold'>דקות</span>
-            </div>
-            <div className="second-bus-arrival-time">
-                {showInfoIcon1 && isHomeScreen && <img src={iconUrl} alt="Info Icon" className="info-icon" />}
-                <span>{sortedArrivals[1].time !== null && sortedArrivals[1].time < 10 ? `0${sortedArrivals[1].time}` : sortedArrivals[1].time}</span>
-                <span className='minutes_gray'>דקות</span>
-            </div>
+            <BusArrivalTime
+                time={sortedArrivals[0].time}
+                isHomeScreen={isHomeScreen}
+                showInfoIcon={showInfoIcon0}
+                isSelected={selectedIndex === 0}
+                setIsSelected={() => handleSelection(0)}
+            />
+            <BusArrivalTime
+                time={sortedArrivals[1].time}
+                isHomeScreen={isHomeScreen}
+                showInfoIcon={showInfoIcon1}
+                isSelected={selectedIndex === 1}
+                setIsSelected={() => handleSelection(1)}
+            />
         </div>
     );
 }

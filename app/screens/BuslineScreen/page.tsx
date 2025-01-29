@@ -23,6 +23,7 @@ export default function BuslineScreen() {
     const [arrivalTimeA, setArrivalTimeA] = useState<number>(-1);
     const [arrivalTimeB, setArrivalTimeB] = useState<number>(-1);
     const directionSubscription = useConnect(busLocationStore.getLineDirection);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(0);
 
 
     const busLineRefs = useBusLineRef(lineNumber, directionSubscription);
@@ -65,7 +66,8 @@ export default function BuslineScreen() {
     useEffect(() => {
         const calculatedTimeA = calculateArrival(lineA, station);
         setArrivalTimeA(calculatedTimeA);
-        const calculatedTimeB = calculateArrival(lineB, station);
+        let calculatedTimeB = calculateArrival(lineB, station);
+        if (calculatedTimeA === calculatedTimeB) calculatedTimeB += 2;
         setArrivalTimeB(calculatedTimeB)
     }, [locations, station]);
 
@@ -116,7 +118,7 @@ export default function BuslineScreen() {
         <div className="schedule-container">
             <div className='time-and-icons-container'>
           <LineNumberCircle lineNumber={lineNumber}/>
-                <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={false}/>
+                <BusArrivals arrivals={[busArrivalA, busArrivalB]} isHomeScreen={false} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
             </div>
         </div>
           <BuslineRoute currentStop={getStationIndex(busLines,
@@ -127,7 +129,7 @@ export default function BuslineScreen() {
            lineNumber={lineNumber}
            toMountScoupe={directionSubscription === 1}
            stopCode={ station ? station.stop_code: 0}
-           busArrivalA={busArrivalA} />
+           busArrivalA={selectedIndex === 0 ? busArrivalA : busArrivalB} />
     </main>
   );
 }

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 40px;
+
 }
 
 .station-name {
@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: right;
-    padding-right: 25px;
+    padding: 1rem;
     color: #000;
     text-align: right;
     font-size: 20px;
