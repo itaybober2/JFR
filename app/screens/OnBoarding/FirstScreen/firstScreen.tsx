@@ -3,12 +3,26 @@ import {useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 
 import "./firstScreen.css";
+import {userLocationStore} from "@/backend/stores/userLocationStore";
 
 export default function FirstScreen() {
   const [toMountScoupe, setToMountScoupe] = useState<boolean>(true);
   const router = useRouter();
 
     useEffect(() => {
+        const fetchLocation = () => {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    userLocationStore.setUserLocation({ lat: latitude, lon: longitude });
+                },
+                (err) => {
+                    console.error('Error fetching location:', err.message);
+                },
+                { enableHighAccuracy: true }
+            );
+        };
+        fetchLocation();
         setTimeout(() => {setToMountScoupe(false)}, 1000);
         setTimeout(() => {setToMountScoupe(true)}, 2000);
         setTimeout(() => {setToMountScoupe(false)}, 3000);
