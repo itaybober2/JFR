@@ -10,7 +10,7 @@ type LineNumberCircleProps = {
 
 const LineNumberCircle = (props: LineNumberCircleProps) => {
     const { lineNumber, isShownFromReportModal, isWhite } = props;
-    let imageUrl: string = isWhite ? circelLines.line19White : circelLines.line19A;
+    let imageUrl: string = isWhite ? circelLines.line19AWhite : circelLines.line19A;
 
     switch (lineNumber) {
         case "517":

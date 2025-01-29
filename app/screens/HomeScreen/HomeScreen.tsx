@@ -44,7 +44,7 @@ const HomeScreen = () => {
 
     useUserLocation({ handleStopsFetch });
 
-    var filteredStops = stops.filter((stop) => stop.direction === (directionSubscription));
+    let filteredStops = stops.filter((stop) => stop.direction === (directionSubscription));
 
     filteredStops = filteredStops.filter(stop => stop.line_num.length > 0);
 
