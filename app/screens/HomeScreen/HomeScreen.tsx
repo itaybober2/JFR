@@ -23,7 +23,7 @@ export type Stop = {
 
 const HomeScreen = () => {
     const [stops, setStops] = useState<Stop[]>([]);
-    const directionSubscription = useConnect(busLocationStore.getLineDirection);
+    const directionSubscription = useConnect(busLocationStore.getLineDirection) ?? 1;
 
 
     useEffect(() => {

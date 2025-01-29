@@ -45,7 +45,7 @@ export default function BuslineRoute(props: BuslineRouteProps) {
     const [report, setReport] = useState<Report | undefined>();
     const [loading, setLoading] = useState(true);
     const [distanceFromBus] = useState(0); // Default value, adjust as needed
-    const lineId = busLocationStore.getBusLocation(lineNumber)?.siriRideId || 0;
+    const lineId = busArrivalA.id ||busLocationStore.getBusLocation(lineNumber)?.siriRideId;
     const stops = toMountScoupe ? busLines[lineNumber] : busLinesToB[lineNumber];
     const currentStopRef = useRef<HTMLDivElement>(null);
 
@@ -74,8 +74,6 @@ export default function BuslineRoute(props: BuslineRouteProps) {
         // Find the stop based on stop name and direction
         const directionNumber = Number(toMountScoupe);  // Convert boolean to number
         const stop = allStops.find(stop => stop.stop_name === stopName && stop.direction === directionNumber);
-        console.log("stop name", stopName);
-        console.log("direction:", directionNumber);
         if(!stop){
             const newStop = allStops.find(stop => stop.stop_name === stopName);
             return newStop ? newStop.stop_code : undefined
