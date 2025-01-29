@@ -28,13 +28,11 @@ export default function FourScreen() {
 
    useEffect(() => {
     // Disable scrolling when the component mounts
-    document.body.style.overflow = 'hidden';
     document.body.style.backgroundColor = 'white';
 
 
     // Re-enable scrolling when the component unmounts
     return () => {
-        document.body.style.overflow = 'auto';
         document.body.style.backgroundColor = '';
 
     };
