@@ -48,15 +48,13 @@ const OnBoardingSecond: React.FC = () => {
 
     useEffect(() => {
         // Disable scrolling when the component mounts
-        document.body.style.overflow = 'hidden';
         document.body.style.backgroundColor = '#d5d5d5';
         // Re-enable scrolling when the component unmounts
         return () => {
-            document.body.style.overflow = 'auto';
             document.body.style.backgroundColor = '';
 
         };
-    }, []); // Empty dependency array ensures this effect runs only once on mount and unmount
+    }, []);
 
   return (
     <div className="on-boarding">
