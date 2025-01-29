@@ -8,7 +8,7 @@
 }
 
 .arrow{
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 .floating-box {
@@ -44,7 +44,11 @@
 
 .floating-box-content {
     padding: 8px;
-    font-size: 14px;
+    font-size: 16px;
+    font-family: 'TitleFont', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 .floating-box-content.yellow {

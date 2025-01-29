@@ -1,7 +1,7 @@
 /* Combined styles for BuslineRoute and BuslineRouteTimeline */
 
 .route {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
@@ -16,6 +16,7 @@
     position: relative;
     padding: 20px 0;
     height: auto;
+    margin-top: 6rem;
 }
 
 .bus-icon-container {
@@ -167,15 +168,15 @@
 }
 
 .station-info.report {
-    margin: 0 10px 20px 0;
+    margin: 0 10px 10px 0;
 }
 
 .station-info.active.report{
-    margin: 0 10px 20px 0;
+    margin: 0 10px 10px 0;
 
 }
 
 .station-info.current.report{
-    margin: 0 10px 20px 0;
+    margin: 0 10px 10px 0;
 
 }

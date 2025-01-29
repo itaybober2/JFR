@@ -72,7 +72,7 @@ export default function BuslineRoute(props: BuslineRouteProps) {
 
     function getStopCode(stopName: string) {
         // Find the stop based on stop name and direction
-        const directionNumber = Number(toMountScoupe) + 1;  // Convert boolean to number
+        const directionNumber = Number(toMountScoupe);  // Convert boolean to number
         const stop = allStops.find(stop => stop.stop_name === stopName && stop.direction === directionNumber);
         console.log("stop name", stopName);
         console.log("direction:", directionNumber);
@@ -131,7 +131,7 @@ export default function BuslineRoute(props: BuslineRouteProps) {
                         </div>
 
                         {index === currentStop && <div className="blue-box" id="blue-box">
-                            {stopCode}
+                            {getStopCode(stop.name)}
                         </div>}
 
                     </div>
