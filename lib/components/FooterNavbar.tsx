@@ -10,6 +10,12 @@ const Footer = () => {
     const hideFooter = pathname.startsWith("/screens/OnBoarding");
     const [selectedButton, setSelectedButton] = useState('home');
 
+    useEffect(() => {
+        if (pathname === "/screens/HomeScreen") {
+            setSelectedButton("home");
+        }
+    }, [pathname]);
+
   // Define a function to get the appropriate image URL based on the selected button
   const getIconSrc = (button: string) => {
     switch (button) {
